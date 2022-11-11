@@ -13,6 +13,21 @@ export default function Weights({ mode }) {
   );
 }
 
+/* 
+BEGINNER
+SETS 1-2
+REPS 8-12
+2-3 PER WEEK
+INTENSITY 60-80%
+
+HIPS: Legs press, dumbbell squat, knee extension
+LEGS: Hamstring curl, db deadlift
+CHEST: Machine chest press, dips 
+BACK: Machine row, pullup machine
+SHOULDER: Dumbbell raise, face pull
+ABS: Curl up, leg raises, planks
+*/
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,

@@ -8,6 +8,9 @@ import Row from './row';
 export default function Calculator() {
   const [weight, setWeight] = useState('')//weight used
   const [reps, setReps] = useState('')//number of repetitions completed
+  const [mode, setMode] = useState('weights');
+
+  //store it in state, use onchange
 
   //Resets the calculator
   const reset = () => {
@@ -20,7 +23,7 @@ export default function Calculator() {
 
   return (
     <View style={styles.container}>
-      <>
+      <View>
         <Text style={styles.value}>
           Calculate your strength
         </Text>
@@ -50,12 +53,18 @@ export default function Calculator() {
           <Calcbutton text="3" />
         </Row>
 
+
         <Row>
           <Calcbutton text="0" />
           <Calcbutton text="Reset" />
           <Calcbutton text="Enter" />
         </Row>
-      </>
+
+        <Row>
+          <Calcbutton text="Weights" />
+          <Calcbutton text="Cardio" />
+        </Row>
+      </View>
 
       {/* add a range input to show optimal ranges for endurance, hypertrophy and strength? */}
     </View>

@@ -20,7 +20,10 @@ export default function App() {
             <Button title="Weights" style={styles.btns} onPress={() => setMode('weights')} />
           </Text>
           <Text style={styles.calcBtn}>
-            <Button title="Calculator" style={styles.btns} onPress={() => setMode('calculator')} />
+            <Button title="Calc" style={styles.btns} onPress={() => setMode('calculator')} />
+          </Text>
+          <Text style={styles.calcBtn}>
+            <Button title="Tips" style={styles.btns} />
           </Text>
         </View>
         <Wrapper mode={mode} />
@@ -65,18 +68,18 @@ const styles = StyleSheet.create({
     textAlign: "center"
   },
   btns: {
-    width: "30%",
+    width: "20%",
   },
   btnContainer: {
     flexDirection: 'row', flexWrap: 'wrap', marginRight: 'auto', marginLeft: 'auto', marginTop: 30
   },
   cardioBtn: {
-    marginRight: 5,
+    marginRight: 3,
   },
   weightsBtn: {
-    marginLeft: 5,
+    marginLeft: 3,
   },
   calcBtn: {
-    marginLeft: 5,
+    marginLeft: 3,
   },
 });
