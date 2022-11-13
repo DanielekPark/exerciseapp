@@ -6,7 +6,7 @@ import Wrapper from './components/wrapper';
 import Calculator from './components/weights/calculator';
 
 export default function App() {
-  const [mode, setMode] = useState('');
+  const [mode, setMode] = useState('cardio');
 
   return (
     <View style={styles.app}>
@@ -23,7 +23,7 @@ export default function App() {
             <Button title="Calc" style={styles.btns} onPress={() => setMode('calculator')} />
           </Text>
           <Text style={styles.calcBtn}>
-            <Button title="Tips" style={styles.btns} />
+            <Button title="Tips" style={styles.btns} onPress={() => setMode('tips')} />
           </Text>
         </View>
         <Wrapper mode={mode} />
