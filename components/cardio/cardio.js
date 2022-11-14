@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, TextInput, Form } from 'react-native';
+import { StyleSheet, Text, View, TextInput } from 'react-native';
 import { Stack, Button } from "@react-native-material/core";
 
 export default function Weights() {
@@ -16,13 +16,12 @@ export default function Weights() {
 
     //WARMUP EXERCISE
     if (userData.intensity === 'warmup') {
-      // const effortLevel = Math.round((220 - age * 0.39));
       const lowerLevel = Math.round((220 - age) * 0.3);
       const upperLevel = Math.round((220 - age) * 0.39);
       const hrRange = `${lowerLevel} - ${upperLevel}`
       setUserData({ ...userData, heartRange: hrRange });
     }
-    // MODERATE INTENSITY
+    // MODERATE INTENSITY EXERCISE
     // if (userData.intensity === 'level1') {
     //   const effortLevel = Math.round((220 - age * 0.4));
     //   heartRange.push(effortLevel);
@@ -31,7 +30,7 @@ export default function Weights() {
     //   const effortLevel = Math.round((220 - age * 0.59));
     //   heartRange.push(effortLevel);
     // }
-    // VIGOROUS INTENSITY
+    // VIGOROUS INTENSITY EXERCISE
     // if (userData.intensity === 'level3') {
     //   const effortLevel = Math.round((220 - age * 0.6));
     //   heartRange.push(effortLevel);
@@ -41,19 +40,18 @@ export default function Weights() {
     //   heartRange.push(effortLevel);
     // }
 
-    // reset 
+    // RESET DATA
     //setUserData({ age: '', intensity: '', heartRange: '' });
   }
 
-
-  useEffect(() => {
-    console.log(userData)
-  }, [userData])
+  // useEffect(() => {
+  //   console.log(userData)
+  // }, [userData])
 
   return (
     <View>
       <View>
-        {/* DISPLAY HEART RANGE */}
+        {/* DISPLAYS HEART RANGE */}
         <Text>
           Recommended heart range {userData.heartRange ? `${userData.heartRange} BPM` : ''}
         </Text>

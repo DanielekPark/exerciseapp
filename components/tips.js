@@ -7,6 +7,7 @@ export default function Tips() {
   return (
     <View>
       <Text style={styles.title}>Tips</Text>
+      {/* add a range input to show optimal ranges for endurance, hypertrophy and strength? */}
     </View>
   );
 }

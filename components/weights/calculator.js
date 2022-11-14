@@ -1,72 +1,61 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
-import { Stack, Button } from "@react-native-material/core";
-import Calcbutton from './calcbutton';
-import Row from './row';
+import { Stack, Button, TextInput } from "@react-native-material/core";
 
 // Component calculates/estimate the user's strength based on the weight used and number of repetitions completed
 export default function Calculator() {
-  const [weight, setWeight] = useState('')//weight used
-  const [reps, setReps] = useState('')//number of repetitions completed
-  const [mode, setMode] = useState('weights');
+  const [fitData, setFitData] = useState({ weight: '', reps: '', oneRepMax: '', exp: 'beginner' });
 
-  //store it in state, use onchange
+  //Calculates recommended weight based on weight & repetitions completed
+  const calcStrength = () => {
+    //wt / 1.0278 - (reps x 0.0278)
+    const weight = fitData.weight / 1;
+    const repetitions = fitData.reps / 1;
+    if (!weight) return;
+    if (!repetitions) return;
+    if (weight < 5) return;
+    if (repetitions < 5) return;
+    const maxRep = (weight / 1.0278) - (repetitions * 0.0278);
 
-  //Resets the calculator
-  const reset = () => {
-    setWeight('');
-    setReps('');
+    setFitData({ ...fitData, reps: repetitions })
+    setFitData({ ...fitData, weight: weight })
+    setFitData({ ...fitData, oneRepMax: maxRep })
+
   }
 
-  //Calculates recommended intensity level
-  const calcStrength = () => { }
+  useEffect(() => {
+    console.log(fitData)
+  }, [fitData])
+
+  //Resets the calculator
+  const reset = () => { }
 
   return (
-    <View style={styles.container}>
+    <View>
       <View>
-        <Text style={styles.value}>
+        <Text style={styles.title}>
           Calculate your strength
         </Text>
-        <Text style={styles.value}>
-          Weight:
-        </Text>
-        <Text style={styles.value}>
-          Repetitions completed:
-        </Text>
+        <View>
+          <Button title="Beginner" onPressIn={() => setFitData({ ...fitData, exp: 'beginner' })} />
+          <Button title="Intermediate" onPressIn={() => setFitData({ ...fitData, exp: 'intermediate' })} />
+        </View>
+        <View style={{ margin: 16 }} >
+          <TextInput keyboardType="numeric" style={{ margin: 16 }} label="Weight" />
+          <TextInput keyboardType="numeric" style={{ margin: 16 }} label="Repetitions completed" />
+        </View>
+        <View>
+          <Button title="Enter" />
+        </View>
+        <View>
+          <Text>
+            Estimaged maximum amount of weight that can be lifted for 1 repetition {fitData.oneRepMax ? fitData.oneRepMax : ''}
 
-        {/* Number */}
-        <Row>
-          <Calcbutton text="7" />
-          <Calcbutton text="8" />
-          <Calcbutton text="9" />
-        </Row>
-
-        <Row>
-          <Calcbutton text="5" />
-          <Calcbutton text="6" />
-          <Calcbutton text="7" />
-        </Row>
-
-        <Row>
-          <Calcbutton text="1" />
-          <Calcbutton text="2" />
-          <Calcbutton text="3" />
-        </Row>
-
-
-        <Row>
-          <Calcbutton text="0" />
-          <Calcbutton text="Reset" />
-          <Calcbutton text="Enter" />
-        </Row>
-
-        <Row>
-          <Calcbutton text="Weights" />
-          <Calcbutton text="Cardio" />
-        </Row>
+          </Text>
+        </View>
       </View>
 
-      {/* add a range input to show optimal ranges for endurance, hypertrophy and strength? */}
+
     </View>
   );
 }
