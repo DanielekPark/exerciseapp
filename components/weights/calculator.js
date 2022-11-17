@@ -2,30 +2,28 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
 import { Stack, Button, TextInput } from "@react-native-material/core";
 
-// Component calculates/estimate the user's strength based on the weight used and number of repetitions completed
+
 export default function Calculator() {
   const [fitData, setFitData] = useState({ weight: '', reps: '', oneRepMax: '', exp: 'beginner' });
 
   //Calculates recommended weight based on weight & repetitions completed
   const calcStrength = () => {
-    //wt / 1.0278 - (reps x 0.0278)
     const weight = fitData.weight / 1;
     const repetitions = fitData.reps / 1;
-    if (!weight) return;
+    if (!weight || weight < 7) return;
     if (!repetitions) return;
-    if (weight < 5) return;
-    if (repetitions < 5) return;
-    const maxRep = (weight / 1.0278) - (repetitions * 0.0278);
+    if (repetitions < 1 || repetitions > 15) return;
+    const oneRepMax = Math.round(weight / (1.0287 - (0.0278 * repetitions)));
 
     setFitData({ ...fitData, reps: repetitions })
     setFitData({ ...fitData, weight: weight })
-    setFitData({ ...fitData, oneRepMax: maxRep })
+    setFitData({ ...fitData, oneRepMax: oneRepMax })
 
   }
 
-  useEffect(() => {
-    console.log(fitData)
-  }, [fitData])
+  // useEffect(() => {
+  //   console.log(fitData)
+  // }, [fitData])
 
   //Resets the calculator
   const reset = () => { }
@@ -41,16 +39,15 @@ export default function Calculator() {
           <Button title="Intermediate" onPressIn={() => setFitData({ ...fitData, exp: 'intermediate' })} />
         </View>
         <View style={{ margin: 16 }} >
-          <TextInput keyboardType="numeric" style={{ margin: 16 }} label="Weight" />
-          <TextInput keyboardType="numeric" style={{ margin: 16 }} label="Repetitions completed" />
+          <TextInput keyboardType="numeric" style={{ margin: 16 }} maxLength={3} onChangeText={(value) => setFitData({ ...fitData, weight: value })} label="Weight, min 7lbs" />
+          <TextInput keyboardType="numeric" style={{ margin: 16 }} maxLength={2} onChangeText={(value) => setFitData({ ...fitData, reps: value })} label="Repetitions, max 15" />
         </View>
         <View>
-          <Button title="Enter" />
+          <Button title="Enter" onPress={calcStrength} />
         </View>
         <View>
           <Text>
-            Estimaged maximum amount of weight that can be lifted for 1 repetition {fitData.oneRepMax ? fitData.oneRepMax : ''}
-
+            Estimated maximum amount of weight that can be lift for 1 repetition {fitData.oneRepMax ? `${fitData.oneRepMax} lbs (${Math.round(fitData.oneRepMax / 2.2)}kg)` : ''}
           </Text>
         </View>
       </View>
@@ -71,7 +68,7 @@ const styles = StyleSheet.create({
 
 });
 
-// Formula to calculate strength
-// wt/1.0278-(reps x 0.0278)
-// need input & buttons
+//https://www.nfpt.com/blog/calculating-a-clients-1rm#:~:text=This%20formula%20states%20that%20an,performed%20for%20the%20given%20exercise.
+/* This formula states that an individual’s 1RM = w ÷ [(1.0278) – (0.0278 x r)]. The w represents the weight, in pounds, lifted for 10 successful repetitions. The r stands for the number of repetitions performed for the given exercise. */
+
 //check the numbers that are more than 5 and less than 250
