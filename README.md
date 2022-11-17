@@ -1,7 +1,7 @@
 
 # Workout App
 
-A mobile exercise application to assist users making a exercise regiment for cardiovascular health and improve muscular strength, size, and endurance. 
+A mobile exercise application to assist users to estimate muscular strength, develop a exercise regimen for cardiovascular exercise, and to improve muscular strength, size, and endurance. 
 
 Technologies used: 
 
