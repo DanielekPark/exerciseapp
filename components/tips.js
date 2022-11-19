@@ -1,31 +1,63 @@
 import React, { useState, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Flatlist } from 'react-native';
 
 export default function Tips() {
+
+  // use flatlist 
+  // https://www.atomlab.dev/tutorials/react-native-bullet-list
+
+  const glossaryTerms = [
+    {
+      term: 'Strength',
+      def: 'Maximal amount of force muscles can generate.'
+    },
+    {
+      term: 'Hypertrophy',
+      def: 'Increase in muscle size'
+    },
+    {
+      term: 'Muscular endurance',
+      def: 'Ability to sustain repeated effort over a period of time.'
+    },
+  ]
 
   return (
     <View>
       <Text style={styles.title}>Tips</Text>
-      {/* add a range input to show optimal ranges for endurance, hypertrophy and strength? */}
+
+      <Text style={styles.title}>Glossary terms</Text>
+      {/* Provide glossary terms */}
+      {/* Hypertrophy, endurance, strength */}
+      <View>
+        {glossaryTerms.map((item) => {
+          return (
+            <View key={item.term} style={{ marginBottom: 10, marginTop: 5 }}>
+              <Text>
+                {`\u2022 ${item.term} ${item.def}`}
+              </Text>
+            </View>
+          )
+        })}
+      </View>
+
+      <Text style={styles.title}>Exercise frequency</Text>
+      <Text>
+        After exercising a muscle group (e.g. chest), it is recommended to wait 48 hours train the same muscle group again.
+      </Text>
+      {/* add a range input to show optimal ranges for endurance, hypertrophy, strength
+      show percentage range,reps, & rest times of each optimal fitness goal
+      https://github.com/miblanchard/react-native-slider
+      */}
+      <Text style={styles.title}>Optimal strength range</Text>
+      <Text>
+        Drag the dot to how many repetitions, rest times between sets, and percentage is best for your goal.
+      </Text>
+      {/* Need visual aid for breathing & eccentric muscle movement 3 seconds duration*/}
     </View>
   );
 }
 
-/* 
-BEGINNER
-SETS 1-2
-REPS 8-12
-2-3 PER WEEK
-INTENSITY 60-80%
-
-HIPS: Legs press, dumbbell squat, knee extension
-LEGS: Hamstring curl, db deadlift
-CHEST: Machine chest press, dips 
-BACK: Machine row, pullup machine
-SHOULDER: Dumbbell raise, face pull
-ABS: Curl up, leg raises, planks
-*/
 
 const styles = StyleSheet.create({
   container: {

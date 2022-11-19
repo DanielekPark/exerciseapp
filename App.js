@@ -6,12 +6,13 @@ import Wrapper from './components/wrapper';
 import Calculator from './components/weights/calculator';
 
 export default function App() {
-  const [mode, setMode] = useState('cardio');
+  const [mode, setMode] = useState('tips');
 
   return (
     <View style={styles.app}>
       <View style={styles.header}>
         <Text style={styles.title}>Exercise App</Text>
+        {/* for buttons useState to show if button is active*/}
         <View style={styles.btnContainer}>
           <Text style={styles.cardioBtn}>
             <Button title="Cardio" style={styles.btns} onPress={() => setMode('cardio')} />
@@ -33,17 +34,9 @@ export default function App() {
   );
 }
 
-/*
-// 1. work on questionaire later
-// 2. Ask user if he/her is a beginner or intermediate
-// 3. Need beginner component
-// 4. user chooses exercises
-//Component should display userTip all the times
+// work on questionaire later
+// user chooses exercises
 //Display strengthChart for intermediate setting
-
-*/
-
-//WORK ON  LOGIC FOR BEGINNER WORKOUT
 
 const styles = StyleSheet.create({
   container: {

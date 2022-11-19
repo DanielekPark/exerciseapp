@@ -9,11 +9,18 @@ export default function Weights({ mode }) {
   return (
     <View>
       <Text style={styles.title}>Weight Lifting</Text>
+      {/* Ask if user has use app before */}
+
     </View>
   );
 }
 
+
+
 /* 
+https://www.gograph.com/vector-clip-art/exercise-stick-figure.html
+
+
 BEGINNER
 SETS 1-2
 REPS 8-12

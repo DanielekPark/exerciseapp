@@ -35,6 +35,7 @@ export default function Calculator() {
           Calculate your strength
         </Text>
         <View>
+          {/* replace beginner/intermediate buttons with toggle */}
           <Button title="Beginner" onPressIn={() => setFitData({ ...fitData, exp: 'beginner' })} />
           <Button title="Intermediate" onPressIn={() => setFitData({ ...fitData, exp: 'intermediate' })} />
         </View>
