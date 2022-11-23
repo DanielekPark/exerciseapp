@@ -46,6 +46,16 @@ export default function Tips() {
         })}
       </View>
 
+      <Text style={styles.title}>Training Age</Text>
+      <Text>
+        {`Beginners: < 2 months`}
+      </Text>
+      <Text>
+        {`Intermediate: 2 - 6 months`}
+      </Text>
+      <Text>
+        {`Advanced: more than or equal to 1 year`}
+      </Text>
       <Text style={styles.title}>Exercise frequency</Text>
       <Text>
         After exercising a muscle group (e.g. chest), it is recommended to wait 48 hours train the same muscle group again.
@@ -55,6 +65,7 @@ export default function Tips() {
       <Text>
         Drag the dot to see how many repetitions, rest times between sets, and percentage is best for your goals.
       </Text>
+
 
       <View style={styles.chart}>
         <View style={[styles.category, sliderValue <= 67 ? styles.highlight : '']}>

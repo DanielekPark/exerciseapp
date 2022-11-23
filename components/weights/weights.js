@@ -9,8 +9,21 @@ export default function Weights({ mode }) {
   return (
     <View>
       <Text style={styles.title}>Weight Lifting</Text>
-      {/* Ask if user has use app before */}
+      {/* RETURNING USERS */}
+      {/* ASK TRAINING AGE */}
+      {/* INPUT DATA FROM PREVIOUS WORKOUT */}
+      {/* ALTER OR KEEP WORKOUT */}
 
+
+
+      {/* FIRST TIME USERS */}
+      {/* 
+          QUESTIONS
+          GOALS
+          DAYS
+         */}
+
+      {/* SHOW WORKOUT */}
     </View>
   );
 }
