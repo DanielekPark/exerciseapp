@@ -15,9 +15,8 @@ export default function Weights({ mode }) {
   );
 }
 
-
-
 /* 
+EXERCISE ICONS
 https://www.gograph.com/vector-clip-art/exercise-stick-figure.html
 
 
@@ -61,7 +60,11 @@ const styles = StyleSheet.create({
     width: "30%",
   },
   btnContainer: {
-    flexDirection: 'row', flexWrap: 'wrap', marginRight: 'auto', marginLeft: 'auto', marginTop: 30
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    marginRight: 'auto',
+    marginLeft: 'auto',
+    marginTop: 30
   },
   cardioBtn: {
     marginRight: 5,

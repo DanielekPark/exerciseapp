@@ -1,14 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, Flatlist } from 'react-native';
 import { Slider } from '@miblanchard/react-native-slider';
+import Goalrange from './goalrange';
 
 export default function Tips() {
   const [sliderValue, setSliderValue] = useState(0)
-
-  useEffect(() => {
-    console.log(sliderValue)
-    console.log(sliderValue.join() / 1, 'line 10')
-  }, [sliderValue])
 
   const glossaryTerms = [
     {
@@ -25,13 +21,19 @@ export default function Tips() {
     },
   ]
 
+  //GETS VALUE FROM RANGE INPUT 
+  const getInputValue = (value) => setSliderValue(value[0]);
+
+  useEffect(() => {
+    console.log(sliderValue)
+  }, [sliderValue])
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Tips</Text>
 
       <Text style={styles.title}>Glossary terms</Text>
-      {/* Provide glossary terms */}
-      {/* Hypertrophy, endurance, strength */}
+
       <View>
         {glossaryTerms.map((item) => {
           return (
@@ -48,7 +50,6 @@ export default function Tips() {
       <Text>
         After exercising a muscle group (e.g. chest), it is recommended to wait 48 hours train the same muscle group again.
       </Text>
-      {/* https://github.com/miblanchard/react-native-slider */}
 
       <Text style={styles.title}>Optimal strength range</Text>
       <Text>
@@ -56,19 +57,20 @@ export default function Tips() {
       </Text>
 
       <View style={styles.chart}>
-        <View style={[styles.category, sliderValue.join() / 1 >= 85 ? styles.highlight : '']}>
-          <Text>Strength</Text>
+        <View style={[styles.category, sliderValue <= 67 ? styles.highlight : '']}>
+          <Text style={[styles.categoryTxt,]}>Endurance</Text>
         </View>
-        <View style={[styles.category, sliderValue.join() / 1 >= 67 && sliderValue.join() < 85 ? styles.highlight : '']}>
-          <Text>Hypertophy</Text>
+        <View style={[styles.category, sliderValue >= 67 && sliderValue < 85 ? styles.highlight : '']}>
+          <Text style={[styles.categoryTxt,]}>Hypertophy</Text>
         </View>
-        <View style={[styles.category, sliderValue.join() <= 67 ? styles.highlight : '']}>
-          <Text>Endurance</Text>
+        <View style={[styles.category, sliderValue > 85 ? styles.highlight : '']}>
+          <Text style={[styles.categoryTxt,]}>Strength</Text>
         </View>
       </View>
 
       <Text style={styles.percentage}>{`${sliderValue}%`}</Text>
       <View>
+        <Goalrange sliderValue={sliderValue} />
         <Slider
           animateTransitions
           minimumTrackTintColor="#13a9d6"
@@ -78,7 +80,7 @@ export default function Tips() {
           maximumValue={100}
           step={1}
           trackClickable={true}
-          onValueChange={(value) => setSliderValue(value)}
+          onValueChange={(value) => getInputValue(value)}
         />
       </View>
 
@@ -143,16 +145,17 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between'
   },
   category: {
-    width: '30%'
+    width: '33.33%'
   },
-  strength: {
-
+  categoryTxt: {
+    textAlign: 'center',
+    fontWeight: "semibold",
+    fontSize: 18,
   },
+  strength: {},
   hypertophy: {},
-  endurance: {
-    marginLeft: 'auto'
-  },
+  endurance: {},
   highlight: {
-    backgroundColor: 'yellow'
+    backgroundColor: "yellow"
   }
 });
