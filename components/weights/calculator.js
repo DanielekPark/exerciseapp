@@ -53,7 +53,6 @@ export default function Calculator() {
         </View>
       </View>
 
-
     </View>
   );
 }

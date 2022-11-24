@@ -6,7 +6,7 @@ import Wrapper from './components/wrapper';
 import Calculator from './components/weights/calculator';
 
 export default function App() {
-  const [mode, setMode] = useState('tips');
+  const [mode, setMode] = useState('weights');
 
   return (
     <ScrollView>

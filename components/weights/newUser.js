@@ -1,18 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Stack, Button } from "@react-native-material/core";
-import UserSelection from './userSelection';
 
-export default function Weights() {
-  const [option, setOption] = useState('buttons')
+export default function NewUser({ option, setOption }) {
 
   return (
     <View>
-      <Text style={styles.title}>Weight Lifting</Text>
-      <UserSelection />
-      {/* RETURNING USERS */}
-
+      <Text style={styles.title}>New User</Text>
+      <View style={styles.btnContainer}>
+        <Text style={styles.cardioBtn}>
+          <Button title="Returning users" style={styles.btns} />
+        </Text>
+        <Text style={styles.weightsBtn}>
+          <Button title="New time user" style={styles.btns} />
+        </Text>
+      </View>
       {/* FIRST TIME USERS */}
+      {/* 
+          QUESTIONS
+          GOALS
+          DAYS
+         */}
 
       {/* SHOW WORKOUT */}
     </View>
