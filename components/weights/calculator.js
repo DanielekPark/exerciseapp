@@ -21,10 +21,6 @@ export default function Calculator() {
 
   }
 
-  // useEffect(() => {
-  //   console.log(fitData)
-  // }, [fitData])
-
   //Resets the calculator
   const reset = () => { }
 
@@ -58,7 +54,6 @@ export default function Calculator() {
 }
 
 const styles = StyleSheet.create({
-
   title: {
     fontWeight: "bold",
     marginTop: 50,

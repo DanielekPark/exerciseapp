@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { Stack, Button, TextInput } from "@react-native-material/core";
+import { StyleSheet, Text, View, Dimensions } from 'react-native';
+import { Stack, Button, TextInput, } from "@react-native-material/core";
+import exercises from './exercises';
 
 export default function ReturningUsers({ option, setOption }) {
+  const [userData, setUserData] = useState({ exercises: exercises, selected: [] });
+  //option, setOption use later for starting over button
 
   return (
     <View>
@@ -19,33 +22,41 @@ export default function ReturningUsers({ option, setOption }) {
 
       <View>
         <View>
-          <View style={{ margin: 16 }} >
+          <View>
             <Text>Number of consecutive workout weeks</Text>
             <TextInput keyboardType="numeric" style={{ margin: 16 }} maxLength={2} label="e.g. 1" />
-            <TextInput keyboardType="numeric" style={{ margin: 16 }} maxLength={2} label="Repetitions" />
+            <View>
+              <Text>Select exercises from a previous workout day</Text>
+
+              {/* FILTER THE EXERCISES CHOSEN & WITH IT THE TEXTINPUT*/}
+              <View style={styles.container}>
+                {userData.exercises.map((item) => {
+                  return (
+                    <View style={styles.item}>
+                      <Text style={styles.itemTitle}>
+                        {item.name}
+                      </Text>
+                    </View>
+                  )
+                })}
+              </View>
+            </View>
+            {/* CREATE A FUNCTION TO ALTER DATA */}
+            {/* DISPLAY WORKOUT */}
+
+            {/* <TextInput keyboardType="numeric" style={{ margin: 16 }} maxLength={2} label="Repetitions" /> */}
           </View>
+          {/* <View>
+            <Button title="Enter" />
+          </View> */}
           <View>
             <Button title="Enter" />
-          </View>
-          <View>
-            <Text>
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Hic, eius!
-            </Text>
+            <View>
+            </View>
           </View>
         </View>
 
       </View>
-      {/* INPUT DATA FROM PREVIOUS WORKOUT */}
-      {/* ALTER OR KEEP WORKOUT */}
-
-      {/* FIRST TIME USERS */}
-      {/* 
-          QUESTIONS
-          GOALS
-          DAYS
-         */}
-
-      {/* SHOW WORKOUT */}
     </View>
   );
 }
@@ -61,29 +72,17 @@ REPS 8-12
 2-3 PER WEEK
 INTENSITY 60-80%
 
-HIPS: Legs press, dumbbell squat, knee extension
-LEGS: Hamstring curl, db deadlift
-CHEST: Machine chest press, dips 
-BACK: Machine row, pullup machine
-SHOULDER: Dumbbell raise, face pull
-ABS: Curl up, leg raises, planks
 */
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  app: {
-    marginHorizontal: "auto",
-    maxWidth: 500
-  },
-  logo: {
-    height: 80
-  },
-  header: {
-    padding: 20
+    marginTop: 30,
+    marginBottom: 30
   },
   title: {
     fontWeight: "bold",
@@ -107,4 +106,19 @@ const styles = StyleSheet.create({
   weightsBtn: {
     marginLeft: 5,
   },
+  item: {
+    width: Dimensions.get('window').width * 0.5,
+    height: 100,
+    width: 100,
+    borderWidth: 1,
+    borderColor: "lightgray",
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  itemTitle: {
+    marginTop: 16,
+  },
+  selected: {
+    backgroundColor: '#98FB98'
+  }
 });

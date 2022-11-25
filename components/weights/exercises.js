@@ -151,4 +151,6 @@ const exercises = [
     secondSet: 0,
     thirdSet: 0
   },
-]
+];
+
+export default exercises
