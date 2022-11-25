@@ -1,11 +1,29 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Dimensions } from 'react-native';
+import { StyleSheet, Text, View, Dimensions, TouchableOpacity } from 'react-native';
 import { Stack, Button, TextInput, } from "@react-native-material/core";
 import exercises from './exercises';
 
 export default function ReturningUsers({ option, setOption }) {
   const [userData, setUserData] = useState({ exercises: exercises, selected: [] });
   //option, setOption use later for starting over button
+
+  //
+  const selectedExercise = (name) => {
+    const selected = userData.exercises.map((item) => {
+      if (item.name === name) {
+        return {
+          ...item,
+          chosen: !item.chosen
+        }
+      }
+      return { ...item };
+    })
+    setUserData({ ...userData, exercises: selected })
+  }
+
+  // useEffect(() => {
+  //   console.log(userData)
+  // }, [userData])
 
   return (
     <View>
@@ -28,15 +46,14 @@ export default function ReturningUsers({ option, setOption }) {
             <View>
               <Text>Select exercises from a previous workout day</Text>
 
-              {/* FILTER THE EXERCISES CHOSEN & WITH IT THE TEXTINPUT*/}
               <View style={styles.container}>
                 {userData.exercises.map((item) => {
                   return (
-                    <View style={styles.item}>
+                    <TouchableOpacity key={item.name} style={[styles.item, item.chosen ? styles.selected : '']} onPress={() => selectedExercise(item.name)}>
                       <Text style={styles.itemTitle}>
                         {item.name}
                       </Text>
-                    </View>
+                    </TouchableOpacity>
                   )
                 })}
               </View>
@@ -55,7 +72,6 @@ export default function ReturningUsers({ option, setOption }) {
             </View>
           </View>
         </View>
-
       </View>
     </View>
   );
