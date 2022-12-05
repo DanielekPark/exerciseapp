@@ -17,7 +17,7 @@ export default function Tips() {
     },
     {
       term: 'Muscular endurance',
-      def: 'Ability to sustain repeated effort over a period of time.'
+      def: 'Ability to sustain repeated effort without fatigue.'
     },
   ]
 

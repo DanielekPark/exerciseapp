@@ -10,7 +10,7 @@ export default function UserSelection() {
   if (option === 'buttons') {
     return (
       <View>
-        <Text>Please press calc button if you haven't done so. It is needed to make your workout.</Text>
+        <Text>Please choose 3 exercises and use the calc button to determine the right weight.</Text>
         <View style={styles.btnContainer}>
           <Text style={styles.cardioBtn}>
             <Button title="Returning users" onPress={() => setOption('returning user')} style={styles.btns} />

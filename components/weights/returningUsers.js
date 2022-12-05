@@ -4,11 +4,11 @@ import { Stack, Button, TextInput, } from "@react-native-material/core";
 import exercises from './exercises';
 
 export default function ReturningUsers({ option, setOption }) {
-  const [userData, setUserData] = useState({ exercises: exercises, selected: [] });
+  const [userData, setUserData] = useState({ exercises: exercises, selected: [], updateExer: false, goal: '' });
   //option, setOption use later for starting over button
 
-  //
-  const selectedExercise = (name) => {
+  //USERS SELECT EXERCISES BASED ON WHAT THEY WANT
+  const chooseExer = (name) => {
     const selected = userData.exercises.map((item) => {
       if (item.name === name) {
         return {
@@ -21,9 +21,31 @@ export default function ReturningUsers({ option, setOption }) {
     setUserData({ ...userData, exercises: selected })
   }
 
+  //SELECTS EXERCISES TO UPDATE
+  const preparePlan = () => {
+    //CHECKS IF EXERCISES HAVE BEEN SELECTED
+    const checkSelected = userData.exercises.some((item) => item.chosen === true);
+    if (!checkSelected) return;
+
+    const exercises = userData.exercises.filter((item) => item.chosen === true);
+    setUserData({ ...userData, selected: exercises, updateExer: true });
+  }
+
+  //UPDATES WORKOUT PLAN BASED OFF DATA PROVIDED FROM PREVIOUS WORKOUT
+  const prepareUpdates = () => {
+    // Update exercises if user updated exercises
+
+    // ask about what their goal is
+
+    // if all 3 sets have numbers increase the reps by 1 from the previous workout? (e.g. 100lbs, reps: 10, 9, 8, next workout all 9 reps?)
+
+    // if all 3 sets have same numbers increase weight
+  }
+
   // useEffect(() => {
-  //   console.log(userData)
+  //   console.log(userData.selected)
   // }, [userData])
+
 
   return (
     <View>
@@ -45,31 +67,57 @@ export default function ReturningUsers({ option, setOption }) {
             <TextInput keyboardType="numeric" style={{ margin: 16 }} maxLength={2} label="e.g. 1" />
             <View>
               <Text>Select exercises from a previous workout day</Text>
-
               <View style={styles.container}>
-                {userData.exercises.map((item) => {
+                {
+                  userData.updateExer ?
+                    userData.selected.map((item) => {
+                      return (
+                        <TouchableOpacity key={item.name} style={[styles.item, item.chosen ? styles.selected : '']}>
+                          <Text style={styles.itemTitle}>
+                            {item.name}
+                          </Text>
+                          <TextInput keyboardType="numeric" style={{ margin: 16 }} maxLength={2} label="e.g. 1" />
+                        </TouchableOpacity>
+                      )
+                    })
+                    :
+                    userData.exercises.map((item) => {
+                      return (
+                        <TouchableOpacity key={item.name} style={[styles.item, item.chosen ? styles.selected : '']} onPress={() => chooseExer(item.name)}>
+                          <Text style={styles.itemTitle}>
+                            {item.name}
+                          </Text>
+                        </TouchableOpacity>
+                      )
+                    })
+                }
+              </View>
+            </View>
+          </View>
+
+          <View>
+            {userData.updateExer ?
+              <Button title="Update" />
+              :
+              <Button title="Enter" onPress={preparePlan} />
+            }
+          </View>
+          <View>
+            {/* 
+              CREATE NEW PLAN 
+              
+                {userData.selected.map((item) => {
                   return (
-                    <TouchableOpacity key={item.name} style={[styles.item, item.chosen ? styles.selected : '']} onPress={() => selectedExercise(item.name)}>
+                    <View key={item.name} style={[styles.item]}>
                       <Text style={styles.itemTitle}>
                         {item.name}
                       </Text>
-                    </TouchableOpacity>
+                    </View>
                   )
                 })}
-              </View>
-            </View>
-            {/* CREATE A FUNCTION TO ALTER DATA */}
-            {/* DISPLAY WORKOUT */}
+            <Text>Number of consecutive workout weeks</Text>
+            <TextInput keyboardType="numeric" style={{ margin: 16 }} maxLength={2} label="e.g. 1" /> */}
 
-            {/* <TextInput keyboardType="numeric" style={{ margin: 16 }} maxLength={2} label="Repetitions" /> */}
-          </View>
-          {/* <View>
-            <Button title="Enter" />
-          </View> */}
-          <View>
-            <Button title="Enter" />
-            <View>
-            </View>
           </View>
         </View>
       </View>
