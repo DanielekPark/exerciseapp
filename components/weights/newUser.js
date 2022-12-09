@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Dimensions, TextInput } from 'react-native';
 import { Stack, Button } from "@react-native-material/core";
 import exercises from './exercises';
+import Schedule from './Schedule';
 
 export default function NewUser({ option, setOption }) {
-  const [userData, setUserData] = useState({ exercises: exercises, selected: [], days: 0, categories: [] })
+  const [userData, setUserData] = useState({ exercises: exercises, selected: [], days: 0, level: '', category: '' });
 
   //USERS SELECT EXERCISES, HIGHLIGHTS WHEN CHOSEN
   const selectedExer = (name) => {
@@ -20,32 +21,27 @@ export default function NewUser({ option, setOption }) {
     setUserData({ ...userData, exercises: selected })
   }
 
-  //SHOW EXERCISES BASED ON AVAILABILITY
-  const daysAvailable = (userData) => {
+  // CREATE A FUNCTION THAT EXERCISES based on button pressed
+  const chooseExer = (userData) => {
     if (userData.days === 2) {
-      const list = userData.exercises.filter((item) => {
-        if (item.muscleGroup === 'chest') return item;
-        if (item.muscleGroup === 'back') return item;
-        if (item.muscleGroup === 'thigh') return item;
-        if (item.muscleGroup === 'hamstring') return item;
-        if (item.muscleGroup === 'core') return item;
-      }).map((item) => {
-        return { ...item, availability: 2 }
-      })
-      setUserData({ ...userData, selected: list });
-    }
+      if (userData.category === 'upper') {
+        const selected = userData.exercises.filter((exer) => {
+          if (userData.muscleGroup === 'back') return exer
+          if (userData.muscleGroup === 'chest') return exer
+        })
+        setUserData({ ...userData, selected: [...selected] });
+      }
 
-    if (num === 3) {
-      const list = userData.exercises.filter((item) => {
-        if (item.muscleGroup === 'chest') return item;
-        if (item.muscleGroup === 'back') return item;
-        if (item.muscleGroup === 'thigh') return item;
-        if (item.muscleGroup === 'hamstring') return item;
-        if (item.muscleGroup === 'shoulder') return item;
-        if (item.muscleGroup === 'core') return item;
-      });
-      setUserData({ ...userData, selected: list });
+      if (userData.category === 'lower') {
+        const selected = userData.exercises.filter((exer) => {
+          if (userData.muscleGroup === 'thigh') return exer
+          if (userData.muscleGroup === 'hamstring') return exer
+        })
+        setUserData({ ...userData, selected: [...selected] });
+      }
     }
+    const removeDuplicates = () => [...new Set(userData.selected)]
+    setUserData({ ...userData, selected: removeDuplicates })
   }
 
   return (
@@ -56,58 +52,47 @@ export default function NewUser({ option, setOption }) {
           <Button title="Returning users" style={styles.btns} />
         </Text>
         <Text style={styles.weightsBtn}>
-          <Button title="New time user" style={styles.btns} />
+          <Button title="New user" style={styles.btns} />
         </Text>
       </View>
 
       <View>
-        <Text>Times per week you can workout?</Text>
+        <Text>Days available for per week for exercise</Text>
         <View style={styles.btnContainer}>
           {/* when clicked show exercises */}
-          <Button title="2" />
-          <Button title="3" />
-          {/* Display */}
+          <Button onPress={() => setUserData({ ...userData, days: 2 })} title="2" />
+          <Button onPress={() => setUserData({ ...userData, days: 3 })} title="3" />
         </View>
-        {/* <View style={styles.btnContainer}>
-
-          <Button title="Chest" />
-          <Button title="Back" />
-          <Button title="Core" />
-          <Button title="Thigh" />
-          <Button title="Hamstring" />
-        </View> */}
       </View>
 
       <View>
         <Text>Choose your level</Text>
         <View style={styles.btnContainer}>
-          <Button title="Beginner" />
-          <Button title="Intermediate" />
+          <Button title="Beginner" onPress={() => setUserData({ ...userData, level: 'beginner' })} />
+          <Button title="Intermediate" onPress={() => setUserData({ ...userData, level: 'intermediate' })} />
         </View>
       </View>
 
       <View>
         <Text>What are your goals?</Text>
         <View style={styles.btnContainer}>
-          <Button title="Get bigger" />
-          <Button title="Stronger" />
+          <Button title="Get bigger" onPress={() => setUserData({ ...userData, goals: 'size' })} />
+          <Button title="Stronger" onPress={() => setUserData({ ...userData, goals: 'strength' })} />
         </View>
       </View>
 
-      <View>
-        <Button title="Choose exercises" />
-      </View>
-      {/* 2 times per week */}
-      {/* display muscle group and exercise 
-      {userData.days > 0 ?  <View>
-        <Text>Category</Text>
-        <View>Exercise</View>
-        <TextInput />
-      </View>
-      : 
-      ''
-      }
-     */}
+      {/* NEEDS AVAIALBLE DAYS & CATEGORY 
+
+      */}
+      <Schedule userData={userData} setUserData={setUserData} />
+
+      {/* 
+        CREATE A FUNCTION THAT  EXERCISES based on button pressed
+        <TouchableOpacity key={item.name} style={[styles.item, item.chosen ? styles.selected : '']} onPress={() => chooseExer(item.name)}>
+          <Text style={styles.itemTitle}>
+            {item.name}
+          </Text>
+        </TouchableOpacity> */}
 
       {/* Tell user to choose 1 exercise per group */}
       {/* if user touches an exercise it becomes true */}
@@ -130,12 +115,6 @@ export default function NewUser({ option, setOption }) {
       {/* Need input, collect numbers from  */}
       {/* Need data */}
       {/* Please provide data from a previous workout or number received from using the calc button */}
-
-
-      {/* 3 times per week */}
-      {/* Chest & Triceps */}
-      {/* Back and Biceps */}
-      {/* Legs and core */}
       {/* 
         Workout plan
       SHOW WORKOUT */}

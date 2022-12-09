@@ -9,7 +9,10 @@ export default function Weights() {
   return (
     <View>
       <Text style={styles.title}>Weight Lifting</Text>
-      <UserSelection />
+
+      <View>
+        <UserSelection />
+      </View>
       {/* RETURNING USERS */}
 
       {/* FIRST TIME USERS */}

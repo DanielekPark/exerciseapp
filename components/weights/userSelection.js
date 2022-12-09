@@ -12,11 +12,11 @@ export default function UserSelection() {
       <View>
         <Text>Please choose 3 exercises and use the calc button to determine the right weight.</Text>
         <View style={styles.btnContainer}>
-          <Text style={styles.cardioBtn}>
+          {/* <Text style={styles.cardioBtn}>
             <Button title="Returning users" onPress={() => setOption('returning user')} style={styles.btns} />
-          </Text>
+          </Text>*/}
           <Text style={styles.weightsBtn}>
-            <Button title="New time user" onPress={() => setOption('new user')} style={styles.btns} />
+            <Button title="New user" onPress={() => setOption('new user')} style={styles.btns} />
           </Text>
         </View>
       </View>

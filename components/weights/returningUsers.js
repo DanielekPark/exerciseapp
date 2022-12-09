@@ -7,7 +7,7 @@ export default function ReturningUsers({ option, setOption }) {
   const [userData, setUserData] = useState({ exercises: exercises, selected: [], updateExer: false, goal: '' });
   //option, setOption use later for starting over button
 
-  //USERS SELECT EXERCISES BASED ON WHAT THEY WANT
+  //SELECT EXERCISES TO USE
   const chooseExer = (name) => {
     const selected = userData.exercises.map((item) => {
       if (item.name === name) {
@@ -37,7 +37,7 @@ export default function ReturningUsers({ option, setOption }) {
 
     // ask about what their goal is
 
-    // if all 3 sets have numbers increase the reps by 1 from the previous workout? (e.g. 100lbs, reps: 10, 9, 8, next workout all 9 reps?)
+    // MAKE SURE REPS ARE WITHIN RANGE
 
     // if all 3 sets have same numbers increase weight
   }
@@ -50,6 +50,7 @@ export default function ReturningUsers({ option, setOption }) {
   return (
     <View>
       <View style={styles.btnContainer}>
+        <Text></Text>
         <Text style={styles.cardioBtn}>
           <Button title="Returning users" style={styles.btns} />
         </Text>
@@ -81,20 +82,22 @@ export default function ReturningUsers({ option, setOption }) {
                       )
                     })
                     :
-                    userData.exercises.map((item) => {
-                      return (
-                        <TouchableOpacity key={item.name} style={[styles.item, item.chosen ? styles.selected : '']} onPress={() => chooseExer(item.name)}>
-                          <Text style={styles.itemTitle}>
-                            {item.name}
-                          </Text>
-                        </TouchableOpacity>
-                      )
-                    })
+                    <View>
+                      {/* PROVIDE DATA TO CREATE NEW PLAN */}
+                      {userData.exercises.map((item) => {
+                        return (
+                          <TouchableOpacity key={item.name} style={[styles.item, item.chosen ? styles.selected : '']} onPress={() => chooseExer(item.name)}>
+                            <Text style={styles.itemTitle}>
+                              {item.name}
+                            </Text>
+                          </TouchableOpacity>
+                        )
+                      })}
+                    </View>
                 }
               </View>
             </View>
           </View>
-
           <View>
             {userData.updateExer ?
               <Button title="Update" />
@@ -103,20 +106,6 @@ export default function ReturningUsers({ option, setOption }) {
             }
           </View>
           <View>
-            {/* 
-              CREATE NEW PLAN 
-              
-                {userData.selected.map((item) => {
-                  return (
-                    <View key={item.name} style={[styles.item]}>
-                      <Text style={styles.itemTitle}>
-                        {item.name}
-                      </Text>
-                    </View>
-                  )
-                })}
-            <Text>Number of consecutive workout weeks</Text>
-            <TextInput keyboardType="numeric" style={{ margin: 16 }} maxLength={2} label="e.g. 1" /> */}
 
           </View>
         </View>
