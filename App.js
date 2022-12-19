@@ -37,8 +37,7 @@ export default function App() {
 }
 
 // work on questionaire later
-// user chooses exercises
-//Display strengthChart for intermediate setting
+// CREATE A BUTTON & COMPONENT FOR WALKTHOUGH GIVE IT A DIFFERENT NAME
 
 const styles = StyleSheet.create({
   container: {

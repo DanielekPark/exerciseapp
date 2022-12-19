@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Dimensions, TextInput } from 'react-native';
 import { Stack, Button } from "@react-native-material/core";
 import exercises from './exercises';
+import WeightExercises from './weightExercises';
 
 const Schedule = ({ userData, setUserData }) => {
 
@@ -10,10 +11,10 @@ const Schedule = ({ userData, setUserData }) => {
     if (userData.days === 2) {
       if (userData.category === 'upper') {
         const filtered = userData.exercises.filter((exer) => {
-          if (exer.muscleGroup === 'chest') return { ...exer };
-          if (exer.muscleGroup === 'back') return { ...exer };
+          if (exer.muscleGroup === 'chest') return exer;
+          if (exer.muscleGroup === 'back') return exer;
         });
-        setUserData({ ...userData, selected: [...filtered] })
+        setUserData({ ...userData, plan: [...filtered] })
       }
 
       if (userData.category === 'lower') {
@@ -22,10 +23,10 @@ const Schedule = ({ userData, setUserData }) => {
           if (exer.muscleGroup === 'hamstring') return exer;
           if (exer.muscleGroup === 'core') return exer;
         });
-        setUserData({ ...userData, selected: [...filtered] })
+        setUserData({ ...userData, plan: [...filtered] })
       }
     }
-
+    // if (userData.days === 3) {}
   }
 
   //SET EXERCISE CATEGORY
@@ -37,22 +38,31 @@ const Schedule = ({ userData, setUserData }) => {
   // 2 DAY AVAILABILITY
   if (userData.days === 2) {
     return (
-      <View style={styles.btnContainer}>
-        <Button title="Upper body" onPress={() => provideSelection('upper')} />
-        <Button title="Lower body" onPress={() => provideSelection('lower')} />
-      </View>
+      <>
+        <View style={styles.btnContainer}>
+          <Button title="Upper body" onPress={() => provideSelection('upper')} />
+          <Button title="Lower body" onPress={() => provideSelection('lower')} />
+        </View>
+        <WeightExercises setUserData={setUserData} userData={userData} />
+      </>
     )
   }
 
-
-
-
-
-  // if (userData.category === 'upper') {
-  //   return (
-  //     userData.selected?.map((item)=> {})
-  //   )
-  // }
+  // DISPLAYS EXERCISES FOR UPPER BODY EXERCISES
+  if (userData.category === 'upper') {
+    return (
+      <>
+        <Text>Choose 1 exercise per muscle group</Text>
+        {userData.plan.map((exer) => {
+          return (
+            <View key={`${exer.name}${exer.muscleGroup}`}>
+              <TextInput />
+              <Button title="Enter" />
+            </View>
+          )
+        })}
+      </>)
+  }
 
 
   {/* 3 times per week 
