@@ -5,7 +5,7 @@ import exercises from './exercises';
 
 const WeightExercises = ({ userData, setUserData }) => {
 
-  //SELECT 1 EXERCISE & REMOVE EXERCISES THAT TARGETS THE SAME MUSCLES
+  //SELECTS 1 EXERCISE & HIDES EXERCISES THAT TARGETS THE SAME MUSCLES
   const chooseExercise = (exer) => {
     const muscleGroup = exer.muscleGroup;
     const name = exer.name;
@@ -27,6 +27,38 @@ const WeightExercises = ({ userData, setUserData }) => {
     setUserData({ ...userData, plan: addToPlan });
   }
 
+  //Sets info for reps and weight, 
+  const addRepsWeights = (value, exerciseName, objKey, exer) => {
+    const updatedInfo = userData.plan.map((obj) => {
+      if (exerciseName === exer.name) {
+        return { ...obj, [objKey]: value };
+      }
+      return obj;
+    });
+    setUserData({ ...userData, plan: updatedInfo });
+  }
+
+  //SHOWS PLAN IF INFO IS PROVIDED
+  const showPlan = () => {
+    if (userData.plan.length < 1) return;
+    const checkInfo = userData.plan.every((obj) => obj.weight > 0 && obj.reps > 0);
+    if (!checkInfo) return;
+    setUserData({ ...userData, showPlan: true });
+  }
+
+  //Estimated weight for user 
+  const calcWeight = (exer, percentage) => {
+    const weight = exer.weight / 1;
+    const repetitions = exer.reps / 1;
+    const oneRepMax = Math.round(weight / (1.0287 - (0.0278 * repetitions)));
+    console.log(weight, repetitions, oneRepMax)
+    return oneRepMax * percentage;
+  }
+
+  // useEffect(() => {
+  //   console.log(userData.plan)
+  // }, [userData])
+
   if (userData.category === 'upper'
     || userData.category === 'lower') {
     return (
@@ -42,11 +74,13 @@ const WeightExercises = ({ userData, setUserData }) => {
                   <>
                     <Text>{exer.name}</Text>
                     <TextInput
-                      placeholder={`Amount of weight used`}
+                      onChangeText={(value) => addRepsWeights(value, exer.name, 'weight', exer)}
+                      placeholder={`Weight used`}
                       keyboardType="numeric"
                     />
                     <TextInput
-                      placeholder={`Amount of weight used`}
+                      onChangeText={(value) => addRepsWeights(value, exer.name, 'reps', exer)}
+                      placeholder={`Reps completed`}
                       keyboardType="numeric"
                     />
                   </>
@@ -55,18 +89,57 @@ const WeightExercises = ({ userData, setUserData }) => {
             </View>
           )
         })}
-        <Button title="Enter" />
+        <Button title="Enter" onPress={showPlan} />
         <Button title="Start Over" />
 
-        {/* DISPLAY EXERCISES BELOW
-
+        {/* DISPLAY EXERCISES BELOW */}
         <View>
+          {userData.showPlan ?
+            (
+              userData.plan.map((exer) => {
+                return (
+                  <View key={`${exer.name}+${exer.name}`}>
+                    <Text>{exer.name}</Text>
+                    <Text>
+                      Recommended weight range for hypertrophy if a beginners or intermediate: {calcWeight(exer, 0.7)} - {calcWeight(exer, 0.85)}
+                    </Text>
+                    <Text>
+                      Recommended repetition range: 8 - 12
+                    </Text>
+                    <Text>
+                      Number of sets 1 - 3 per exercise
+                    </Text>
+                    <Text>
+                      Rest duration between sets 1 - 2 min
+                    </Text>
+                  </View>
+                )
+              })
+            )
+            :
+            ''
+          }
         </View>
-        */}
-
       </>)
   }
 
 }
+
+/* 
+          <View>
+            <Text>
+              Recommended weight range for hypertrophy if a beginners or intermediate: {}
+            </Text>
+            <Text>
+              Recommended repetition range: 8 - 12
+            </Text>
+            <Text>
+              Number of sets 1 -3 per exercise
+            </Text>
+            <Text>
+              Rest time between sets: {}
+            </Text>
+          </View>
+*/
 
 export default WeightExercises

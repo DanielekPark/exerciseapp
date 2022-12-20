@@ -18,7 +18,7 @@ export default function Weights() {
     if (userData.intensity === 'warmup') {
       const lowerLevel = Math.round((220 - age) * 0.3);
       const upperLevel = Math.round((220 - age) * 0.39);
-      const hrRange = `${lowerLevel} - ${upperLevel}`
+      const hrRange = `${lowerLevel} - ${upperLevel}`;
       setUserData({ ...userData, heartRange: hrRange });
     }
     // MODERATE INTENSITY EXERCISE
@@ -73,10 +73,9 @@ export default function Weights() {
         <Text style={styles.calcBtn}>
           <Button title="Level 4" style={styles.btns} onPress={() => setUserData({ ...userData, intensity: 'level4' })} />
         </Text>
-
       </View>
+
       <View>
-        {/* NEED INPUT FOR AGE */}
         <TextInput
           style={styles.input}
           placeholder="Age"

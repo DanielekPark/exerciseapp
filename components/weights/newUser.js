@@ -5,7 +5,7 @@ import exercises from './exercises';
 import Schedule from './Schedule';
 
 export default function NewUser({ option, setOption }) {
-  const [userData, setUserData] = useState({ exercises: exercises, plan: [], days: 0, level: '', category: '' });
+  const [userData, setUserData] = useState({ exercises: exercises, plan: [], days: 0, level: '', category: '', showPlan: false });
 
   //USERS SELECT EXERCISES, HIGHLIGHTS WHEN CHOSEN
   const selectedExer = (name) => {
