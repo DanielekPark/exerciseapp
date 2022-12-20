@@ -7,17 +7,19 @@ import WeightExercises from './weightExercises';
 const Schedule = ({ userData, setUserData }) => {
 
   //FILTER EXERCISES BASED ON USER SELECTION
-  const filterExercises = () => {
-    if (userData.days === 2) {
-      if (userData.category === 'upper') {
-        const filtered = userData.exercises.filter((exer) => {
-          if (exer.muscleGroup === 'chest') return exer;
-          if (exer.muscleGroup === 'back') return exer;
-        });
-        setUserData({ ...userData, plan: [...filtered] })
-      }
+  //SET EXERCISE CATEGORY
+  const provideSelection = (selection) => {
+    setUserData({ ...userData, category: 'upper' })
 
-      if (userData.category === 'lower') {
+    if (selection === 'upper') {
+      const filtered = userData.exercises.filter((exer) => {
+        if (exer.muscleGroup === 'chest') return exer;
+        if (exer.muscleGroup === 'back') return exer;
+      });
+      setUserData({ ...userData, plan: [...filtered] })
+
+
+      if (selection === 'lower') {
         const filtered = userData.exercises.filter((exer) => {
           if (exer.muscleGroup === 'thigh') return exer;
           if (exer.muscleGroup === 'hamstring') return exer;
@@ -26,13 +28,8 @@ const Schedule = ({ userData, setUserData }) => {
         setUserData({ ...userData, plan: [...filtered] })
       }
     }
-    // if (userData.days === 3) {}
-  }
 
-  //SET EXERCISE CATEGORY
-  const provideSelection = (category) => {
-    setUserData({ ...userData, category: category })
-    filterExercises()
+    // if (userData.days === 3) {}
   }
 
   // 2 DAY AVAILABILITY
@@ -41,29 +38,12 @@ const Schedule = ({ userData, setUserData }) => {
       <>
         <View style={styles.btnContainer}>
           <Button title="Upper body" onPress={() => provideSelection('upper')} />
-          <Button title="Lower body" onPress={() => provideSelection('lower')} />
+          <Button title="Lower body" onPress={() => setUserData({ ...userData, category: 'lower' })} />
         </View>
         <WeightExercises setUserData={setUserData} userData={userData} />
       </>
     )
   }
-
-  // DISPLAYS EXERCISES FOR UPPER BODY EXERCISES
-  if (userData.category === 'upper') {
-    return (
-      <>
-        <Text>Choose 1 exercise per muscle group</Text>
-        {userData.plan.map((exer) => {
-          return (
-            <View key={`${exer.name}${exer.muscleGroup}`}>
-              <TextInput />
-              <Button title="Enter" />
-            </View>
-          )
-        })}
-      </>)
-  }
-
 
   {/* 3 times per week 
       {userData.days === 3 ?
@@ -78,8 +58,6 @@ const Schedule = ({ userData, setUserData }) => {
         :
         ''
       }*/}
-
-
 }
 
 const styles = StyleSheet.create({

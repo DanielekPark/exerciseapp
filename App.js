@@ -36,8 +36,11 @@ export default function App() {
   );
 }
 
+// OTHER FEATURES:
 // work on questionaire later
 // CREATE A BUTTON & COMPONENT FOR WALKTHOUGH GIVE IT A DIFFERENT NAME
+//stretching visual aid guide
+
 
 const styles = StyleSheet.create({
   container: {

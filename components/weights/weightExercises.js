@@ -9,6 +9,7 @@ const WeightExercises = ({ userData, setUserData }) => {
   const chooseExercise = (exer) => {
     const muscleGroup = exer.muscleGroup;
     const name = exer.name;
+
     const addToPlan = userData.plan
       .map((item) => {
         if (item.name === name) {
@@ -24,10 +25,11 @@ const WeightExercises = ({ userData, setUserData }) => {
           return exer;
         }
       });
+
     setUserData({ ...userData, plan: addToPlan });
   }
 
-  //Sets info for reps and weight, 
+  //SETS INFO FOR REPS & SETS
   const addRepsWeights = (value, exerciseName, objKey, exer) => {
     const updatedInfo = userData.plan.map((obj) => {
       if (exerciseName === exer.name) {
@@ -46,7 +48,7 @@ const WeightExercises = ({ userData, setUserData }) => {
     setUserData({ ...userData, showPlan: true });
   }
 
-  //Estimated weight for user 
+  //ESTIMATES SUGGESTED WEIGHT FOR USER
   const calcWeight = (exer, percentage) => {
     const weight = exer.weight / 1;
     const repetitions = exer.reps / 1;
@@ -59,87 +61,68 @@ const WeightExercises = ({ userData, setUserData }) => {
   //   console.log(userData.plan)
   // }, [userData])
 
-  if (userData.category === 'upper'
-    || userData.category === 'lower') {
-    return (
-      <>
-        <Text>Choose 1 exercise per muscle group</Text>
-        {userData.plan.map((exer) => {
-          return (
-            <View key={`${exer.name}${exer.muscleGroup}`}>
-              <View>
-                {!exer.chosen ?
-                  <Button title={exer.name} onPress={() => chooseExercise(exer)} />
-                  :
-                  <>
-                    <Text>{exer.name}</Text>
-                    <TextInput
-                      onChangeText={(value) => addRepsWeights(value, exer.name, 'weight', exer)}
-                      placeholder={`Weight used`}
-                      keyboardType="numeric"
-                    />
-                    <TextInput
-                      onChangeText={(value) => addRepsWeights(value, exer.name, 'reps', exer)}
-                      placeholder={`Reps completed`}
-                      keyboardType="numeric"
-                    />
-                  </>
-                }
-              </View>
+  return (
+    <View>
+      <Text>Choose 1 exercise per muscle group</Text>
+      {userData?.plan?.map((exer) => {
+        return (
+          <View key={`${exer.name}${exer.muscleGroup}`}>
+            <View>
+              {!exer.chosen ?
+                <Button title={exer.name} onPress={() => chooseExercise(exer)} />
+                :
+                <>
+                  <Text>{exer.name}</Text>
+                  <TextInput
+                    onChangeText={(value) => addRepsWeights(value, exer.name, 'weight', exer)}
+                    placeholder={`Weight used`}
+                    keyboardType="numeric"
+                  />
+                  <TextInput
+                    onChangeText={(value) => addRepsWeights(value, exer.name, 'reps', exer)}
+                    placeholder={`Reps completed`}
+                    keyboardType="numeric"
+                  />
+                </>
+              }
             </View>
-          )
-        })}
-        <Button title="Enter" onPress={showPlan} />
-        <Button title="Start Over" />
+          </View>
+        )
+      })}
+      <Button title="Enter" onPress={showPlan} />
+      <Button title="Start Over" />
 
-        {/* DISPLAY EXERCISES BELOW */}
-        <View>
-          {userData.showPlan ?
-            (
-              userData.plan.map((exer) => {
-                return (
-                  <View key={`${exer.name}+${exer.name}`}>
-                    <Text>{exer.name}</Text>
-                    <Text>
-                      Recommended weight range for hypertrophy if a beginners or intermediate: {calcWeight(exer, 0.7)} - {calcWeight(exer, 0.85)}
-                    </Text>
-                    <Text>
-                      Recommended repetition range: 8 - 12
-                    </Text>
-                    <Text>
-                      Number of sets 1 - 3 per exercise
-                    </Text>
-                    <Text>
-                      Rest duration between sets 1 - 2 min
-                    </Text>
-                  </View>
-                )
-              })
-            )
-            :
-            ''
-          }
-        </View>
-      </>)
-  }
+      {/* DISPLAY EXERCISES & SUGGESTED WEIGHT BELOW */}
+      <View>
+        {userData.showPlan ?
+          (
+            userData.plan.map((exer) => {
+              return (
+                <View key={`${exer.name}+${exer.name}`}>
+                  <Text>{exer.name}</Text>
+                  <Text>
+                    Recommended weight range for hypertrophy if a beginners or intermediate: {calcWeight(exer, 0.7)} - {calcWeight(exer, 0.85)}
+                  </Text>
+                  <Text>
+                    Recommended repetition range: 8 - 12
+                  </Text>
+                  <Text>
+                    Number of sets 1 - 3 per exercise
+                  </Text>
+                  <Text>
+                    Rest duration between sets 1 - 2 min
+                  </Text>
+                </View>
+              )
+            })
+          )
+          :
+          ''
+        }
+      </View>
+    </View>)
+
 
 }
-
-/* 
-          <View>
-            <Text>
-              Recommended weight range for hypertrophy if a beginners or intermediate: {}
-            </Text>
-            <Text>
-              Recommended repetition range: 8 - 12
-            </Text>
-            <Text>
-              Number of sets 1 -3 per exercise
-            </Text>
-            <Text>
-              Rest time between sets: {}
-            </Text>
-          </View>
-*/
 
 export default WeightExercises

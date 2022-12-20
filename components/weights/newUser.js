@@ -5,7 +5,7 @@ import exercises from './exercises';
 import Schedule from './Schedule';
 
 export default function NewUser({ option, setOption }) {
-  const [userData, setUserData] = useState({ exercises: exercises, plan: [], days: 0, level: '', category: '', showPlan: false });
+  const [userData, setUserData] = useState({ exercises: exercises, plan: [], days: 0, level: '', category: '', showPlan: false, goals: '' });
 
   //USERS SELECT EXERCISES, HIGHLIGHTS WHEN CHOSEN
   const selectedExer = (name) => {
@@ -44,6 +44,35 @@ export default function NewUser({ option, setOption }) {
     setUserData({ ...userData, selected: removeDuplicates })
   }
 
+  const provideSelection = () => {
+
+    if (userData.category === 'upper') {
+      const filtered = userData.exercises.filter((exer) => {
+        if (exer.muscleGroup === 'chest') return exer;
+        if (exer.muscleGroup === 'back') return exer;
+      });
+      setUserData({ ...userData, plan: [...filtered] })
+
+
+      if (userData.category === 'lower') {
+        const filtered = userData.exercises.filter((exer) => {
+          if (exer.muscleGroup === 'thigh') return exer;
+          if (exer.muscleGroup === 'hamstring') return exer;
+          if (exer.muscleGroup === 'core') return exer;
+        });
+        setUserData({ ...userData, plan: [...filtered] })
+      }
+    }
+
+    // if (userData.days === 3) {}
+  }
+
+  // useEffect(() => {
+  //   if (userData.category === 'upper') {
+  //     provideSelection()
+  //   }
+  // }, [userData])
+
   return (
     <View>
       <Text style={styles.title}>Create your workout</Text>
@@ -56,10 +85,10 @@ export default function NewUser({ option, setOption }) {
         </Text>
       </View>
 
+      {/* when buttons are clicked show exercises */}
       <View>
         <Text>Days available for per week for exercise</Text>
         <View style={styles.btnContainer}>
-          {/* when clicked show exercises */}
           <Button onPress={() => setUserData({ ...userData, days: 2 })} title="2" />
           <Button onPress={() => setUserData({ ...userData, days: 3 })} title="3" />
         </View>
@@ -81,32 +110,11 @@ export default function NewUser({ option, setOption }) {
         </View>
       </View>
 
-      {/* NEEDS AVAIALBLE DAYS & CATEGORY 
-
-      */}
       <Schedule userData={userData} setUserData={setUserData} />
     </View>
   );
 }
 
-/* 
-EXERCISE ICONS
-https://www.gograph.com/vector-clip-art/exercise-stick-figure.html
-
-
-BEGINNER
-SETS 1-2
-REPS 8-12
-2-3 PER WEEK
-INTENSITY 60-80%
-
-HIPS: Legs press, dumbbell squat, knee extension
-LEGS: Hamstring curl, db deadlift
-CHEST: Machine chest press, dips 
-BACK: Machine row, pullup machine
-SHOULDER: Dumbbell raise, face pull
-ABS: Curl up, leg raises, planks
-*/
 
 const styles = StyleSheet.create({
   container: {
@@ -166,6 +174,18 @@ const styles = StyleSheet.create({
     backgroundColor: '#98FB98'
   }
 });
+
+/* 
+EXERCISE ICONS
+https://www.gograph.com/vector-clip-art/exercise-stick-figure.html
+
+HIPS: Legs press, dumbbell squat, knee extension
+LEGS: Hamstring curl, db deadlift
+CHEST: Machine chest press, dips 
+BACK: Machine row, pullup machine
+SHOULDER: Dumbbell raise, face pull
+ABS: Curl up, leg raises, planks
+*/
 
 /* 
   acsm pg 350
