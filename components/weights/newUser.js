@@ -67,12 +67,6 @@ export default function NewUser({ option, setOption }) {
     // if (userData.days === 3) {}
   }
 
-  // useEffect(() => {
-  //   if (userData.category === 'upper') {
-  //     provideSelection()
-  //   }
-  // }, [userData])
-
   return (
     <View>
       <Text style={styles.title}>Create your workout</Text>

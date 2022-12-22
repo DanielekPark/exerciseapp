@@ -6,30 +6,36 @@ import WeightExercises from './weightExercises';
 
 const Schedule = ({ userData, setUserData }) => {
 
-  //FILTER EXERCISES BASED ON USER SELECTION
-  //SET EXERCISE CATEGORY
+  //FILTER EXERCISES BASED ON USER SELECTION & SET EXERCISE CATEGORY
   const provideSelection = (selection) => {
-    setUserData({ ...userData, category: 'upper' })
 
+    //2 DAY AVAILABLITY
     if (selection === 'upper') {
       const filtered = userData.exercises.filter((exer) => {
         if (exer.muscleGroup === 'chest') return exer;
         if (exer.muscleGroup === 'back') return exer;
       });
       setUserData({ ...userData, plan: [...filtered] })
-
-
-      if (selection === 'lower') {
-        const filtered = userData.exercises.filter((exer) => {
-          if (exer.muscleGroup === 'thigh') return exer;
-          if (exer.muscleGroup === 'hamstring') return exer;
-          if (exer.muscleGroup === 'core') return exer;
-        });
-        setUserData({ ...userData, plan: [...filtered] })
-      }
     }
 
-    // if (userData.days === 3) {}
+    if (selection === 'lower') {
+      const filtered = userData.exercises.filter((exer) => {
+        if (exer.muscleGroup === 'thigh') return exer;
+        if (exer.muscleGroup === 'hamstring') return exer;
+        if (exer.muscleGroup === 'core') return exer;
+      });
+      setUserData({ ...userData, plan: [...filtered] })
+    }
+
+    //3 DAY AVAILABLITY
+    if (selection === 'chest_tri') {
+      const filtered = userData.exercises.filter((exer) => {
+        if (exer.muscleGroup === 'chest') return exer;
+        if (exer.muscleGroup === 'triceps') return exer;
+      });
+      setUserData({ ...userData, plan: [...filtered] })
+    }
+
   }
 
   // 2 DAY AVAILABILITY
@@ -38,26 +44,27 @@ const Schedule = ({ userData, setUserData }) => {
       <>
         <View style={styles.btnContainer}>
           <Button title="Upper body" onPress={() => provideSelection('upper')} />
-          <Button title="Lower body" onPress={() => setUserData({ ...userData, category: 'lower' })} />
+          <Button title="Lower body" onPress={() => provideSelection('lower')} />
         </View>
         <WeightExercises setUserData={setUserData} userData={userData} />
       </>
     )
   }
 
-  {/* 3 times per week 
-      {userData.days === 3 ?
-        <>
-          <Text>Choose a category</Text>
-          <View style={styles.btnContainer}>
-            <Button title="Chest & triceps" />
-            <Button title="Back & biceps" />
-            <Button title="Core & legs" />
-          </View>
-        </>
-        :
-        ''
-      }*/}
+  // 3 DAY AVAILBILITY
+  if (userData.days === 3) {
+    return (
+      <>
+        <Text>Choose a category</Text>
+        <View style={styles.btnContainer}>
+          <Button title="Chest & triceps" onPress={() => provideSelection('chest_tri')} />
+          <Button title="Back & biceps" onPress={() => provideSelection('back_bic')} />
+          <Button title="Core & legs" onPress={() => provideSelection('core_legs')} />
+        </View>
+        <WeightExercises setUserData={setUserData} userData={userData} />
+      </>
+    )
+  }
 }
 
 const styles = StyleSheet.create({
