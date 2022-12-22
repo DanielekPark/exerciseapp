@@ -62,6 +62,31 @@ const exercises = [
     goal: ''
 
   },
+  // CALVES
+  {
+    name: 'Standing calf raise',
+    muscleGroup: 'calf',
+    chosen: false,
+    weight: 0,
+    reps: 0,
+    firstSet: 0,
+    secondSet: 0,
+    thirdSet: 0,
+    availability: 0,
+    goal: ''
+  },
+  {
+    name: 'Seated calf raise',
+    muscleGroup: 'calf',
+    chosen: false,
+    weight: 0,
+    reps: 0,
+    firstSet: 0,
+    secondSet: 0,
+    thirdSet: 0,
+    availability: 0,
+    goal: ''
+  },
   // CHEST
   {
     name: 'Bench press',

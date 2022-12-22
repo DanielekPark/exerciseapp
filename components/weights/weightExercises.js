@@ -106,7 +106,7 @@ const WeightExercises = ({ userData, setUserData }) => {
       <Button title="Enter" onPress={showPlan} />
       <Button title="Start Over" />
 
-      {/* DISPLAY EXERCISES & SUGGESTED WEIGHT BELOW */}
+      {/* WEIGHT LIFTING SCHEDULE*/}
       <View>
         {userData.showPlan ?
           (
@@ -120,8 +120,6 @@ const WeightExercises = ({ userData, setUserData }) => {
                   <Text>
                     Rest duration between sets 1 - 2 min
                   </Text>
-
-                  {/* SUGGESTIONS FOR EXERCISE DATES & WEIGHT AMOUNT */}
                   <Text>
                     Week 1: Week of {exerciseDates(0)} {calcWeight(exer, 0.7)}lbs 12 reps
                   </Text>

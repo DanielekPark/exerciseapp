@@ -9,25 +9,25 @@ const Schedule = ({ userData, setUserData }) => {
   //FILTER EXERCISES BASED ON USER SELECTION & SET EXERCISE CATEGORY
   const provideSelection = (selection) => {
 
-    //2 DAY AVAILABLITY
+    //EXERCISES FOR 2 DAYS PER WEEK AVAILABLITY
     if (selection === 'upper') {
       const filtered = userData.exercises.filter((exer) => {
         if (exer.muscleGroup === 'chest') return exer;
         if (exer.muscleGroup === 'back') return exer;
-      });
-      setUserData({ ...userData, plan: [...filtered] })
-    }
-
-    if (selection === 'lower') {
-      const filtered = userData.exercises.filter((exer) => {
-        if (exer.muscleGroup === 'thigh') return exer;
-        if (exer.muscleGroup === 'hamstring') return exer;
         if (exer.muscleGroup === 'core') return exer;
       });
       setUserData({ ...userData, plan: [...filtered] })
     }
+    if (selection === 'lower') {
+      const filtered = userData.exercises.filter((exer) => {
+        if (exer.muscleGroup === 'thigh') return exer;
+        if (exer.muscleGroup === 'hamstring') return exer;
+        if (exer.muscleGroup === 'calf') return exer;
+      });
+      setUserData({ ...userData, plan: [...filtered] })
+    }
 
-    //3 DAY AVAILABLITY
+    //EXERCISES FOR 3 DAYS PER WEEK AVAILABLITY
     if (selection === 'chest_tri') {
       const filtered = userData.exercises.filter((exer) => {
         if (exer.muscleGroup === 'chest') return exer;
@@ -35,7 +35,21 @@ const Schedule = ({ userData, setUserData }) => {
       });
       setUserData({ ...userData, plan: [...filtered] })
     }
-
+    if (selection === 'back_bic') {
+      const filtered = userData.exercises.filter((exer) => {
+        if (exer.muscleGroup === 'back') return exer;
+        if (exer.muscleGroup === 'biceps') return exer;
+      });
+      setUserData({ ...userData, plan: [...filtered] })
+    }
+    if (selection === 'core_legs') {
+      const filtered = userData.exercises.filter((exer) => {
+        if (exer.muscleGroup === 'core') return exer;
+        if (exer.muscleGroup === 'hamstring') return exer;
+        if (exer.muscleGroup === 'thigh') return exer;
+      });
+      setUserData({ ...userData, plan: [...filtered] })
+    }
   }
 
   // 2 DAY AVAILABILITY
