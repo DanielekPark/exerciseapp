@@ -49,11 +49,25 @@ const WeightExercises = ({ userData, setUserData }) => {
   }
 
   //ESTIMATES SUGGESTED WEIGHT FOR USER
-  const calcWeight = (exer, percentage) => {
-    const weight = exer.weight / 1;
-    const repetitions = exer.reps / 1;
+  const calcWeight = (exer) => {
+    //Converts a string to a whole number
+    const weight = Math.trunc(exer.weight / 1);
+    const repetitions = Math.trunc(exer.reps / 1);
+    if (weight < 1 || repetitions < 1) return;
+
     const oneRepMax = Math.round(weight / (1.0287 - (0.0278 * repetitions)));
-    return oneRepMax * percentage;
+
+    //get upper and lower ranges of weight
+    const lower = oneRepMax * 0.7;
+    const upper = oneRepMax * 0.85;
+    const range = [];
+    for (let i = lower; i < upper; i++) {
+      if (i % 5 === 0) {
+        range.push(` ${i} `);
+      }
+      if (range.length > 4) return;
+    }
+    return range;
   }
 
   //SUGGESTED DATES FOR EXERCISE
@@ -63,7 +77,7 @@ const WeightExercises = ({ userData, setUserData }) => {
     const month = date.getMonth();
     const year = date.getFullYear();
     const futureTime = new Date(year, month, day + days);
-    return [futureTime.getDate(), futureTime.getMonth() + 1];
+    return `${futureTime.getMonth() + 1}/${futureTime.getDate()}`;
   }
 
   // useEffect(() => {
@@ -107,16 +121,8 @@ const WeightExercises = ({ userData, setUserData }) => {
           (
             userData.plan.map((exer) => {
               return (
-                <View key={`${exer.name}+${exer.name}`}>
-                  <Text>{exer.name}</Text>
-                  {/* USE TERNARY FOR EITHER HYPERTROPHY OR STRENGTH */}
-                  <Text>
-                    Recommended weight range for hypertrophy if a beginners or intermediate: {calcWeight(exer, 0.7)} - {calcWeight(exer, 0.85)}
-                  </Text>
-
-                  <Text>
-                    Recommended repetition range: 8 - 12
-                  </Text>
+                <View key={`${exer.name}+${exer.name}`} style={{ marginBottom: 16 }}>
+                  <Text style={{ fontWeight: 'bold' }}>{exer.name}</Text>
                   <Text>
                     Number of sets 1 - 3 per exercise
                   </Text>
@@ -124,6 +130,16 @@ const WeightExercises = ({ userData, setUserData }) => {
                     Rest duration between sets 1 - 2 min
                   </Text>
 
+                  {/* SUGGESTIONS FOR EXERCISE DATES & WEIGHT AMOUNT */}
+                  <Text>
+                    Week 1: Week of {exerciseDates(0)} {calcWeight(exer)[0]}lbs 12 reps
+                  </Text>
+                  <Text>
+                    Week 2: Week of {exerciseDates(7)} {calcWeight(exer)[1]}lbs 10 reps
+                  </Text>
+                  <Text>
+                    Week 3: Week of {exerciseDates(14)} {calcWeight(exer)[2]}lbs 8 reps
+                  </Text>
                 </View>
               )
             })
@@ -134,7 +150,4 @@ const WeightExercises = ({ userData, setUserData }) => {
       </View>
     </View>)
 }
-/* 
-https://github.com/john-smilga/javascript-basic-projects/blob/master/12-countdown-timer/final/app.js
-*/
 export default WeightExercises
