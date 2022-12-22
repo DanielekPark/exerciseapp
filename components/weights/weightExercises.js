@@ -49,7 +49,7 @@ const WeightExercises = ({ userData, setUserData }) => {
   }
 
   //ESTIMATES SUGGESTED WEIGHT FOR USER
-  const calcWeight = (exer) => {
+  const calcWeight = (exer, percentage) => {
     //Converts a string to a whole number
     const weight = Math.trunc(exer.weight / 1);
     const repetitions = Math.trunc(exer.reps / 1);
@@ -57,17 +57,8 @@ const WeightExercises = ({ userData, setUserData }) => {
 
     const oneRepMax = Math.round(weight / (1.0287 - (0.0278 * repetitions)));
 
-    //get upper and lower ranges of weight
-    const lower = oneRepMax * 0.7;
-    const upper = oneRepMax * 0.85;
-    const range = [];
-    for (let i = lower; i < upper; i++) {
-      if (i % 5 === 0) {
-        range.push(` ${i} `);
-      }
-      if (range.length > 4) return;
-    }
-    return range;
+    //SUGGESTED WEIGHT
+    return Math.round((oneRepMax * percentage) / 5) * 5;
   }
 
   //SUGGESTED DATES FOR EXERCISE
@@ -132,13 +123,13 @@ const WeightExercises = ({ userData, setUserData }) => {
 
                   {/* SUGGESTIONS FOR EXERCISE DATES & WEIGHT AMOUNT */}
                   <Text>
-                    Week 1: Week of {exerciseDates(0)} {calcWeight(exer)[0]}lbs 12 reps
+                    Week 1: Week of {exerciseDates(0)} {calcWeight(exer, 0.7)}lbs 12 reps
                   </Text>
                   <Text>
-                    Week 2: Week of {exerciseDates(7)} {calcWeight(exer)[1]}lbs 10 reps
+                    Week 2: Week of {exerciseDates(7)} {calcWeight(exer, 0.75)}lbs 10 reps
                   </Text>
                   <Text>
-                    Week 3: Week of {exerciseDates(14)} {calcWeight(exer)[2]}lbs 8 reps
+                    Week 3: Week of {exerciseDates(14)} {calcWeight(exer, 0.8)}lbs 8 reps
                   </Text>
                 </View>
               )
