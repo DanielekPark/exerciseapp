@@ -53,8 +53,17 @@ const WeightExercises = ({ userData, setUserData }) => {
     const weight = exer.weight / 1;
     const repetitions = exer.reps / 1;
     const oneRepMax = Math.round(weight / (1.0287 - (0.0278 * repetitions)));
-    console.log(weight, repetitions, oneRepMax)
     return oneRepMax * percentage;
+  }
+
+  //SUGGESTED DATES FOR EXERCISE
+  const exerciseDates = (days) => {
+    const date = new Date();
+    const day = date.getDate();
+    const month = date.getMonth();
+    const year = date.getFullYear();
+    const futureTime = new Date(year, month, day + days);
+    return [futureTime.getDate(), futureTime.getMonth() + 1];
   }
 
   // useEffect(() => {
@@ -100,9 +109,11 @@ const WeightExercises = ({ userData, setUserData }) => {
               return (
                 <View key={`${exer.name}+${exer.name}`}>
                   <Text>{exer.name}</Text>
+                  {/* USE TERNARY FOR EITHER HYPERTROPHY OR STRENGTH */}
                   <Text>
                     Recommended weight range for hypertrophy if a beginners or intermediate: {calcWeight(exer, 0.7)} - {calcWeight(exer, 0.85)}
                   </Text>
+
                   <Text>
                     Recommended repetition range: 8 - 12
                   </Text>
@@ -112,6 +123,7 @@ const WeightExercises = ({ userData, setUserData }) => {
                   <Text>
                     Rest duration between sets 1 - 2 min
                   </Text>
+
                 </View>
               )
             })
@@ -121,8 +133,8 @@ const WeightExercises = ({ userData, setUserData }) => {
         }
       </View>
     </View>)
-
-
 }
-
+/* 
+https://github.com/john-smilga/javascript-basic-projects/blob/master/12-countdown-timer/final/app.js
+*/
 export default WeightExercises
