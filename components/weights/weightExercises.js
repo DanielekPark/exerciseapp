@@ -71,6 +71,9 @@ const WeightExercises = ({ userData, setUserData }) => {
     return `${futureTime.getMonth() + 1}/${futureTime.getDate()}`;
   }
 
+  //CLEAR USER DATA & START OVER
+  const startOver = () => setUserData({ exercises: exercises, plan: [], days: 0, level: '', category: '', showPlan: false, goals: '' })
+
   // useEffect(() => {
   //   console.log(userData.plan)
   // }, [userData])
@@ -104,7 +107,7 @@ const WeightExercises = ({ userData, setUserData }) => {
         )
       })}
       <Button title="Enter" onPress={showPlan} />
-      <Button title="Start Over" />
+      <Button title="Start Over" onPress={startOver} />
 
       {/* WEIGHT LIFTING SCHEDULE*/}
       <View>

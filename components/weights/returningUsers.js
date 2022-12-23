@@ -31,31 +31,18 @@ export default function ReturningUsers({ option, setOption }) {
     setUserData({ ...userData, selected: exercises, updateExer: true });
   }
 
-  //UPDATES WORKOUT PLAN BASED OFF DATA PROVIDED FROM PREVIOUS WORKOUT
-  const prepareUpdates = () => {
-    // Update exercises if user updated exercises
-
-    // ask about what their goal is
-
-    // MAKE SURE REPS ARE WITHIN RANGE
-
-    // if all 3 sets have same numbers increase weight
-  }
-
   // useEffect(() => {
   //   console.log(userData.selected)
   // }, [userData])
 
-
   return (
     <View>
       <View style={styles.btnContainer}>
-        <Text></Text>
-        <Text style={styles.cardioBtn}>
-          <Button title="Returning users" style={styles.btns} />
-        </Text>
         <Text style={styles.weightsBtn}>
           <Button title="New time user" style={styles.btns} />
+        </Text>
+        <Text style={styles.cardioBtn}>
+          <Button title="Returning users" style={styles.btns} />
         </Text>
       </View>
       {/* ASK TRAINING AGE */}

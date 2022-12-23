@@ -8,7 +8,6 @@ const Schedule = ({ userData, setUserData }) => {
 
   //FILTER EXERCISES BASED ON USER SELECTION & SET EXERCISE CATEGORY
   const provideSelection = (selection) => {
-
     //EXERCISES FOR 2 DAYS PER WEEK AVAILABLITY
     if (selection === 'upper') {
       const filtered = userData.exercises.filter((exer) => {
@@ -32,6 +31,7 @@ const Schedule = ({ userData, setUserData }) => {
       const filtered = userData.exercises.filter((exer) => {
         if (exer.muscleGroup === 'chest') return exer;
         if (exer.muscleGroup === 'triceps') return exer;
+        if (exer.muscleGroup === 'shoulders') return exer;
       });
       setUserData({ ...userData, plan: [...filtered] })
     }
@@ -56,6 +56,7 @@ const Schedule = ({ userData, setUserData }) => {
   if (userData.days === 2) {
     return (
       <>
+        <Text>Choose a workout day</Text>
         <View style={styles.btnContainer}>
           <Button title="Upper body" onPress={() => provideSelection('upper')} />
           <Button title="Lower body" onPress={() => provideSelection('lower')} />
@@ -69,7 +70,7 @@ const Schedule = ({ userData, setUserData }) => {
   if (userData.days === 3) {
     return (
       <>
-        <Text>Choose a category</Text>
+        <Text>Choose a workout day</Text>
         <View style={styles.btnContainer}>
           <Button title="Chest & triceps" onPress={() => provideSelection('chest_tri')} />
           <Button title="Back & biceps" onPress={() => provideSelection('back_bic')} />
@@ -139,6 +140,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#98FB98'
   }
 });
-
 
 export default Schedule

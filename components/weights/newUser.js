@@ -7,66 +7,6 @@ import Schedule from './Schedule';
 export default function NewUser({ option, setOption }) {
   const [userData, setUserData] = useState({ exercises: exercises, plan: [], days: 0, level: '', category: '', showPlan: false, goals: '' });
 
-  //USERS SELECT EXERCISES, HIGHLIGHTS WHEN CHOSEN
-  const selectedExer = (name) => {
-    const selected = userData.focus.map((item) => {
-      if (item.name === name) {
-        return {
-          ...item,
-          chosen: !item.chosen
-        }
-      }
-      return { ...item };
-    })
-    setUserData({ ...userData, exercises: selected })
-  }
-
-  // CREATE A FUNCTION CREATES EXERCISES based on button pressed
-  const chooseExer = (userData) => {
-    if (userData.days === 2) {
-      if (userData.category === 'upper') {
-        const selected = userData.exercises.filter((exer) => {
-          if (userData.muscleGroup === 'back') return exer
-          if (userData.muscleGroup === 'chest') return exer
-        })
-        setUserData({ ...userData, plan: [...selected] });
-      }
-
-      if (userData.category === 'lower') {
-        const selected = userData.exercises.filter((exer) => {
-          if (userData.muscleGroup === 'thigh') return exer
-          if (userData.muscleGroup === 'hamstring') return exer
-        })
-        setUserData({ ...userData, plan: [...selected] });
-      }
-    }
-    const removeDuplicates = () => [...new Set(userData.selected)]
-    setUserData({ ...userData, selected: removeDuplicates })
-  }
-
-  const provideSelection = () => {
-
-    if (userData.category === 'upper') {
-      const filtered = userData.exercises.filter((exer) => {
-        if (exer.muscleGroup === 'chest') return exer;
-        if (exer.muscleGroup === 'back') return exer;
-      });
-      setUserData({ ...userData, plan: [...filtered] })
-
-
-      if (userData.category === 'lower') {
-        const filtered = userData.exercises.filter((exer) => {
-          if (exer.muscleGroup === 'thigh') return exer;
-          if (exer.muscleGroup === 'hamstring') return exer;
-          if (exer.muscleGroup === 'core') return exer;
-        });
-        setUserData({ ...userData, plan: [...filtered] })
-      }
-    }
-
-    // if (userData.days === 3) {}
-  }
-
   return (
     <View>
       <Text style={styles.title}>Create your workout</Text>
@@ -79,7 +19,7 @@ export default function NewUser({ option, setOption }) {
         </Text>
       </View>
 
-      {/* when buttons are clicked show exercises */}
+      {/* SHOWS EXERCISES DEPENDING BUTTON PRESSED */}
       <View>
         <Text>Days available for per week for exercise</Text>
         <View style={styles.btnContainer}>
@@ -108,7 +48,6 @@ export default function NewUser({ option, setOption }) {
     </View>
   );
 }
-
 
 const styles = StyleSheet.create({
   container: {
@@ -168,6 +107,43 @@ const styles = StyleSheet.create({
     backgroundColor: '#98FB98'
   }
 });
+  //USERS SELECT EXERCISES, HIGHLIGHTS WHEN CHOSEN
+  // const selectedExer = (name) => {
+  //   const selected = userData.focus.map((item) => {
+  //     if (item.name === name) {
+  //       return {
+  //         ...item,
+  //         chosen: !item.chosen
+  //       }
+  //     }
+  //     return { ...item };
+  //   })
+  //   setUserData({ ...userData, exercises: selected })
+  // }
+
+  // CREATE A FUNCTION CREATES EXERCISES based on button pressed
+  // const chooseExer = (userData) => {
+  //   if (userData.days === 2) {
+  //     if (userData.category === 'upper') {
+  //       const selected = userData.exercises.filter((exer) => {
+  //         if (userData.muscleGroup === 'back') return exer
+  //         if (userData.muscleGroup === 'chest') return exer
+  //       })
+  //       setUserData({ ...userData, plan: [...selected] });
+  //     }
+
+  //     if (userData.category === 'lower') {
+  //       const selected = userData.exercises.filter((exer) => {
+  //         if (userData.muscleGroup === 'thigh') return exer
+  //         if (userData.muscleGroup === 'hamstring') return exer
+  //       })
+  //       setUserData({ ...userData, plan: [...selected] });
+  //     }
+  //   }
+  //   const removeDuplicates = () => [...new Set(userData.selected)]
+  //   setUserData({ ...userData, selected: removeDuplicates })
+  // }
+
 
 /* 
 EXERCISE ICONS

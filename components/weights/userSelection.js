@@ -17,16 +17,16 @@ export default function UserSelection() {
           </Text>*/}
           <Text style={styles.weightsBtn}>
             <Button title="New user" onPress={() => setOption('new user')} style={styles.btns} />
+            <Button title="Prev user" onPress={() => setOption('returning user')} style={styles.btns} />
           </Text>
         </View>
       </View>
     );
   }
 
-  if (option === 'returning user') return <ReturningUsers option={option} setOption={setOption} />
-
   if (option === 'new user') return <NewUser option={option} setOption={setOption} />
 
+  if (option === 'returning user') return <ReturningUsers option={option} setOption={setOption} />
 }
 
 const styles = StyleSheet.create({

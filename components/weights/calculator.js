@@ -18,11 +18,7 @@ export default function Calculator() {
     setFitData({ ...fitData, reps: repetitions })
     setFitData({ ...fitData, weight: weight })
     setFitData({ ...fitData, oneRepMax: oneRepMax })
-
   }
-
-  //Resets the calculator
-  const reset = () => { }
 
   return (
     <View>

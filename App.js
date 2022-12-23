@@ -15,9 +15,9 @@ export default function App() {
           <Text style={styles.title}>Exercise App</Text>
           {/* for buttons useState to show if button is active*/}
           <View style={styles.btnContainer}>
-            <Text style={styles.cardioBtn}>
+            {/* <Text style={styles.cardioBtn}>
               <Button title="Cardio" style={styles.btns} onPress={() => setMode('cardio')} />
-            </Text>
+            </Text> */}
             <Text style={styles.weightsBtn}>
               <Button title="Weights" style={styles.btns} onPress={() => setMode('weights')} />
             </Text>
@@ -27,6 +27,9 @@ export default function App() {
             <Text style={styles.calcBtn}>
               <Button title="Tips" style={styles.btns} onPress={() => setMode('tips')} />
             </Text>
+            {/* <Text style={styles.calcBtn}>
+              <Button title="Stretch" style={styles.btns} onPress={() => setMode('stretch')} />
+            </Text> */}
           </View>
           <Wrapper mode={mode} />
           <StatusBar style="auto" />
