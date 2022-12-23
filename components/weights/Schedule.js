@@ -23,7 +23,8 @@ const Schedule = ({ userData, setUserData }) => {
         if (exer.muscleGroup === 'hamstring') return exer;
         if (exer.muscleGroup === 'calf') return exer;
       });
-      setUserData({ ...userData, plan: [...filtered] })
+
+      setUserData({ ...userData, plan: [...filtered] });
     }
 
     //EXERCISES FOR 3 DAYS PER WEEK AVAILABLITY

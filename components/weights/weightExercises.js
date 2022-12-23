@@ -71,9 +71,6 @@ const WeightExercises = ({ userData, setUserData }) => {
     return `${futureTime.getMonth() + 1}/${futureTime.getDate()}`;
   }
 
-  //CLEAR USER DATA & START OVER
-  const startOver = () => setUserData({ exercises: exercises, plan: [], days: 0, level: '', category: '', showPlan: false, goals: '' })
-
   // useEffect(() => {
   //   console.log(userData.plan)
   // }, [userData])
@@ -107,7 +104,7 @@ const WeightExercises = ({ userData, setUserData }) => {
         )
       })}
       <Button title="Enter" onPress={showPlan} />
-      <Button title="Start Over" onPress={startOver} />
+      <Button title="Start Over" onPress={() => setUserData({ exercises: exercises, plan: [], days: 0, level: '', category: '', showPlan: false, goals: '' })} />
 
       {/* WEIGHT LIFTING SCHEDULE*/}
       <View>
@@ -117,6 +114,9 @@ const WeightExercises = ({ userData, setUserData }) => {
               return (
                 <View key={`${exer.name}+${exer.name}`} style={{ marginBottom: 16 }}>
                   <Text style={{ fontWeight: 'bold' }}>{exer.name}</Text>
+                  <Text>
+                    Warmup exercises for the week of {exerciseDates(0)} 3 sets {calcWeight(exer, 0.6)}lbs 12 reps
+                  </Text>
                   <Text>
                     Number of sets 1 - 3 per exercise
                   </Text>

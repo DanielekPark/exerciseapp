@@ -39,6 +39,13 @@ export default function App() {
   );
 }
 
+/* 
+PRIORITY: 
+
+MAKE WARM-UP PLAN
+WORK ON RETURNING USERS FUNCTIONALITY
+*/
+
 // OTHER FEATURES:
 // work on questionaire later
 // CREATE A BUTTON & COMPONENT FOR WALKTHOUGH GIVE IT A DIFFERENT NAME

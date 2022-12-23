@@ -24,10 +24,6 @@ export default function Tips() {
   //GETS VALUE FROM RANGE INPUT 
   const getInputValue = (value) => setSliderValue(value[0]);
 
-  useEffect(() => {
-    console.log(sliderValue)
-  }, [sliderValue])
-
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Tips</Text>
@@ -72,7 +68,7 @@ export default function Tips() {
           <Text style={[styles.categoryTxt,]}>Endurance</Text>
         </View>
         <View style={[styles.category, sliderValue >= 67 && sliderValue < 85 ? styles.highlight : '']}>
-          <Text style={[styles.categoryTxt,]}>Hypertophy</Text>
+          <Text style={[styles.categoryTxt,]}>Muscle Size</Text>
         </View>
         <View style={[styles.category, sliderValue > 85 ? styles.highlight : '']}>
           <Text style={[styles.categoryTxt,]}>Strength</Text>
