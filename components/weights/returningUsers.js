@@ -4,101 +4,75 @@ import { Stack, Button, TextInput, } from "@react-native-material/core";
 import exercises from './exercises';
 
 export default function ReturningUsers({ option, setOption }) {
-  const [userData, setUserData] = useState({ exercises: exercises, selected: [], updateExer: false, goal: '' });
-  //option, setOption use later for starting over button
+  const [userData, setUserData] = useState({ exercises: exercises, selected: [], updateExer: false, goal: '', updateData: false });
 
   //SELECT EXERCISES TO USE
-  const chooseExer = (name) => {
-    const selected = userData.exercises.map((item) => {
-      if (item.name === name) {
-        return {
-          ...item,
-          chosen: !item.chosen
+  const chooseExercise = (exer) => {
+    const name = exer.name;
+    const arry = userData.selected
+      .some((exer) => exer.chosen === true) ? 'selected' : 'exercises';
+
+    //EXERCISE PLAN
+    const plan = userData[arry]
+      .map((item) => {
+        if (item.name === name) {
+          return { ...item, chosen: !item.chosen }
         }
-      }
-      return { ...item };
-    })
-    setUserData({ ...userData, exercises: selected })
+        return item;
+      })
+    setUserData({ ...userData, selected: plan });
   }
 
-  //SELECTS EXERCISES TO UPDATE
-  const preparePlan = () => {
-    //CHECKS IF EXERCISES HAVE BEEN SELECTED
-    const checkSelected = userData.exercises.some((item) => item.chosen === true);
-    if (!checkSelected) return;
-
-    const exercises = userData.exercises.filter((item) => item.chosen === true);
-    setUserData({ ...userData, selected: exercises, updateExer: true });
+  //DISPLAY EXERCISES BASED ON SELECTION
+  const displayExer = () => {
+    const checkData = userData.selected.some((exer) => exer.chosen === true);
+    if (!checkData) return;
+    const filtered = userData.selected.filter((exer) => exer.chosen === true)
+    setUserData({ ...userData, selected: filtered, updateData: !userData.updateData })
   }
+
+  //PROVIDES EXERCISE PLAN IF USER PROVIDES EXERCISE DATA
+  const showPlan = () => { }
 
   // useEffect(() => {
   //   console.log(userData.selected)
   // }, [userData])
 
-  return (
-    <View>
-      <View style={styles.btnContainer}>
-        <Text style={styles.weightsBtn}>
-          <Button title="New time user" style={styles.btns} />
-        </Text>
-        <Text style={styles.cardioBtn}>
-          <Button title="Returning users" style={styles.btns} />
-        </Text>
-      </View>
-      {/* ASK TRAINING AGE */}
-      <Text style={styles.title}>Questions</Text>
-
+  if (!userData.updateData) {
+    return (
       <View>
-        <View>
-          <View>
-            <Text>Number of consecutive workout weeks</Text>
-            <TextInput keyboardType="numeric" style={{ margin: 16 }} maxLength={2} label="e.g. 1" />
-            <View>
-              <Text>Select exercises from a previous workout day</Text>
-              <View style={styles.container}>
-                {
-                  userData.updateExer ?
-                    userData.selected.map((item) => {
-                      return (
-                        <TouchableOpacity key={item.name} style={[styles.item, item.chosen ? styles.selected : '']}>
-                          <Text style={styles.itemTitle}>
-                            {item.name}
-                          </Text>
-                          <TextInput keyboardType="numeric" style={{ margin: 16 }} maxLength={2} label="e.g. 1" />
-                        </TouchableOpacity>
-                      )
-                    })
-                    :
-                    <View>
-                      {/* PROVIDE DATA TO CREATE NEW PLAN */}
-                      {userData.exercises.map((item) => {
-                        return (
-                          <TouchableOpacity key={item.name} style={[styles.item, item.chosen ? styles.selected : '']} onPress={() => chooseExer(item.name)}>
-                            <Text style={styles.itemTitle}>
-                              {item.name}
-                            </Text>
-                          </TouchableOpacity>
-                        )
-                      })}
-                    </View>
-                }
-              </View>
+        <Text style={styles.title}>Select previous exercises</Text>
+        {userData.exercises.map((exer) => {
+          return (
+            <View key={`key${exer.name}${exer.name}`} style={{ marginBottom: 16 }}>
+              <Button title={exer.name} onPress={() => chooseExercise(exer)} />
             </View>
-          </View>
-          <View>
-            {userData.updateExer ?
-              <Button title="Update" />
-              :
-              <Button title="Enter" onPress={preparePlan} />
-            }
-          </View>
-          <View>
-
-          </View>
-        </View>
+          )
+        })
+        }
+        <Button title="Add Data" onPress={displayExer} />
       </View>
-    </View>
-  );
+    )
+  }
+
+  if (userData.updateData) {
+    return (
+      <View>
+        <Text style={styles.title}>Select previous exercises</Text>
+        {userData.selected.map((exer) => {
+          return (
+            <View key={`key${exer.name}${exer.name}`} style={{ marginBottom: 16 }}>
+              <Text>{exer.name}</Text>
+              <Button title={exer.name} onPress={() => chooseExercise(exer)} />
+            </View>
+          )
+        })
+        }
+        <Button title="Enter" />
+        <Button title="Start Over" onPress={() => setUserData({ exercises: exercises, selected: [], updateExer: false, goal: '', updateData: false })} />
+      </View>
+    )
+  }
 }
 
 /* 

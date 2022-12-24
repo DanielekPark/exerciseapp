@@ -41,8 +41,6 @@ export default function App() {
 
 /* 
 PRIORITY: 
-
-MAKE WARM-UP PLAN
 WORK ON RETURNING USERS FUNCTIONALITY
 */
 
