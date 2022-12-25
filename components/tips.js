@@ -62,8 +62,8 @@ export default function Tips() {
         Drag the dot to see how many repetitions, rest times between sets, and percentage is best for your goals.
       </Text>
 
-
-      <View style={styles.chart}>
+      {/* NEEDS WORK */}
+      {/* <View style={styles.chart}>
         <View style={[styles.category, sliderValue <= 67 ? styles.highlight : '']}>
           <Text style={[styles.categoryTxt,]}>Endurance</Text>
         </View>
@@ -73,7 +73,7 @@ export default function Tips() {
         <View style={[styles.category, sliderValue > 85 ? styles.highlight : '']}>
           <Text style={[styles.categoryTxt,]}>Strength</Text>
         </View>
-      </View>
+      </View> */}
 
       <Text style={styles.percentage}>{`${sliderValue}%`}</Text>
       <View>
