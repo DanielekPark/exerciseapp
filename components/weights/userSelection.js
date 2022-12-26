@@ -11,6 +11,7 @@ export default function UserSelection() {
     return (
       <View>
         <Text>Please choose 3 exercises and use the calc button to determine the right weight.</Text>
+
         <View style={styles.btnContainer}>
           {/* <Text style={styles.cardioBtn}>
             <Button title="Returning users" onPress={() => setOption('returning user')} style={styles.btns} />
@@ -24,9 +25,24 @@ export default function UserSelection() {
     );
   }
 
-  if (option === 'new user') return <NewUser option={option} setOption={setOption} />
+  if (option === 'new user') {
+    return (
+      <View>
+        <Text>Weight Lifting</Text>
+        <NewUser option={option} setOption={setOption} />
+      </View>
+    )
+  }
 
-  if (option === 'returning user') return <ReturningUsers option={option} setOption={setOption} />
+  if (option === 'returning user') {
+    return (
+      <View>
+        <Text>Weight Lifting</Text>
+        <ReturningUsers option={option} setOption={setOption} />
+      </View>
+    )
+  }
+
 }
 
 const styles = StyleSheet.create({

@@ -17,7 +17,7 @@ export default function Tips() {
     },
     {
       term: 'Muscular endurance',
-      def: 'Ability to sustain repeated effort without fatigue.'
+      def: 'Ability to do repeated movements and resist fatigue.'
     },
   ]
 
@@ -57,12 +57,12 @@ export default function Tips() {
         After exercising a muscle group (e.g. chest), it is recommended to wait 48 hours train the same muscle group again.
       </Text>
 
-      <Text style={styles.title}>Optimal strength range</Text>
+      {/*  <Text style={styles.title}>Optimal strength range</Text>
       <Text>
         Drag the dot to see how many repetitions, rest times between sets, and percentage is best for your goals.
       </Text>
 
-      {/* NEEDS WORK */}
+      NEEDS WORK */}
       {/* <View style={styles.chart}>
         <View style={[styles.category, sliderValue <= 67 ? styles.highlight : '']}>
           <Text style={[styles.categoryTxt,]}>Endurance</Text>
@@ -73,7 +73,7 @@ export default function Tips() {
         <View style={[styles.category, sliderValue > 85 ? styles.highlight : '']}>
           <Text style={[styles.categoryTxt,]}>Strength</Text>
         </View>
-      </View> */}
+      </View> *
 
       <Text style={styles.percentage}>{`${sliderValue}%`}</Text>
       <View>
@@ -89,9 +89,11 @@ export default function Tips() {
           trackClickable={true}
           onValueChange={(value) => getInputValue(value)}
         />
-      </View>
+      </View>/}
 
       {/* Need visual aid for breathing & eccentric muscle movement 3 seconds duration*/}
+
+
     </View>
   );
 }

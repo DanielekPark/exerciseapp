@@ -1,53 +1,65 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, createContext, useContext } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import { Stack, Button } from "@react-native-material/core";
 import Wrapper from './components/wrapper';
 import Calculator from './components/weights/calculator';
+import { AppContext } from './AppContext';
 
 export default function App() {
   const [mode, setMode] = useState('weights');
 
+  const func = () => console.log('hello')
+
   return (
-    <ScrollView>
-      <View style={styles.app}>
-        <View style={styles.header}>
-          <Text style={styles.title}>Exercise App</Text>
-          {/* for buttons useState to show if button is active*/}
-          <View style={styles.btnContainer}>
-            {/* <Text style={styles.cardioBtn}>
+    <AppContext.Provider value={func}>
+      <ScrollView>
+        <View style={styles.app}>
+          <View style={styles.header}>
+            <Text style={styles.title}>Exercise App</Text>
+            {/* for buttons useState to show if button is active*/}
+            <View style={styles.btnContainer}>
+              {/* <Text style={styles.cardioBtn}>
               <Button title="Cardio" style={styles.btns} onPress={() => setMode('cardio')} />
             </Text> */}
-            <Text style={styles.weightsBtn}>
-              <Button title="Weights" style={styles.btns} onPress={() => setMode('weights')} />
-            </Text>
-            <Text style={styles.calcBtn}>
-              <Button title="Calc" style={styles.btns} onPress={() => setMode('calculator')} />
-            </Text>
-            <Text style={styles.calcBtn}>
-              <Button title="Tips" style={styles.btns} onPress={() => setMode('tips')} />
-            </Text>
-            {/* <Text style={styles.calcBtn}>
+              <Text style={styles.weightsBtn}>
+                <Button title="Weights" style={styles.btns} onPress={() => setMode('weights')} />
+              </Text>
+              <Text style={styles.calcBtn}>
+                <Button title="Calc" style={styles.btns} onPress={() => setMode('calculator')} />
+              </Text>
+              <Text style={styles.calcBtn}>
+                <Button title="Tips" style={styles.btns} onPress={() => setMode('tips')} />
+              </Text>
+              {/* <Text style={styles.calcBtn}>
               <Button title="Stretch" style={styles.btns} onPress={() => setMode('stretch')} />
             </Text> */}
+            </View>
+            <Wrapper mode={mode} />
+            <StatusBar style="auto" />
           </View>
-          <Wrapper mode={mode} />
-          <StatusBar style="auto" />
         </View>
-      </View>
-    </ScrollView>
+      </ScrollView>
+    </AppContext.Provider>
   );
 }
 
 /* 
 PRIORITY: 
-WORK ON RETURNING USERS FUNCTIONALITY
-*/
+RE-FACTOR CODE
+ADD useContext
 
-// OTHER FEATURES:
-// work on questionaire later
-// CREATE A BUTTON & COMPONENT FOR WALKTHOUGH GIVE IT A DIFFERENT NAME
-//stretching visual aid guide
+REACT NATIVE PAPER DOCS
+https://callstack.github.io/react-native-paper/drawer-item.html
+
+LOTTIE FOR ANIMATIONS
+https://airbnb.io/lottie/#/react-native
+
+OTHER FEATURES:
+work on questionaire later 
+CREATE A BUTTON & COMPONENT FOR WALKTHOUGH GIVE IT A DIFFERENT NAME
+stretching visual aid guide
+*/
 
 
 const styles = StyleSheet.create({
