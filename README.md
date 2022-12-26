@@ -8,6 +8,8 @@ Technologies used:
 
 - [Material UI React Native](https://www.react-native-material.com/docs/getting-started)
 
+- [React Native Paper](https://callstack.github.io/react-native-paper/getting-started.html)
+
 - [Expo](https://docs.expo.dev/)
 
 
@@ -27,9 +29,6 @@ Please visit: [React Native Documentation](https://reactnative.dev/docs/environm
   cd exerciseapp
   npx expo start
 ```
-
-## Demo
-[Expo](https://expo.dev/)
 
 ## Questions?
 Feel free to contact me if you have a suggestion to improve the app or a feature to be added. 
