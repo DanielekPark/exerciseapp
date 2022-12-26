@@ -1,12 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Stack, Button } from "@react-native-material/core";
-import UserSelection from './userSelection';
 import ReturningUsers from './returningUsers';
 import NewUser from './newUser';
 
 export default function Weights() {
-  const [option, setOption] = useState('buttons')
+  const [option, setOption] = useState('buttons');
+
+  const calcWeight = (exer, percentage) => {
+    //Converts a string to a whole number
+    const weight = Math.trunc(exer.weight / 1);
+    const repetitions = Math.trunc(exer.reps / 1);
+    if (weight < 1 || repetitions < 1) return;
+
+    //ESTIMATED HEAVIEST WEIGHT THAT CAN BE LIFT
+    const oneRepMax = Math.round(weight / (1.0287 - (0.0278 * repetitions)));
+    //SUGGESTED WEIGHT
+    return Math.round((oneRepMax * percentage) / 5) * 5;
+  }
+
+  const exerciseDates = (days) => {
+    const date = new Date();
+    const day = date.getDate();
+    const month = date.getMonth();
+    const year = date.getFullYear();
+    const futureTime = new Date(year, month, day + days);
+    return `${futureTime.getMonth() + 1}/${futureTime.getDate()}`;
+  }
 
   if (option === 'buttons') {
     return (
@@ -30,7 +50,9 @@ export default function Weights() {
     return (
       <View>
         <Text>Weight Lifting</Text>
-        <NewUser option={option} setOption={setOption} />
+        <NewUser
+          calcWeight={calcWeight}
+          exerciseDates={exerciseDates} />
       </View>
     )
   }
@@ -48,20 +70,6 @@ export default function Weights() {
 /* 
 EXERCISE ICONS
 https://www.gograph.com/vector-clip-art/exercise-stick-figure.html
-
-
-BEGINNER
-SETS 1-2
-REPS 8-12
-2-3 PER WEEK
-INTENSITY 60-80%
-
-HIPS: Legs press, dumbbell squat, knee extension
-LEGS: Hamstring curl, db deadlift
-CHEST: Machine chest press, dips 
-BACK: Machine row, pullup machine
-SHOULDER: Dumbbell raise, face pull
-ABS: Curl up, leg raises, planks
 */
 
 const styles = StyleSheet.create({

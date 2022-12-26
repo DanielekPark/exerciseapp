@@ -4,7 +4,7 @@ import { Stack, Button } from "@react-native-material/core";
 import exercises from './exercises';
 import Schedule from './Schedule';
 
-export default function NewUser({ option, setOption }) {
+export default function NewUser({ calcWeight, exerciseDates }) {
   const [userData, setUserData] = useState({ exercises: exercises, plan: [], days: 0, level: '', category: '', showPlan: false, goals: '' });
 
   return (
@@ -44,7 +44,11 @@ export default function NewUser({ option, setOption }) {
         </View>
       </View>
 
-      <Schedule userData={userData} setUserData={setUserData} />
+      <Schedule
+        userData={userData}
+        setUserData={setUserData}
+        calcWeight={calcWeight}
+        exerciseDates={exerciseDates} />
     </View>
   );
 }
@@ -107,42 +111,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#98FB98'
   }
 });
-  //USERS SELECT EXERCISES, HIGHLIGHTS WHEN CHOSEN
-  // const selectedExer = (name) => {
-  //   const selected = userData.focus.map((item) => {
-  //     if (item.name === name) {
-  //       return {
-  //         ...item,
-  //         chosen: !item.chosen
-  //       }
-  //     }
-  //     return { ...item };
-  //   })
-  //   setUserData({ ...userData, exercises: selected })
-  // }
 
-  // CREATE A FUNCTION CREATES EXERCISES based on button pressed
-  // const chooseExer = (userData) => {
-  //   if (userData.days === 2) {
-  //     if (userData.category === 'upper') {
-  //       const selected = userData.exercises.filter((exer) => {
-  //         if (userData.muscleGroup === 'back') return exer
-  //         if (userData.muscleGroup === 'chest') return exer
-  //       })
-  //       setUserData({ ...userData, plan: [...selected] });
-  //     }
-
-  //     if (userData.category === 'lower') {
-  //       const selected = userData.exercises.filter((exer) => {
-  //         if (userData.muscleGroup === 'thigh') return exer
-  //         if (userData.muscleGroup === 'hamstring') return exer
-  //       })
-  //       setUserData({ ...userData, plan: [...selected] });
-  //     }
-  //   }
-  //   const removeDuplicates = () => [...new Set(userData.selected)]
-  //   setUserData({ ...userData, selected: removeDuplicates })
-  // }
 
 
 /* 

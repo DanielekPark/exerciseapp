@@ -48,8 +48,8 @@ export default function ReturningUsers({ option, setOption }) {
     const repetitions = Math.trunc(exer.reps / 1);
     if (weight < 1 || repetitions < 1) return;
 
+    //ESTIMATED HEAVIEST WEIGHT THAT CAN BE LIFT
     const oneRepMax = Math.round(weight / (1.0287 - (0.0278 * repetitions)));
-
     //SUGGESTED WEIGHT
     return Math.round((oneRepMax * percentage) / 5) * 5;
   }
@@ -64,9 +64,9 @@ export default function ReturningUsers({ option, setOption }) {
     return `${futureTime.getMonth() + 1}/${futureTime.getDate()}`;
   }
 
-  useEffect(() => {
-    console.log(userData.selected, 'line 50 returningUsers')
-  }, [userData])
+  // useEffect(() => {
+  //   console.log(userData.selected, 'line 50 returningUsers')
+  // }, [userData])
 
   if (userData.updateData === false) {
     return (

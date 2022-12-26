@@ -4,7 +4,7 @@ import { Stack, Button } from "@react-native-material/core";
 import exercises from './exercises';
 import WeightExercises from './weightExercises';
 
-const Schedule = ({ userData, setUserData }) => {
+const Schedule = ({ userData, setUserData, calcWeight, exerciseDates }) => {
 
   //FILTER EXERCISES BASED ON USER SELECTION & SET EXERCISE CATEGORY
   const provideSelection = (selection) => {
@@ -62,7 +62,11 @@ const Schedule = ({ userData, setUserData }) => {
           <Button title="Upper body" onPress={() => provideSelection('upper')} />
           <Button title="Lower body" onPress={() => provideSelection('lower')} />
         </View>
-        <WeightExercises setUserData={setUserData} userData={userData} />
+        <WeightExercises
+          setUserData={setUserData}
+          userData={userData}
+          calcWeight={calcWeight}
+          exerciseDates={exerciseDates} />
       </>
     )
   }
@@ -77,7 +81,11 @@ const Schedule = ({ userData, setUserData }) => {
           <Button title="Back & biceps" onPress={() => provideSelection('back_bic')} />
           <Button title="Core & legs" onPress={() => provideSelection('core_legs')} />
         </View>
-        <WeightExercises setUserData={setUserData} userData={userData} />
+        <WeightExercises
+          setUserData={setUserData}
+          userData={userData}
+          calcWeight={calcWeight}
+          exerciseDates={exerciseDates} />
       </>
     )
   }

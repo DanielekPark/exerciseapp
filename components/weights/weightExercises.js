@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, TouchableOpacity, Dimensions, } from 'react-nat
 import { Stack, Button, TextInput } from "@react-native-material/core";
 import exercises from './exercises';
 
-const WeightExercises = ({ userData, setUserData }) => {
+const WeightExercises = ({ userData, setUserData, calcWeight, exerciseDates }) => {
 
   //SELECTS 1 EXERCISE & HIDES EXERCISES THAT TARGETS THE SAME MUSCLES
   const chooseExercise = (exer) => {
@@ -46,29 +46,6 @@ const WeightExercises = ({ userData, setUserData }) => {
     const checkInfo = userData.plan.every((obj) => obj.weight > 0 && obj.reps > 0);
     if (!checkInfo) return;
     setUserData({ ...userData, showPlan: true });
-  }
-
-  //ESTIMATES SUGGESTED WEIGHT FOR USER
-  const calcWeight = (exer, percentage) => {
-    //Converts a string to a whole number
-    const weight = Math.trunc(exer.weight / 1);
-    const repetitions = Math.trunc(exer.reps / 1);
-    if (weight < 1 || repetitions < 1) return;
-
-    const oneRepMax = Math.round(weight / (1.0287 - (0.0278 * repetitions)));
-
-    //SUGGESTED WEIGHT
-    return Math.round((oneRepMax * percentage) / 5) * 5;
-  }
-
-  //SUGGESTED DATES FOR EXERCISE
-  const exerciseDates = (days) => {
-    const date = new Date();
-    const day = date.getDate();
-    const month = date.getMonth();
-    const year = date.getFullYear();
-    const futureTime = new Date(year, month, day + days);
-    return `${futureTime.getMonth() + 1}/${futureTime.getDate()}`;
   }
 
   // useEffect(() => {
