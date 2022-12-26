@@ -7,6 +7,7 @@ import NewUser from './newUser';
 export default function Weights() {
   const [option, setOption] = useState('buttons');
 
+  //CALCULATES HEAVIEST WEIGHT A USER CAN LIFT
   const calcWeight = (exer, percentage) => {
     //Converts a string to a whole number
     const weight = Math.trunc(exer.weight / 1);
@@ -19,6 +20,8 @@ export default function Weights() {
     return Math.round((oneRepMax * percentage) / 5) * 5;
   }
 
+
+  //SUGGESTED EXERCISE DATES
   const exerciseDates = (days) => {
     const date = new Date();
     const day = date.getDate();
@@ -61,7 +64,11 @@ export default function Weights() {
     return (
       <View>
         <Text>Weight Lifting</Text>
-        <ReturningUsers option={option} setOption={setOption} />
+        <ReturningUsers
+          option={option}
+          setOption={setOption}
+          calcWeight={calcWeight}
+          exerciseDates={exerciseDates} />
       </View>
     )
   }
