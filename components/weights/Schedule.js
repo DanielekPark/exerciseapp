@@ -56,28 +56,34 @@ const Schedule = ({ userData, setUserData, calcWeight, exerciseDates }) => {
   // 2 DAY AVAILABILITY
   if (userData.days === 2) {
     return (
-      <View style={styles.days}>
-        <View style={styles.daysTxt}>
-          <Text>Choose a category</Text>
+      <View>
+        <View style={styles.days}>
+          <View style={styles.daysTxt}>
+            <Text>Choose a category</Text>
+          </View>
+          <View style={styles.btnContainer}>
+            <Button
+              onPress={() => provideSelection('upper')}
+              mode={userData.category === 'upper' ? 'contained' : 'outlined'}>
+              Upper
+            </Button>
+            <Button
+              style={styles.rightBtn}
+              onPress={() => provideSelection('lower')}
+              mode={userData.category === 'lower' ? 'contained' : 'outlined'}>
+              Lower
+            </Button>
+          </View>
         </View>
-        <View style={styles.btnContainer}>
-          <Button
-            onPress={() => provideSelection('upper')}
-            mode={userData.category === 'upper' ? 'contained' : 'outlined'}>
-            Upper
-          </Button>
-          <Button
-            style={styles.rightBtn}
-            onPress={() => provideSelection('lower')}
-            mode={userData.category === 'lower' ? 'contained' : 'outlined'}>
-            Lower
-          </Button>
+        <View>
+          <View style={styles.daysTxt}>
+            <WeightExercises
+              setUserData={setUserData}
+              userData={userData}
+              calcWeight={calcWeight}
+              exerciseDates={exerciseDates} />
+          </View>
         </View>
-        {/* <WeightExercises
-          setUserData={setUserData}
-          userData={userData}
-          calcWeight={calcWeight}
-          exerciseDates={exerciseDates} /> */}
       </View>
     )
   }
@@ -85,18 +91,20 @@ const Schedule = ({ userData, setUserData, calcWeight, exerciseDates }) => {
   // 3 DAY AVAILBILITY
   if (userData.days === 3) {
     return (
-      <View>
-        <Text>Choose a workout day</Text>
-        <View style={styles.btnContainer}>
-          <Button title="Chest & triceps" onPress={() => provideSelection('chest_tri')} />
-          <Button title="Back & biceps" onPress={() => provideSelection('back_bic')} />
-          <Button title="Core & legs" onPress={() => provideSelection('core_legs')} />
+      <View style={styles.days}>
+        <View style={styles.daysTxt}>
+          <Text>Choose a category</Text>
+          <View style={styles.btnContainer}>
+            <Button title="Chest & triceps" onPress={() => provideSelection('chest_tri')} />
+            <Button title="Back & biceps" onPress={() => provideSelection('back_bic')} />
+            <Button title="Core & legs" onPress={() => provideSelection('core_legs')} />
+          </View>
+          <WeightExercises
+            setUserData={setUserData}
+            userData={userData}
+            calcWeight={calcWeight}
+            exerciseDates={exerciseDates} />
         </View>
-        <WeightExercises
-          setUserData={setUserData}
-          userData={userData}
-          calcWeight={calcWeight}
-          exerciseDates={exerciseDates} />
       </View>
     )
   }

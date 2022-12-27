@@ -58,7 +58,7 @@ export default function NewUser({ calcWeight, exerciseDates }) {
       <View>
         <View style={styles.days}>
           <View style={styles.daysTxt}>
-            <Text>Goals?</Text>
+            <Text>Goals ?</Text>
           </View>
 
           <View style={styles.btnContainer}>
@@ -77,11 +77,17 @@ export default function NewUser({ calcWeight, exerciseDates }) {
         </View>
       </View>
 
-      <Schedule
-        userData={userData}
-        setUserData={setUserData}
-        calcWeight={calcWeight}
-        exerciseDates={exerciseDates} />
+      {userData.days > 1 && userData.level && userData.goals ?
+        <View>
+          <Schedule
+            userData={userData}
+            setUserData={setUserData}
+            calcWeight={calcWeight}
+            exerciseDates={exerciseDates} />
+        </View>
+        :
+        ""
+      }
     </View>
   );
 }
