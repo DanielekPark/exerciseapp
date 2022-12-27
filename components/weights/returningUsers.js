@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Dimensions, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Dimensions } from 'react-native';
 import { Stack, Button, TextInput, } from "@react-native-material/core";
 import exercises from './exercises';
 
-export default function ReturningUsers({ option, setOption, calcWeight, exerciseDates }) {
+export default function ReturningUsers({ calcWeight, exerciseDates }) {
   const [userData, setUserData] = useState({ exercises: exercises, selected: [], goal: '', updateData: false, updatePlan: false, showPlan: false });
 
   //SELECT EXERCISES TO USE

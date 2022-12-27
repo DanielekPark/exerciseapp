@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Dimensions, TextInput } from 'react-native';
-import { Stack, Button } from "@react-native-material/core";
+import { StyleSheet, View, TouchableOpacity, Dimensions, TextInput } from 'react-native';
+import { Stack } from "@react-native-material/core";
+import { Text, Button } from 'react-native-paper';
+
 import exercises from './exercises';
 import Schedule from './Schedule';
 
@@ -8,39 +10,71 @@ export default function NewUser({ calcWeight, exerciseDates }) {
   const [userData, setUserData] = useState({ exercises: exercises, plan: [], days: 0, level: '', category: '', showPlan: false, goals: '' });
 
   return (
-    <View>
-      <Text style={styles.title}>Create your workout</Text>
-      <View style={styles.btnContainer}>
-        <Text style={styles.weightsBtn}>
-          <Button title="New user" style={styles.btns} />
-        </Text>
-        <Text style={styles.cardioBtn}>
-          <Button title="Returning users" style={styles.btns} />
-        </Text>
-      </View>
+    <View style={styles.headSpacing}>
+      <Text variant="headlineSmall" style={styles.txtCenter}>
+        Create your workout
+      </Text>
+      <View style={styles.days}>
+        <View style={styles.daysTxt}>
+          <Text>Days available per week ?</Text>
+        </View>
 
-      {/* SHOWS EXERCISES DEPENDING BUTTON PRESSED */}
-      <View>
-        <Text>Days available for per week for exercise</Text>
         <View style={styles.btnContainer}>
-          <Button onPress={() => setUserData({ ...userData, days: 2 })} title="2" />
-          <Button onPress={() => setUserData({ ...userData, days: 3 })} title="3" />
+          <Button
+            onPress={() => setUserData({ ...userData, days: 2 })}
+            mode={userData.days === 2 ? 'contained' : 'outlined'}>
+            2
+          </Button>
+          <Button
+            style={styles.rightBtn}
+            onPress={() => setUserData({ ...userData, days: 3 })}
+            mode={userData.days === 3 ? 'contained' : 'outlined'}>
+            3
+          </Button>
         </View>
       </View>
 
       <View>
-        <Text>Choose your level</Text>
-        <View style={styles.btnContainer}>
-          <Button title="Beginner" onPress={() => setUserData({ ...userData, level: 'beginner' })} />
-          <Button title="Intermediate" onPress={() => setUserData({ ...userData, level: 'intermediate' })} />
+        <View style={styles.days}>
+          <View style={styles.daysTxt}>
+            <Text>Experience level? </Text>
+          </View>
+
+          <View style={styles.experience}>
+            <Button
+              onPress={() => setUserData({ ...userData, level: 'beginner' })}
+              mode={userData.level === 'beginner' ? 'contained' : 'outlined'}>
+              Beginner
+            </Button>
+            <Button
+              style={styles.rightBtn}
+              onPress={() => setUserData({ ...userData, level: 'intermediate' })}
+              mode={userData.level === 'intermediate' ? 'contained' : 'outlined'}>
+              Intermediate
+            </Button>
+          </View>
         </View>
       </View>
 
       <View>
-        <Text>What are your goals?</Text>
-        <View style={styles.btnContainer}>
-          <Button title="Get bigger" onPress={() => setUserData({ ...userData, goals: 'size' })} />
-          <Button title="Stronger" onPress={() => setUserData({ ...userData, goals: 'strength' })} />
+        <View style={styles.days}>
+          <View style={styles.daysTxt}>
+            <Text>Goals?</Text>
+          </View>
+
+          <View style={styles.btnContainer}>
+            <Button
+              onPress={() => setUserData({ ...userData, goals: 'get bigger' })}
+              mode={userData.goals === 'get bigger' ? 'contained' : 'outlined'}>
+              Get Bigger
+            </Button>
+            <Button
+              style={styles.rightBtn}
+              onPress={() => setUserData({ ...userData, goals: 'stronger' })}
+              mode={userData.goals === 'stronger' ? 'contained' : 'outlined'}>
+              Stronger
+            </Button>
+          </View>
         </View>
       </View>
 
@@ -54,80 +88,31 @@ export default function NewUser({ calcWeight, exerciseDates }) {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    alignItems: 'center',
-    justifyContent: 'center',
+  headSpacing: {
     marginTop: 30,
-    marginBottom: 30
   },
-  app: {
-    marginHorizontal: "auto",
-    maxWidth: 500
+  days: {
+    marginTop: 30,
+    marginBottom: 30,
+    flexDirection: 'row',
   },
-  logo: {
-    height: 80
+  txtCenter: {
+    textAlign: 'center',
   },
-  header: {
-    padding: 20
-  },
-  title: {
-    fontWeight: "bold",
-    marginTop: 50,
-    fontSize: 24,
-    textAlign: "center"
-  },
-  btns: {
-    width: "30%",
+  daysTxt: {
+    marginTop: 'auto',
+    marginBottom: 'auto'
   },
   btnContainer: {
     flexDirection: 'row',
-    flexWrap: 'wrap',
-    marginRight: 'auto',
+    justifyContent: 'space-between',
     marginLeft: 'auto',
-    marginTop: 30
   },
-  cardioBtn: {
-    marginRight: 5,
+  experience: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
-  weightsBtn: {
-    marginLeft: 5,
+  rightBtn: {
+    marginLeft: 5
   },
-  item: {
-    width: Dimensions.get('window').width * 0.5,
-    height: 100,
-    width: 100,
-    borderWidth: 1,
-    borderColor: "lightgray",
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  itemTitle: {
-    marginTop: 16,
-  },
-  selected: {
-    backgroundColor: '#98FB98'
-  }
 });
-
-
-
-/* 
-EXERCISE ICONS
-https://www.gograph.com/vector-clip-art/exercise-stick-figure.html
-
-HIPS: Legs press, dumbbell squat, knee extension
-LEGS: Hamstring curl, db deadlift
-CHEST: Machine chest press, dips 
-BACK: Machine row, pullup machine
-SHOULDER: Dumbbell raise, face pull
-ABS: Curl up, leg raises, planks
-*/
-
-/* 
-  acsm pg 350
-  nsca pg 390
-  beginner 8 - 12 reps, 2-3 sets, 60 - 80%
-*/

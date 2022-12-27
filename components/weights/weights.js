@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Switch, Text, Button } from 'react-native-paper';
+import { Text, Button } from 'react-native-paper';
 import ReturningUsers from './returningUsers';
 import NewUser from './newUser';
 
@@ -13,11 +13,10 @@ const btns = [
     level: 'Returning User',
     selected: false
   }
-]
+];
 
 export default function Weights() {
   const [buttons, setButtons] = useState(btns);
-  const [option, setOption] = useState('buttons');
 
   //CALCULATES HEAVIEST WEIGHT USER CAN LIFT
   const calcWeight = (exer, percentage) => {
@@ -78,8 +77,6 @@ export default function Weights() {
         :
         <View>
           <ReturningUsers
-            option={option}
-            setOption={setOption}
             calcWeight={calcWeight}
             exerciseDates={exerciseDates} />
         </View>
@@ -88,19 +85,13 @@ export default function Weights() {
   );
 }
 
-/* 
-EXERCISE ICONS
-https://www.gograph.com/vector-clip-art/exercise-stick-figure.html
-*/
-
 const styles = StyleSheet.create({
   txtCenter: {
     textAlign: 'center'
   },
   btnContainer: {
-    flex: 1,
     flexDirection: 'row',
-    justifyContent: 'space-around',
+    justifyContent: 'space-evenly',
     marginTop: 20,
   }
 });

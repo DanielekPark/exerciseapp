@@ -47,6 +47,16 @@ export default function App() {
 
 AppRegistry.registerComponent(appName, () => App);
 
+/* 
+EXERCISE ICONS
+https://www.gograph.com/vector-clip-art/exercise-stick-figure.html
+*/
+
+/* 
+  acsm pg 350
+  nsca pg 390
+  beginner 8 - 12 reps, 2-3 sets, 60 - 80%
+*/
 
 /* 
 OTHER FEATURES:
