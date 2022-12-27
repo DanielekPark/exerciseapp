@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Dimensions, TextInput } from 'react-native';
-import { Stack, Button } from "@react-native-material/core";
+import React, { useState } from 'react';
+import { StyleSheet, View, Dimensions, TextInput } from 'react-native';
+import { Text, Button } from 'react-native-paper';
 import exercises from './exercises';
 import WeightExercises from './weightExercises';
 
@@ -15,7 +15,7 @@ const Schedule = ({ userData, setUserData, calcWeight, exerciseDates }) => {
         if (exer.muscleGroup === 'back') return exer;
         if (exer.muscleGroup === 'core') return exer;
       });
-      setUserData({ ...userData, plan: [...filtered] })
+      setUserData({ ...userData, category: 'upper', plan: [...filtered] })
     }
     if (selection === 'lower') {
       const filtered = userData.exercises.filter((exer) => {
@@ -24,7 +24,7 @@ const Schedule = ({ userData, setUserData, calcWeight, exerciseDates }) => {
         if (exer.muscleGroup === 'calf') return exer;
       });
 
-      setUserData({ ...userData, plan: [...filtered] });
+      setUserData({ ...userData, category: 'lower', plan: [...filtered] });
     }
 
     //EXERCISES FOR 3 DAYS PER WEEK AVAILABLITY
@@ -56,25 +56,36 @@ const Schedule = ({ userData, setUserData, calcWeight, exerciseDates }) => {
   // 2 DAY AVAILABILITY
   if (userData.days === 2) {
     return (
-      <>
-        <Text>Choose a workout day</Text>
-        <View style={styles.btnContainer}>
-          <Button title="Upper body" onPress={() => provideSelection('upper')} />
-          <Button title="Lower body" onPress={() => provideSelection('lower')} />
+      <View style={styles.days}>
+        <View style={styles.daysTxt}>
+          <Text>Choose a category</Text>
         </View>
-        <WeightExercises
+        <View style={styles.btnContainer}>
+          <Button
+            onPress={() => provideSelection('upper')}
+            mode={userData.category === 'upper' ? 'contained' : 'outlined'}>
+            Upper
+          </Button>
+          <Button
+            style={styles.rightBtn}
+            onPress={() => provideSelection('lower')}
+            mode={userData.category === 'lower' ? 'contained' : 'outlined'}>
+            Lower
+          </Button>
+        </View>
+        {/* <WeightExercises
           setUserData={setUserData}
           userData={userData}
           calcWeight={calcWeight}
-          exerciseDates={exerciseDates} />
-      </>
+          exerciseDates={exerciseDates} /> */}
+      </View>
     )
   }
 
   // 3 DAY AVAILBILITY
   if (userData.days === 3) {
     return (
-      <>
+      <View>
         <Text>Choose a workout day</Text>
         <View style={styles.btnContainer}>
           <Button title="Chest & triceps" onPress={() => provideSelection('chest_tri')} />
@@ -86,67 +97,28 @@ const Schedule = ({ userData, setUserData, calcWeight, exerciseDates }) => {
           userData={userData}
           calcWeight={calcWeight}
           exerciseDates={exerciseDates} />
-      </>
+      </View>
     )
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    alignItems: 'center',
-    justifyContent: 'center',
+  days: {
     marginTop: 30,
-    marginBottom: 30
+    marginBottom: 30,
+    flexDirection: 'row',
   },
-  app: {
-    marginHorizontal: "auto",
-    maxWidth: 500
-  },
-  logo: {
-    height: 80
-  },
-  header: {
-    padding: 20
-  },
-  title: {
-    fontWeight: "bold",
-    marginTop: 50,
-    fontSize: 24,
-    textAlign: "center"
-  },
-  btns: {
-    width: "30%",
+  daysTxt: {
+    marginTop: 'auto',
+    marginBottom: 'auto'
   },
   btnContainer: {
     flexDirection: 'row',
-    flexWrap: 'wrap',
-    marginRight: 'auto',
+    justifyContent: 'space-between',
     marginLeft: 'auto',
-    marginTop: 30
   },
-  cardioBtn: {
-    marginRight: 5,
-  },
-  weightsBtn: {
-    marginLeft: 5,
-  },
-  item: {
-    width: Dimensions.get('window').width * 0.5,
-    height: 100,
-    width: 100,
-    borderWidth: 1,
-    borderColor: "lightgray",
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  itemTitle: {
-    marginTop: 16,
-  },
-  selected: {
-    backgroundColor: '#98FB98'
+  rightBtn: {
+    marginLeft: 5
   }
 });
 

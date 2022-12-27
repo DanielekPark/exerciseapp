@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, TouchableOpacity, Dimensions, TextInput } from 'react-native';
-import { Stack } from "@react-native-material/core";
+import React, { useState } from 'react';
+import { StyleSheet, View } from 'react-native';
 import { Text, Button } from 'react-native-paper';
-
 import exercises from './exercises';
 import Schedule from './Schedule';
 
@@ -19,6 +17,7 @@ export default function NewUser({ calcWeight, exerciseDates }) {
           <Text>Days available per week ?</Text>
         </View>
 
+        {/* BUTTONS ARE HIGHLIGHTED WHEN PRESSED */}
         <View style={styles.btnContainer}>
           <Button
             onPress={() => setUserData({ ...userData, days: 2 })}
