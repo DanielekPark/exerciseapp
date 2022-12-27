@@ -1,14 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Switch, Text } from 'react-native-paper';
+import { Switch, Text, Button } from 'react-native-paper';
 import ReturningUsers from './returningUsers';
 import NewUser from './newUser';
 
-export default function Weights() {
-  const [option, setOption] = useState('buttons');
-  const [isSwitchOn, setIsSwitchOn] = useState(false);
-  const onToggleSwitch = () => setIsSwitchOn(!isSwitchOn);
+const btns = [
+  {
+    level: 'New User',
+    selected: true
+  },
+  {
+    level: 'Returning User',
+    selected: false
+  }
+]
 
+export default function Weights() {
+  const [buttons, setButtons] = useState(btns);
+  const [option, setOption] = useState('buttons');
 
   //CALCULATES HEAVIEST WEIGHT USER CAN LIFT
   const calcWeight = (exer, percentage) => {
@@ -21,6 +30,17 @@ export default function Weights() {
     const oneRepMax = Math.round(weight / (1.0287 - (0.0278 * repetitions)));
     //SUGGESTED WEIGHT
     return Math.round((oneRepMax * percentage) / 5) * 5;
+  }
+
+  //HIGHLIGHT BUTTON WHEN PRESSED
+  const activeBtn = (btn, level) => {
+    const active = buttons.map((item) => {
+      if (btn.level === level) {
+        return { ...item, selected: !item.selected };
+      }
+      return item;
+    })
+    setButtons(active);
   }
 
 
@@ -37,10 +57,19 @@ export default function Weights() {
   if (option === 'buttons') {
     return (
       <View>
-        <View style={{ display: 'flex', flexDirection: 'row' }}>
-          <Text variant="headlineSmall">New Users</Text>
-          <Switch value={isSwitchOn} onValueChange={onToggleSwitch} />
-          <Text variant="headlineSmall">Returning Users</Text>
+        <Text variant="displaySmall">Weight Lifting</Text>
+        <View>
+          {buttons.map((btn) => {
+            return (
+              <Button
+                key={btn.level + 'buttonKey'}
+                mode={btn.selected ? 'contained' : 'outlined'}
+                onPress={() => activeBtn(btn, btn.level)}
+              >
+                {btn.level}
+              </Button>
+            )
+          })}
         </View>
       </View>
     );
