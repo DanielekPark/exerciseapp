@@ -5,13 +5,13 @@ import { Stack, Button } from "@react-native-material/core";
 import Cardio from './cardio/cardio';
 import Weights from './weights/weights';
 import Calculator from './weights/calculator';
-import Tips from './tips';
+import Tips from './tips/tips';
 
 export default function Wrapper({ mode }) {
 
   if (mode === 'cardio') return <Cardio />
   if (mode === 'weights') return <Weights />
-  if (mode === 'calculator') return <Calculator />
+  if (mode === 'calc') return <Calculator />
   if (mode === 'tips') return <Tips />
 }
 

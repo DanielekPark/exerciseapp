@@ -12,6 +12,8 @@ Technologies used:
 
 - [Expo](https://docs.expo.dev/)
 
+Icons used: 
+- [Hamburger menu icon](https://www.iconfinder.com/)
 
 ## Setup
 Please visit: [React Native Documentation](https://reactnative.dev/docs/environment-setup)

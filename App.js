@@ -1,14 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { StyleSheet, View, ScrollView, AppRegistry, Image, Pressable } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, ScrollView, AppRegistry } from 'react-native';
-import { Stack } from "@react-native-material/core";
+import { Provider as PaperProvider, Appbar, Drawer, Avatar, Button } from 'react-native-paper';
 import Wrapper from './components/wrapper';
-import { Provider as PaperProvider, Appbar, Drawer, Button } from 'react-native-paper';
 import { name as appName } from './app.json';
+import { Stack } from "@react-native-material/core";
 
 export default function App() {
   const [mode, setMode] = useState('weights');
-  const [active, setActive] = useState('');
 
   return (
     <PaperProvider>
@@ -19,43 +18,23 @@ export default function App() {
               <Appbar.Content title="Exercise App" />
             </Appbar.Header>
             {/* hamburger menu icon*/}
-
-            <Drawer.Section>
+            <Drawer.Section showDivider={false}>
               <Drawer.Item
                 label="Weights"
-                active={active === 'weights'}
-                onPress={() => setActive('weights')}
+                active={mode === 'weights'}
+                onPress={() => setMode('weights')}
               />
               <Drawer.Item
                 label="Calculator"
-                active={active === 'calc'}
-                onPress={() => setActive('calc')}
+                active={mode === 'calc'}
+                onPress={() => setMode('calc')}
               />
               <Drawer.Item
                 label="Tips"
-                active={active === 'tips'}
-                onPress={() => setActive('tips')}
+                active={mode === 'tips'}
+                onPress={() => setMode('tips')}
               />
             </Drawer.Section>
-
-            {/* for buttons useState to show if button is active*/}
-            <View style={styles.btnContainer}>
-              {/* <Text style={styles.cardioBtn}>
-                <Button title="Cardio" style={styles.btns} onPress={() => setMode('cardio')} />
-              </Text> 
-              <Text style={styles.weightsBtn}>
-                <Button title="Weights" style={styles.btns} onPress={() => setMode('weights')} />
-              </Text>
-              <Text style={styles.calcBtn}>
-                <Button title="Calc" style={styles.btns} onPress={() => setMode('calculator')} />
-              </Text>
-              <Text style={styles.calcBtn}>
-                <Button title="Tips" style={styles.btns} onPress={() => setMode('tips')} />
-              </Text>*/}
-              {/* <Text style={styles.calcBtn}>
-                <Button title="Stretch" style={styles.btns} onPress={() => setMode('stretch')} />
-              </Text> */}
-            </View>
             <Wrapper mode={mode} />
             <StatusBar style="auto" />
           </View>
@@ -66,7 +45,7 @@ export default function App() {
   );
 }
 
-AppRegistry.registerComponent(appName, () => Main);
+AppRegistry.registerComponent(appName, () => App);
 
 
 /* 

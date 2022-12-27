@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { Stack, Button } from "@react-native-material/core";
+import { StyleSheet, View } from 'react-native';
+import { Switch, Text } from 'react-native-paper';
 import ReturningUsers from './returningUsers';
 import NewUser from './newUser';
 
 export default function Weights() {
   const [option, setOption] = useState('buttons');
+  const [isSwitchOn, setIsSwitchOn] = useState(false);
+  const onToggleSwitch = () => setIsSwitchOn(!isSwitchOn);
 
-  //CALCULATES HEAVIEST WEIGHT A USER CAN LIFT
+
+  //CALCULATES HEAVIEST WEIGHT USER CAN LIFT
   const calcWeight = (exer, percentage) => {
     //Converts a string to a whole number
     const weight = Math.trunc(exer.weight / 1);
@@ -34,16 +37,10 @@ export default function Weights() {
   if (option === 'buttons') {
     return (
       <View>
-        <Text>Please choose 3 exercises and use the calc button to determine the right weight.</Text>
-
-        <View style={styles.btnContainer}>
-          {/* <Text style={styles.cardioBtn}>
-            <Button title="Returning users" onPress={() => setOption('returning user')} style={styles.btns} />
-          </Text>*/}
-          <Text style={styles.weightsBtn}>
-            <Button title="New user" onPress={() => setOption('new user')} style={styles.btns} />
-            <Button title="Prev user" onPress={() => setOption('returning user')} style={styles.btns} />
-          </Text>
+        <View style={{ display: 'flex', flexDirection: 'row' }}>
+          <Text variant="headlineSmall">New Users</Text>
+          <Switch value={isSwitchOn} onValueChange={onToggleSwitch} />
+          <Text variant="headlineSmall">Returning Users</Text>
         </View>
       </View>
     );
