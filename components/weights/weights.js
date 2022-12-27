@@ -39,10 +39,9 @@ export default function Weights() {
         return { ...item, selected: !item.selected };
       }
       return item;
-    })
+    });
     setButtons(active);
   }
-
 
   //SUGGESTED EXERCISE DATES
   const exerciseDates = (days) => {
@@ -54,50 +53,39 @@ export default function Weights() {
     return `${futureTime.getMonth() + 1}/${futureTime.getDate()}`;
   }
 
-  if (option === 'buttons') {
-    return (
-      <View>
-        <Text variant="displaySmall">Weight Lifting</Text>
+  return (
+    <View>
+      <Text variant="headlineSmall" style={styles.txtCenter}>Weight Lifting</Text>
+      <View style={styles.btnContainer}>
+        {buttons.map((btn) => {
+          return (
+            <Button
+              key={btn.level + 'buttonKey'}
+              mode={btn.selected ? 'contained' : 'outlined'}
+              onPress={() => activeBtn(btn, btn.level)}
+            >
+              {btn.level}
+            </Button>
+          )
+        })}
+      </View>
+      {buttons[0].selected ?
         <View>
-          {buttons.map((btn) => {
-            return (
-              <Button
-                key={btn.level + 'buttonKey'}
-                mode={btn.selected ? 'contained' : 'outlined'}
-                onPress={() => activeBtn(btn, btn.level)}
-              >
-                {btn.level}
-              </Button>
-            )
-          })}
+          <NewUser
+            calcWeight={calcWeight}
+            exerciseDates={exerciseDates} />
         </View>
-      </View>
-    );
-  }
-
-  if (option === 'new user') {
-    return (
-      <View>
-        <Text>Weight Lifting</Text>
-        <NewUser
-          calcWeight={calcWeight}
-          exerciseDates={exerciseDates} />
-      </View>
-    )
-  }
-
-  if (option === 'returning user') {
-    return (
-      <View>
-        <Text>Weight Lifting</Text>
-        <ReturningUsers
-          option={option}
-          setOption={setOption}
-          calcWeight={calcWeight}
-          exerciseDates={exerciseDates} />
-      </View>
-    )
-  }
+        :
+        <View>
+          <ReturningUsers
+            option={option}
+            setOption={setOption}
+            calcWeight={calcWeight}
+            exerciseDates={exerciseDates} />
+        </View>
+      }
+    </View>
+  );
 }
 
 /* 
@@ -106,41 +94,13 @@ https://www.gograph.com/vector-clip-art/exercise-stick-figure.html
 */
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  app: {
-    marginHorizontal: "auto",
-    maxWidth: 500
-  },
-  logo: {
-    height: 80
-  },
-  header: {
-    padding: 20
-  },
-  title: {
-    fontWeight: "bold",
-    marginTop: 50,
-    fontSize: 24,
-    textAlign: "center"
-  },
-  btns: {
-    width: "30%",
+  txtCenter: {
+    textAlign: 'center'
   },
   btnContainer: {
+    flex: 1,
     flexDirection: 'row',
-    flexWrap: 'wrap',
-    marginRight: 'auto',
-    marginLeft: 'auto',
-    marginTop: 30
-  },
-  cardioBtn: {
-    marginRight: 5,
-  },
-  weightsBtn: {
-    marginLeft: 5,
-  },
+    justifyContent: 'space-around',
+    marginTop: 20,
+  }
 });
