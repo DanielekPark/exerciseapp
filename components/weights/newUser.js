@@ -4,8 +4,8 @@ import { Text, Button } from 'react-native-paper';
 import exercises from './exercises';
 import Schedule from './Schedule';
 
-export default function NewUser({ calcWeight, exerciseDates }) {
-  const [userData, setUserData] = useState({ exercises: exercises, plan: [], days: 0, level: '', category: '', showPlan: false, goals: '' });
+export default function NewUser() {
+  const [userData, setUserData] = useState({ exercises: exercises, list: [], plan: [], days: 0, level: '', category: '', showPlan: false, goals: '' });
 
   return (
     <View style={styles.headSpacing}>
@@ -81,9 +81,7 @@ export default function NewUser({ calcWeight, exerciseDates }) {
         <View>
           <Schedule
             userData={userData}
-            setUserData={setUserData}
-            calcWeight={calcWeight}
-            exerciseDates={exerciseDates} />
+            setUserData={setUserData} />
         </View>
         :
         ""

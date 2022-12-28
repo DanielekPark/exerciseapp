@@ -4,7 +4,7 @@ import { Text, Button } from 'react-native-paper';
 import exercises from './exercises';
 import WeightExercises from './weightExercises';
 
-const Schedule = ({ userData, setUserData, calcWeight, exerciseDates }) => {
+const Schedule = ({ userData, setUserData }) => {
 
   //FILTER EXERCISES BASED ON USER SELECTION & SET EXERCISE CATEGORY
   const provideSelection = (selection) => {
@@ -15,16 +15,16 @@ const Schedule = ({ userData, setUserData, calcWeight, exerciseDates }) => {
         if (exer.muscleGroup === 'back') return exer;
         if (exer.muscleGroup === 'core') return exer;
       });
-      setUserData({ ...userData, category: 'upper', plan: [...filtered] })
+      setUserData({ ...userData, category: 'upper', list: filtered });
     }
+
     if (selection === 'lower') {
       const filtered = userData.exercises.filter((exer) => {
         if (exer.muscleGroup === 'thigh') return exer;
         if (exer.muscleGroup === 'hamstring') return exer;
         if (exer.muscleGroup === 'calf') return exer;
       });
-
-      setUserData({ ...userData, category: 'lower', plan: [...filtered] });
+      setUserData({ ...userData, category: 'lower', list: filtered });
     }
 
     //EXERCISES FOR 3 DAYS PER WEEK AVAILABLITY
@@ -34,14 +34,14 @@ const Schedule = ({ userData, setUserData, calcWeight, exerciseDates }) => {
         if (exer.muscleGroup === 'triceps') return exer;
         if (exer.muscleGroup === 'shoulders') return exer;
       });
-      setUserData({ ...userData, plan: [...filtered] })
+      setUserData({ ...userData, list: filtered });
     }
     if (selection === 'back_bic') {
       const filtered = userData.exercises.filter((exer) => {
         if (exer.muscleGroup === 'back') return exer;
         if (exer.muscleGroup === 'biceps') return exer;
       });
-      setUserData({ ...userData, plan: [...filtered] })
+      setUserData({ ...userData, list: filtered });
     }
     if (selection === 'core_legs') {
       const filtered = userData.exercises.filter((exer) => {
@@ -49,7 +49,7 @@ const Schedule = ({ userData, setUserData, calcWeight, exerciseDates }) => {
         if (exer.muscleGroup === 'hamstring') return exer;
         if (exer.muscleGroup === 'thigh') return exer;
       });
-      setUserData({ ...userData, plan: [...filtered] })
+      setUserData({ ...userData, list: filtered });
     }
   }
 
@@ -79,9 +79,7 @@ const Schedule = ({ userData, setUserData, calcWeight, exerciseDates }) => {
           <View style={styles.daysTxt}>
             <WeightExercises
               setUserData={setUserData}
-              userData={userData}
-              calcWeight={calcWeight}
-              exerciseDates={exerciseDates} />
+              userData={userData} />
           </View>
         </View>
       </View>
