@@ -124,7 +124,6 @@ const Plan = ({ userData, setUserData }) => {
             })}
           </View>
           :
-
           <View style={styles.inputWrap}>
             {/* COLLECTS USER EXERCISE DATA */}
             {userData?.plan?.map((exer) => {
@@ -161,8 +160,7 @@ const Plan = ({ userData, setUserData }) => {
               :
               <Button
                 mode="contained"
-                onPress={() => setUserData({ ...userData, showPlan: true })}
-              >
+                onPress={() => setUserData({ ...userData, showPlan: true })}>
                 Create Plan
               </Button>
             }

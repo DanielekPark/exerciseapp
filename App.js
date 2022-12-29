@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, ScrollView, AppRegistry } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-import { Provider as PaperProvider, Appbar, Drawer, Button } from 'react-native-paper';
+import { Provider as PaperProvider, Appbar, Drawer } from 'react-native-paper';
 import Wrapper from './components/wrapper';
 import { name as appName } from './app.json';
 
@@ -16,7 +16,6 @@ export default function App() {
             <Appbar.Header>
               <Appbar.Content title="Exercise App" />
             </Appbar.Header>
-            {/* hamburger menu icon*/}
             <Drawer.Section showDivider={false}>
               <Drawer.Item
                 label="Weights"
@@ -46,6 +45,16 @@ export default function App() {
 
 AppRegistry.registerComponent(appName, () => App);
 
+const styles = StyleSheet.create({
+  app: {
+    marginHorizontal: "auto",
+    maxWidth: 500
+  },
+  header: {
+    padding: 20
+  },
+});
+
 /* 
 EXERCISE ICONS
 https://www.gograph.com/vector-clip-art/exercise-stick-figure.html
@@ -63,42 +72,3 @@ work on questionaire later
 CREATE A BUTTON & COMPONENT FOR WALKTHOUGH GIVE IT A DIFFERENT NAME
 stretching visual aid guide
 */
-
-
-const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  app: {
-    marginHorizontal: "auto",
-    maxWidth: 500
-  },
-  logo: {
-    height: 80
-  },
-  header: {
-    padding: 20
-  },
-  title: {
-    fontWeight: "bold",
-    marginTop: 50,
-    fontSize: 24,
-    textAlign: "center"
-  },
-  btns: {
-    width: "20%",
-  },
-  btnContainer: {
-    flexDirection: 'row', flexWrap: 'wrap', marginRight: 'auto', marginLeft: 'auto', marginTop: 30
-  },
-  cardioBtn: {
-    marginRight: 3,
-  },
-  weightsBtn: {
-    marginLeft: 3,
-  },
-  calcBtn: {
-    marginLeft: 3,
-  },
-});

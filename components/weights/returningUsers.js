@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import { StyleSheet, Text, View, Dimensions } from 'react-native';
-import { Button } from 'react-native-paper';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, View, Dimensions } from 'react-native';
+import { Button, Text, TextInput, Card, Paragraph } from 'react-native-paper';
 import exercises from './exercises';
 
 export default function ReturningUsers() {
   const [userData, setUserData] = useState({ exercises: exercises, selected: [], goal: '', updateData: false, updatePlan: false, showPlan: false });
 
-  //SELECT EXERCISES TO USE
+  //SELECT EXERCISES
   const chooseExercise = (exer) => {
     const name = exer.name;
     const hookArry = userData.selected
@@ -15,11 +15,11 @@ export default function ReturningUsers() {
     const plan = userData[hookArry]
       .map((item) => {
         if (item.name === name) {
-          return { ...item, chosen: !item.chosen }
+          return { ...item, chosen: !item.chosen };
         }
         return item;
       })
-    setUserData({ ...userData, selected: plan });
+    setUserData({ ...userData, exercises: plan, selected: plan });
   }
 
   //DISPLAY EXERCISES BASED ON SELECTION
@@ -42,7 +42,6 @@ export default function ReturningUsers() {
     setUserData({ ...userData, selected: updatedPlan });
   }
 
-
   //CALCULATES HEAVIEST WEIGHT USER CAN LIFT
   const calcWeight = (exer, percentage) => {
     //Converts a string to a whole number
@@ -55,7 +54,6 @@ export default function ReturningUsers() {
     return Math.round((oneRepMax * percentage) / 5) * 5;
   }
 
-
   //SUGGESTED EXERCISE DATES
   const exerciseDates = (days) => {
     const date = new Date();
@@ -67,71 +65,106 @@ export default function ReturningUsers() {
   }
 
   // useEffect(() => {
-  //   console.log(userData.selected, 'line 50 returningUsers')
+  //   console.log(userData.selected, 'line 67 returningUsers')
   // }, [userData])
 
   if (userData.updateData === false) {
     return (
-      <View>
-        <Text style={styles.title}>Select previous exercises</Text>
-        {userData.exercises.map((exer) => {
-          return (
-            <View key={`key${exer.name}`} style={{ marginBottom: 16 }}>
-              <Button title={exer.name} onPress={() => chooseExercise(exer)} />
-            </View>
-          )
-        })
-        }
-        <Button title="Add Data" onPress={displaySelected} />
-      </View>
+      <>
+        <View style={styles.days}>
+          <View style={styles.daysTxt}>
+            <Text style={styles.txtCenter}>
+              Select previous exercises
+            </Text>
+          </View>
+        </View>
+        <View style={styles.btnContainer}>
+          {userData.exercises.map((exer) => {
+            return (
+              <View key={`option${exer.name}key`} >
+                <Button style={styles.exerBtn}
+                  onPress={() => chooseExercise(exer)}
+                  mode={exer.chosen === true ? 'contained' : 'outlined'}>
+                  {exer.name}
+                </Button>
+              </View>
+            )
+          })}
+        </View>
+        <View style={styles.wrapper}>
+          <Button onPress={displaySelected} mode="contained" >
+            Create Plan
+          </Button>
+        </View>
+      </>
     )
   }
 
   if (userData.updateData === true) {
     return (
       <View>
-        <Text style={styles.title}>Provide weight & repetitions</Text>
-        {userData.selected.map((exer) => {
-          return (
-            <View key={`reactkey${exer.name}`} style={{ marginBottom: 16 }}>
-              <Text>{exer.name}</Text>
-              <TextInput placeholder='Weight' onChangeText={(value) => updateData(value, exer, 'weight')} keyboardType='numeric' />
-              <TextInput placeholder='Reps completed' onChangeText={(value) => updateData(value, exer, 'reps')} keyboardType='numeric' />
-            </View>
-          )
-        })
-        }
-        <Button title="Enter" onPress={() => setUserData({ ...userData, showPlan: true })} />
-
+        <Text style={styles.title}>Enter weight & repetitions</Text>
+        <View style={styles.inputWrap}>
+          {userData.selected.map((exer) => {
+            return (
+              <View key={`reactkey${exer.name}`} style={{ marginBottom: 16 }}>
+                <Text>{exer.name}</Text>
+                <TextInput placeholder='Weight' onChangeText={(value) => updateData(value, exer, 'weight')} keyboardType='numeric' />
+                <TextInput placeholder='Reps completed' onChangeText={(value) => updateData(value, exer, 'reps')} keyboardType='numeric' />
+              </View>
+            )
+          })}
+        </View>
+        <View style={styles.days}>
+          <View style={styles.btnContainer}>
+            <Button onPress={() => setUserData({ ...userData, showPlan: true })} mode="contained" >
+              Enter
+            </Button>
+          </View>
+        </View>
 
         {userData.showPlan ?
-          (
-            userData.selected.map((exer, index) => {
-              return (
-                <View key={`${index + exer.name + exer.muscleGroup}`} style={{ marginBottom: 16 }}>
-                  <Text style={{ fontWeight: 'bold' }}>{exer.name}</Text>
-                  <Text>
-                    Warmup exercises for the week of {exerciseDates(0)} 3 sets {calcWeight(exer, 0.6)}lbs 12 reps
-                  </Text>
-                  <Text>
-                    Number of sets 1 - 3 per exercise
-                  </Text>
-                  <Text>
-                    Rest duration between sets 1 - 2 min
-                  </Text>
-                  <Text>
-                    Week 1: Week of {exerciseDates(0)} {calcWeight(exer, 0.7)}lbs 12 reps
-                  </Text>
-                  <Text>
-                    Week 2: Week of {exerciseDates(7)} {calcWeight(exer, 0.75)}lbs 10 reps
-                  </Text>
-                  <Text>
-                    Week 3: Week of {exerciseDates(14)} {calcWeight(exer, 0.8)}lbs 8 reps
-                  </Text>
-                </View>
-              )
-            })
-          )
+          <View>
+            <Card style={styles.infoCard}>
+              <Card.Title title="Warm up" subtitle={`Week of ${exerciseDates(0)}`} />
+              <Card.Content>
+                <Paragraph>Rest between sets: 2 min</Paragraph>
+                {userData.selected.map((exer) => {
+                  return (
+                    <View key={`warmup-key${exer.name}`}>
+                      <Paragraph>{exer.name}: 2 - 3 sets  8-12 reps {calcWeight(exer, 0.6)}lbs</Paragraph>
+                    </View>
+                  )
+                })}
+              </Card.Content>
+            </Card>
+            <Card style={styles.infoCard}>
+              <Card.Title title="Workout" subtitle={`Week of ${exerciseDates(0)}`} />
+              <Card.Content>
+                <Paragraph>Rest between sets: 2 min</Paragraph>
+                {userData.selected.map((exer, index) => {
+                  return (
+                    <View key={`wk1returnUsers${exer.name + index}`}>
+                      <Paragraph>{exer.name}: 2 - 4 sets  12 reps {calcWeight(exer, 0.7)}lbs</Paragraph>
+                    </View>
+                  )
+                })}
+              </Card.Content>
+            </Card>
+            <Card style={styles.infoCard}>
+              <Card.Title title="Workout" subtitle={`Week of ${exerciseDates(7)}`} />
+              <Card.Content>
+                <Paragraph>Rest between sets: 2 min</Paragraph>
+                {userData.selected.map((exer) => {
+                  return (
+                    <View key={`week2returnUsers${exer.name}`}>
+                      <Paragraph>{exer.name}: 2 - 4 sets  10 reps {calcWeight(exer, 0.75)}lbs</Paragraph>
+                    </View>
+                  )
+                })}
+              </Card.Content>
+            </Card>
+          </View>
           : ''}
         <Button title="Start Over" onPress={() => setUserData({ exercises: exercises, selected: [], updateData: false, updatePlan: false, showPlan: false })} />
       </View>
@@ -153,14 +186,49 @@ INTENSITY 60-80%
 */
 
 const styles = StyleSheet.create({
-  container: {
+  headSpacing: {
+    marginTop: 30,
+  },
+  txtCenter: {
+    textAlign: 'center',
+  },
+  btnContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    flexWrap: 'wrap',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+  },
+  exerBtn: {
+    marginBottom: 10
+  },
+  days: {
+    marginTop: 30,
+    marginBottom: 30,
+    flexDirection: 'row',
+  },
+  daysTxt: {
+    marginTop: 'auto',
+    marginBottom: 'auto'
+  },
+  inputWrap: {
+    alignItems: 'center',
+    justifyContent: 'space-between',
     flexDirection: 'row',
     flexWrap: 'wrap',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 30,
-    marginBottom: 30
+    paddingTop: 20,
   },
+  infoCard: {
+    marginBottom: 10,
+  },
+
+  wrapper: {
+    marginTop: 10,
+    marginBottom: 10,
+    marginLeft: 'auto',
+    marginRight: 'auto',
+  },
+
   title: {
     fontWeight: "bold",
     marginTop: 50,
@@ -170,13 +238,7 @@ const styles = StyleSheet.create({
   btns: {
     width: "30%",
   },
-  btnContainer: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    marginRight: 'auto',
-    marginLeft: 'auto',
-    marginTop: 30
-  },
+
   cardioBtn: {
     marginRight: 5,
   },

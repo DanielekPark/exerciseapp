@@ -17,7 +17,7 @@ export default function NewUser() {
           <Text>Days available per week ?</Text>
         </View>
 
-        {/* BUTTONS ARE HIGHLIGHTED WHEN PRESSED */}
+        {/* BUTTON HIGHLIGHTS WHEN PRESSED */}
         <View style={styles.btnContainer}>
           <Button
             onPress={() => setUserData({ ...userData, days: 2 })}
