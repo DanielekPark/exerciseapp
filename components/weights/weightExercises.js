@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Text, Button, TextInput } from 'react-native-paper';
+import { Text, Button, TextInput, Card, Title } from 'react-native-paper';
 import exercises from './exercises';
 // import { calcWeight, exerciseDates } from '../../utils';
 
 const WeightExercises = ({ userData, setUserData }) => {
 
   //SELECTS 1 EXERCISE & HIDES EXERCISES THAT TARGETS THE SAME MUSCLES
-  const chooseExercise = (exer, limit) => {
+  const chooseExercise = (exer) => {
+    if (userData.days < 2) return;
+
     const countSelected = userData.list
       .reduce((total, item) => {
         if (item.muscleGroup === exer.muscleGroup) {
@@ -17,6 +19,8 @@ const WeightExercises = ({ userData, setUserData }) => {
         }
         return total;
       }, 0);
+
+    const limit = userData.days === 2 ? 1 : 2;
 
     //selects exercise 
     if (countSelected < limit) {
@@ -47,9 +51,7 @@ const WeightExercises = ({ userData, setUserData }) => {
         });
       setUserData({ ...userData, list: addToPlan });
     }
-
   }
-
 
   //CALCULATES HEAVIEST WEIGHT USER CAN LIFT
   const calcWeight = (exer, percentage) => {
@@ -75,7 +77,7 @@ const WeightExercises = ({ userData, setUserData }) => {
 
   //SETS INFO FOR REPS & SETS
   const addRepsWeights = (value, exerciseName, objKey, exer) => {
-    const updatedInfo = userData.list.map((obj) => {
+    const updatedInfo = userData.plan.map((obj) => {
       if (exerciseName === exer.name) {
         return { ...obj, [objKey]: value };
       }
@@ -85,12 +87,14 @@ const WeightExercises = ({ userData, setUserData }) => {
   }
 
   //SHOWS PLAN IF INFO IS PROVIDED
-  const showPlan = () => {
-    if (userData.plan.length < 1) return;
-    const checkInfo = userData.plan.every((obj) => obj.weight > 0 && obj.reps > 0);
-    if (!checkInfo) return;
-    setUserData({ ...userData, showPlan: true });
+  const showInputs = () => {
+    if (userData.list.length < 1) return;
+    const selected = userData.list
+      .filter((exer) => exer.chosen === true);
+    setUserData({ ...userData, plan: selected, showInputs: true });
   }
+
+  const createPlan = () => { }
 
   useEffect(() => {
     console.log(userData.list)
@@ -99,72 +103,95 @@ const WeightExercises = ({ userData, setUserData }) => {
   return (
     <View style={styles.days}>
       <View style={styles.daysTxt}>
-        <Text>Choose 1 exercise per muscle group</Text>
-        <View style={styles.wrapper}>
-          {userData?.list?.map((exer) => {
-            return (
-              <View key={`React-${exer.name}-key`} >
-                <Button
-                  style={styles.exerBtn}
-                  onPress={() => chooseExercise(exer, 1)}
-                  mode={exer.chosen ? 'contained' : 'outlined'}>
-                  {exer.name}
-                </Button>
-              </View>
-            )
-          })}
-        </View>
+        <Text>
+          {!userData.Inputs ?
+            'Choose 1 exercise per muscle group'
+            :
+            'Enter numbers for reps & weight'
+          }
+        </Text>
+        {!userData.showInputs ?
+          <View style={styles.wrapper}>
+            {userData?.list?.map((exer) => {
+              return (
+                <View key={`React-${exer.name}-key`} >
+                  <Button
+                    style={styles.exerBtn}
+                    onPress={() => chooseExercise(exer)}
+                    mode={exer.chosen ? 'contained' : 'outlined'}>
+                    {exer.name}
+                  </Button>
+                </View>
+              )
+            })}
+          </View>
+          :
+          <View style={styles.inputWrap}>
+            {userData?.plan?.map((exer) => {
+              return (
+                <View
+                  style={styles.input}
+                  key={`React--key${exer.name}`}
+                >
+                  <Text>{exer.name}</Text>
+                  <TextInput
+                    onChangeText={(value) => addRepsWeights(value, exer.name, 'weight', exer)}
+                    label="Weight"
+                    keyboardType='numeric'
+                  />
+                  <TextInput
+                    onChangeText={(value) => addRepsWeights(value, exer.name, 'reps', exer)}
+                    label="Reps"
+                    keyboardType='numeric'
+                  />
+                </View>
+              )
+            })}
+          </View>}
+
         {/* SHOW SELECTED EXERCISES BELOW W/ INPUT */}
 
         <View style={styles.days}>
           <View style={styles.btnContainer}>
-            <Button
-              onPress={showPlan}
-              mode="contained">
-              Enter
-            </Button>
+            {!userData.showInputs ?
+              <Button
+                mode="contained"
+                onPress={showInputs}>
+                Enter
+              </Button>
+              :
+              <Button
+                mode="contained"
+                onPress={() => setUserData({ ...userData, showPlan: true })}
+              >
+                Create Plan
+              </Button>
+            }
             <Button
               style={styles.rightBtn}
-              onPress={() => setUserData({ exercises: exercises, list: [], plan: [], days: 0, level: '', category: '', showPlan: false, goals: '' })}
+              onPress={() => setUserData({ exercises: exercises, list: [], plan: [], days: 0, level: '', category: '', showInputs: false, showPlan: false, goals: '' })}
               mode='contained'>
               Start Over
             </Button>
           </View>
         </View>
         {/* WEIGHT LIFTING SCHEDULE*/}
-        <View>
-          {/*userData.showPlan ?
-            (
-              userData.plan.map((exer) => {
-                return (
-                  <View key={`${exer.name}+${exer.name}`} style={{ marginBottom: 16 }}>
-                    <Text style={{ fontWeight: 'bold' }}>{exer.name}</Text>
-                    <Text>
-                      Warmup exercises for the week of {exerciseDates(0)} 3 sets {calcWeight(exer, 0.6)}lbs 12 reps
-                    </Text>
-                    <Text>
-                      Number of sets 1 - 3 per exercise
-                    </Text>
-                    <Text>
-                      Rest duration between sets 1 - 2 min
-                    </Text>
-                    <Text>
-                      Week 1: Week of {exerciseDates(0)} {calcWeight(exer, 0.7)}lbs 12 reps
-                    </Text>
-                    <Text>
-                      Week 2: Week of {exerciseDates(7)} {calcWeight(exer, 0.75)}lbs 10 reps
-                    </Text>
-                    <Text>
-                      Week 3: Week of {exerciseDates(14)} {calcWeight(exer, 0.8)}lbs 8 reps
-                    </Text>
-                  </View>
-                )
-              })
-            )
+        <View style={styles.card}>
+          {userData.showPlan ?
+            <View>
+              <Card>
+                <Card.Title title="Card Title" subtitle="Card Subtitle" />
+                <Card.Content>
+                  <Title>Card title</Title>
+                  <Paragraph>Card content</Paragraph>
+                </Card.Content>
+              </Card>
+            </View>
             :
             ''
-          */}
+          }
         </View>
+
       </View>
     </View>
   )
@@ -192,14 +219,59 @@ const styles = StyleSheet.create({
   },
   wrapper: {
     paddingTop: 10,
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
     flexDirection: 'row',
     flexWrap: 'wrap',
     alignContent: 'center'
   },
   exerBtn: {
     marginBottom: 10
-  }
+  },
+  inputWrap: {
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    paddingTop: 20,
+  },
+  input: {
+    width: '45%',
+    marginBottom: 20
+  },
+  card: {
+    borderWidth: 2,
+    borderColor: 'red'
+  },
+
 });
 
 export default WeightExercises
+
+/* (
+              userData.plan.map((exer) => {
+                return (
+                  <View key={`${exer.name}+${exer.name}`} style={{ marginBottom: 16 }}>
+                    <Text style={{ fontWeight: 'bold' }}>{exer.name}</Text>
+                    <Text>
+                      Warmup exercises for the week of {exerciseDates(0)} 3 sets {calcWeight(exer, 0.6)}lbs 12 reps
+                    </Text>
+                    <Text>
+                      Number of sets 1 - 3 per exercise
+                    </Text>
+                    <Text>
+                      Rest duration between sets 1 - 2 min
+                    </Text>
+                    <Text>
+                      Week 1: Week of {exerciseDates(0)} {calcWeight(exer, 0.7)}lbs 12 reps
+                    </Text>
+                    <Text>
+                      Week 2: Week of {exerciseDates(7)} {calcWeight(exer, 0.75)}lbs 10 reps
+                    </Text>
+                    <Text>
+                      Week 3: Week of {exerciseDates(14)} {calcWeight(exer, 0.8)}lbs 8 reps
+                    </Text>
+                  </View>
+                )
+              })
+            ) */
+

@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Text, Button } from 'react-native-paper';
+import { Text, Button, DataTable } from 'react-native-paper';
 import exercises from './exercises';
 import Schedule from './Schedule';
 
 export default function NewUser() {
-  const [userData, setUserData] = useState({ exercises: exercises, list: [], plan: [], days: 0, level: '', category: '', showPlan: false, goals: '' });
+  const [userData, setUserData] = useState({ exercises: exercises, list: [], plan: [], days: 0, level: '', category: '', showInputs: false, showPlan: false, goals: '' });
 
   return (
     <View style={styles.headSpacing}>
