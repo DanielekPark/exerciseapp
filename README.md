@@ -1,12 +1,10 @@
 
-# Workout App
+# Exercise App
 
 A mobile exercise application to assist users to estimate muscular strength, develop a exercise regimen for cardiovascular exercise, and to improve muscular strength, size, and endurance. 
 
 Technologies used: 
 - [React Native](https://reactnative.dev/docs/getting-started)
-
-- [Material UI React Native](https://www.react-native-material.com/docs/getting-started)
 
 - [React Native Paper](https://callstack.github.io/react-native-paper/getting-started.html)
 

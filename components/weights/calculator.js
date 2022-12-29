@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
-import { Stack, Button, TextInput } from "@react-native-material/core";
+import { StyleSheet, View } from 'react-native';
+import { Text, Button, TextInput, Title } from 'react-native-paper';
 
 
 export default function Calculator() {

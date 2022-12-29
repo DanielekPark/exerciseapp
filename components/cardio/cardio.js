@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, TextInput } from 'react-native';
-import { Stack, Button } from "@react-native-material/core";
+import { Button } from 'react-native-paper';
 
 export default function Weights() {
   const [userData, setUserData] = useState({ age: '', intensity: '', heartRange: '' });

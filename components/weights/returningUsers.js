@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, View, Dimensions } from 'react-native';
-import { Stack, Button, TextInput, } from "@react-native-material/core";
+import { Button } from 'react-native-paper';
 import exercises from './exercises';
 
 export default function ReturningUsers() {

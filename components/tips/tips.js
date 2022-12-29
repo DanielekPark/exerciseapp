@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Flatlist } from 'react-native';
-import { Slider } from '@miblanchard/react-native-slider';
+import { StyleSheet, View } from 'react-native';
+import { Text } from 'react-native-paper';
 import Goalrange from './goalrange';
 
 export default function Tips() {

@@ -4,7 +4,7 @@ import { Text, Button, TextInput, Card, Title } from 'react-native-paper';
 import exercises from './exercises';
 // import { calcWeight, exerciseDates } from '../../utils';
 
-const WeightExercises = ({ userData, setUserData }) => {
+const Plan = ({ userData, setUserData }) => {
 
   //SELECTS 1 EXERCISE & HIDES EXERCISES THAT TARGETS THE SAME MUSCLES
   const chooseExercise = (exer) => {
@@ -191,7 +191,6 @@ const WeightExercises = ({ userData, setUserData }) => {
             ''
           }
         </View>
-
       </View>
     </View>
   )
@@ -245,7 +244,7 @@ const styles = StyleSheet.create({
 
 });
 
-export default WeightExercises
+export default Plan;
 
 /* (
               userData.plan.map((exer) => {

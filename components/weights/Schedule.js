@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet, View, Dimensions, TextInput } from 'react-native';
 import { Text, Button } from 'react-native-paper';
 import exercises from './exercises';
-import WeightExercises from './weightExercises';
+import Plan from './plan';
 
 const Schedule = ({ userData, setUserData }) => {
 
@@ -77,7 +77,7 @@ const Schedule = ({ userData, setUserData }) => {
         </View>
         <View>
           <View style={styles.daysTxt}>
-            <WeightExercises
+            <Plan
               setUserData={setUserData}
               userData={userData} />
           </View>

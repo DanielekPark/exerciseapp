@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, ScrollView, AppRegistry, Image, Pressable } from 'react-native';
+import { StyleSheet, View, ScrollView, AppRegistry } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-import { Provider as PaperProvider, Appbar, Drawer, Avatar, Button } from 'react-native-paper';
+import { Provider as PaperProvider, Appbar, Drawer, Button } from 'react-native-paper';
 import Wrapper from './components/wrapper';
 import { name as appName } from './app.json';
-import { Stack } from "@react-native-material/core";
 
 export default function App() {
   const [mode, setMode] = useState('weights');
