@@ -143,7 +143,6 @@ const styles = StyleSheet.create({
     fontSize: 24,
   },
   chart: {
-    flex: 1,
     width: '100%',
     flexDirection: 'row',
     flexWrap: 'wrap',
