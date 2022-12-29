@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Text, Button, TextInput, Card, Title } from 'react-native-paper';
+import { Text, Button, TextInput, Card, Title, Paragraph } from 'react-native-paper';
 import exercises from './exercises';
 // import { calcWeight, exerciseDates } from '../../utils';
 
@@ -86,7 +86,7 @@ const Plan = ({ userData, setUserData }) => {
     setUserData({ ...userData, plan: updatedInfo });
   }
 
-  //SHOWS PLAN IF INFO IS PROVIDED
+  //SHOWS PLAN IF DATA IS PROVIDED
   const showInputs = () => {
     if (userData.list.length < 1) return;
     const selected = userData.list
@@ -94,11 +94,9 @@ const Plan = ({ userData, setUserData }) => {
     setUserData({ ...userData, plan: selected, showInputs: true });
   }
 
-  const createPlan = () => { }
-
-  useEffect(() => {
-    console.log(userData.list)
-  }, [userData])
+  // useEffect(() => {
+  //   console.log(userData.list)
+  // }, [userData])
 
   return (
     <View style={styles.days}>
@@ -126,7 +124,9 @@ const Plan = ({ userData, setUserData }) => {
             })}
           </View>
           :
+
           <View style={styles.inputWrap}>
+            {/* COLLECTS USER EXERCISE DATA */}
             {userData?.plan?.map((exer) => {
               return (
                 <View
@@ -149,8 +149,7 @@ const Plan = ({ userData, setUserData }) => {
             })}
           </View>}
 
-        {/* SHOW SELECTED EXERCISES BELOW W/ INPUT */}
-
+        {/* SHOW SELECTED EXERCISES BELOW WITH INPUTS */}
         <View style={styles.days}>
           <View style={styles.btnContainer}>
             {!userData.showInputs ?
@@ -175,26 +174,58 @@ const Plan = ({ userData, setUserData }) => {
             </Button>
           </View>
         </View>
-        {/* WEIGHT LIFTING SCHEDULE*/}
-        <View style={styles.card}>
-          {userData.showPlan ?
-            <View>
-              <Card>
-                <Card.Title title="Card Title" subtitle="Card Subtitle" />
-                <Card.Content>
-                  <Title>Card title</Title>
-                  <Paragraph>Card content</Paragraph>
-                </Card.Content>
-              </Card>
-            </View>
-            :
-            ''
-          }
-        </View>
+        {/* WEIGHT LIFTING PLAN*/}
+        {userData.showPlan ?
+          <View>
+            <Card style={styles.infoCard}>
+              <Card.Title title="Warm up" subtitle={`Week of ${exerciseDates(0)}`} />
+              <Card.Content>
+                <Paragraph>{userData.category.charAt(0).toUpperCase() + userData.category.slice(1)} body workout</Paragraph>
+                <Paragraph>Rest between sets: 2 min</Paragraph>
+                {userData.plan.map((exer) => {
+                  return (
+                    <View key={`warmup-key${exer.name}`}>
+                      <Paragraph>{exer.name}  2 - 3 sets   8-12 rep {calcWeight(exer, 0.5)}lbs</Paragraph>
+                    </View>
+                  )
+                })}
+              </Card.Content>
+            </Card>
+            <Card style={styles.infoCard}>
+              <Card.Title title="Workout" subtitle={`Week of ${exerciseDates(0)}`} />
+              <Card.Content>
+                <Paragraph>{userData.category.charAt(0).toUpperCase() + userData.category.slice(1)} body workout</Paragraph>
+                <Paragraph>Rest between sets: 2 min</Paragraph>
+                {userData.plan.map((exer) => {
+                  return (
+                    <View key={`week1-key${exer.name}`}>
+                      <Paragraph>{exer.name}  2 - 3 sets   12 reps {calcWeight(exer, 0.6)}lbs</Paragraph>
+                    </View>
+                  )
+                })}
+              </Card.Content>
+            </Card>
+            <Card style={styles.infoCard}>
+              <Card.Title title="Workout" subtitle={`Week of ${exerciseDates(7)}`} />
+              <Card.Content>
+                <Paragraph>{userData.category.charAt(0).toUpperCase() + userData.category.slice(1)} body workout</Paragraph>
+                <Paragraph>Rest between sets: 2 min</Paragraph>
+                {userData.plan.map((exer) => {
+                  return (
+                    <View key={`week2-key${exer.name}`}>
+                      <Paragraph>{exer.name}  2 - 3 sets   10 reps {calcWeight(exer, 0.75)}lbs</Paragraph>
+                    </View>
+                  )
+                })}
+              </Card.Content>
+            </Card>
+          </View>
+          :
+          ""
+        }
       </View>
     </View>
   )
-
 }
 
 const styles = StyleSheet.create({
@@ -237,40 +268,10 @@ const styles = StyleSheet.create({
     width: '45%',
     marginBottom: 20
   },
-  card: {
-    borderWidth: 2,
-    borderColor: 'red'
+  infoCard: {
+    marginBottom: 10,
   },
 
 });
 
 export default Plan;
-
-/* (
-              userData.plan.map((exer) => {
-                return (
-                  <View key={`${exer.name}+${exer.name}`} style={{ marginBottom: 16 }}>
-                    <Text style={{ fontWeight: 'bold' }}>{exer.name}</Text>
-                    <Text>
-                      Warmup exercises for the week of {exerciseDates(0)} 3 sets {calcWeight(exer, 0.6)}lbs 12 reps
-                    </Text>
-                    <Text>
-                      Number of sets 1 - 3 per exercise
-                    </Text>
-                    <Text>
-                      Rest duration between sets 1 - 2 min
-                    </Text>
-                    <Text>
-                      Week 1: Week of {exerciseDates(0)} {calcWeight(exer, 0.7)}lbs 12 reps
-                    </Text>
-                    <Text>
-                      Week 2: Week of {exerciseDates(7)} {calcWeight(exer, 0.75)}lbs 10 reps
-                    </Text>
-                    <Text>
-                      Week 3: Week of {exerciseDates(14)} {calcWeight(exer, 0.8)}lbs 8 reps
-                    </Text>
-                  </View>
-                )
-              })
-            ) */
-
