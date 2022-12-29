@@ -2,11 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Text, Button, TextInput } from 'react-native-paper';
 
-
 export default function Calculator() {
   const [fitData, setFitData] = useState({ weight: '', reps: '', oneRepMax: '', exp: 'beginner' });
 
-  //Calculates recommended weight based on weight & repetitions completed
+  //Calculates recommended weight based on weight & repetitions data
   const calcStrength = () => {
     const weight = fitData.weight / 1;
     const repetitions = fitData.reps / 1;
@@ -26,6 +25,7 @@ export default function Calculator() {
         <Text variant="headlineMedium" style={[styles.txtCenter, styles.title]}>
           Calculate your strength
         </Text>
+        {/* DISPLAYS MAX REP ESTIMATE */}
         <View style={styles.numbersDisplay}>
           {fitData.oneRepMax ?
             <>
@@ -71,7 +71,6 @@ export default function Calculator() {
           </Button>
         </View>
       </View>
-
     </View>
   );
 }
