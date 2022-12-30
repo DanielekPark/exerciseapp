@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Dimensions, TextInput } from 'react-native';
 import { Text, Button } from 'react-native-paper';
-import exercises from './exercises';
 import Plan from './plan';
 
 const Schedule = ({ userData, setUserData }) => {
@@ -34,14 +33,14 @@ const Schedule = ({ userData, setUserData }) => {
         if (exer.muscleGroup === 'triceps') return exer;
         if (exer.muscleGroup === 'shoulders') return exer;
       });
-      setUserData({ ...userData, list: filtered });
+      setUserData({ ...userData, category: 'chest_tri', list: filtered });
     }
     if (selection === 'back_bic') {
       const filtered = userData.exercises.filter((exer) => {
         if (exer.muscleGroup === 'back') return exer;
         if (exer.muscleGroup === 'biceps') return exer;
       });
-      setUserData({ ...userData, list: filtered });
+      setUserData({ ...userData, category: 'back_bic', list: filtered });
     }
     if (selection === 'core_legs') {
       const filtered = userData.exercises.filter((exer) => {
@@ -49,7 +48,7 @@ const Schedule = ({ userData, setUserData }) => {
         if (exer.muscleGroup === 'hamstring') return exer;
         if (exer.muscleGroup === 'thigh') return exer;
       });
-      setUserData({ ...userData, list: filtered });
+      setUserData({ ...userData, category: 'core_legs', list: filtered });
     }
   }
 
@@ -92,16 +91,29 @@ const Schedule = ({ userData, setUserData }) => {
       <View style={styles.days}>
         <View style={styles.daysTxt}>
           <Text>Choose a category</Text>
-          <View style={styles.btnContainer}>
-            <Button title="Chest & triceps" onPress={() => provideSelection('chest_tri')} />
-            <Button title="Back & biceps" onPress={() => provideSelection('back_bic')} />
-            <Button title="Core & legs" onPress={() => provideSelection('core_legs')} />
+          <View style={styles.btnWrapper}>
+            <Button
+              style={styles.btn}
+              onPress={() => provideSelection('back_bic')}
+              mode={userData.category === 'back_bic' ? 'contained' : 'outlined'}>
+              Back & Biceps
+            </Button>
+            <Button
+              style={styles.btn}
+              onPress={() => provideSelection('chest_tri')}
+              mode={userData.category === 'chest_tri' ? 'contained' : 'outlined'}>
+              Chest & Triceps
+            </Button>
+            <Button
+              style={styles.btn}
+              onPress={() => provideSelection('core_legs')}
+              mode={userData.category === 'core_legs' ? 'contained' : 'outlined'}>
+              Core & Legs
+            </Button>
           </View>
-          <WeightExercises
+          <Plan
             setUserData={setUserData}
-            userData={userData}
-            calcWeight={calcWeight}
-            exerciseDates={exerciseDates} />
+            userData={userData} />
         </View>
       </View>
     )
@@ -125,6 +137,17 @@ const styles = StyleSheet.create({
   },
   rightBtn: {
     marginLeft: 5
+  },
+  btnWrapper: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    flexWrap: 'wrap',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    marginTop: 25
+  },
+  btn: {
+    marginBottom: 10
   }
 });
 

@@ -4,7 +4,7 @@
 A mobile exercise application to assist users to estimate muscular strength, develop a exercise regimen for cardiovascular exercise, and to improve muscular strength, size, and endurance. 
 
 Technologies used: 
-- [Javascript]
+- Javascript
 
 - [React Native](https://reactnative.dev/docs/getting-started)
 
@@ -12,29 +12,20 @@ Technologies used:
 
 - [Expo](https://docs.expo.dev/)
 
-Icons used: 
-- [Hamburger menu icon](https://www.iconfinder.com/)
-
-## Setup
-Please visit: [React Native Documentation](https://reactnative.dev/docs/environment-setup)
-
-## Demo
-[Expo Snack](https://snack.expo.dev/@danielekpark/17481f)
-
-## Requirements
-- [Javascript]
-
-- [React](https://reactjs.org/)
-
-- [Expo](https://docs.expo.dev/)
 
 ## Installation
+Create a Expo account and [install Expo](https://docs.expo.dev/get-started/installation/). 
+
+## Demo
+Ensure you have a Expo account and is installed [Expo Snack](https://snack.expo.dev/@danielekpark/17481f). 
+
+## Run the app
+
 ```bash
   cd exerciseapp
   npm install
 ```
 
-## Run the app
 ```bash
   cd exerciseapp
   npx expo start

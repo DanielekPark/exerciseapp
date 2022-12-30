@@ -39,7 +39,6 @@ export default function App() {
         </View>
       </ScrollView>
     </PaperProvider>
-
   );
 }
 
@@ -55,10 +54,13 @@ const styles = StyleSheet.create({
   },
 });
 
-/* 
+/*
 EXERCISE ICONS
 https://www.gograph.com/vector-clip-art/exercise-stick-figure.html
 */
+
+//https://www.nfpt.com/blog/calculating-a-clients-1rm#:~:text=This%20formula%20states%20that%20an,performed%20for%20the%20given%20exercise.
+/* This formula states that an individual’s 1RM = w ÷ [(1.0278) – (0.0278 x r)]. The w represents the weight, in pounds, lifted for 10 successful repetitions. The r stands for the number of repetitions performed for the given exercise. */
 
 /* 
   acsm pg 350

@@ -63,8 +63,8 @@ export default function NewUser() {
 
           <View style={styles.btnContainer}>
             <Button
-              onPress={() => setUserData({ ...userData, goals: 'get bigger' })}
-              mode={userData.goals === 'get bigger' ? 'contained' : 'outlined'}>
+              onPress={() => setUserData({ ...userData, goals: 'muscleSize' })}
+              mode={userData.goals === 'muscleSize' ? 'contained' : 'outlined'}>
               Get Bigger
             </Button>
             <Button

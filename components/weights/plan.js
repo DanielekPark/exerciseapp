@@ -6,7 +6,7 @@ import exercises from './exercises';
 
 const Plan = ({ userData, setUserData }) => {
 
-  //SELECTS 1 EXERCISE & HIDES EXERCISES THAT TARGETS THE SAME MUSCLES
+  //SELECTS 1 EXERCISE & UNSELECTS EXERCISES THAT TARGETS THE SAME MUSCLES
   const chooseExercise = (exer) => {
     if (userData.days < 2) return;
 
@@ -20,7 +20,7 @@ const Plan = ({ userData, setUserData }) => {
         return total;
       }, 0);
 
-    const limit = userData.days === 2 ? 1 : 2;
+    const limit = userData.days === 2 || userData.days === 3 ? 1 : 2;
 
     //selects exercise 
     if (countSelected < limit) {
@@ -36,7 +36,7 @@ const Plan = ({ userData, setUserData }) => {
       setUserData({ ...userData, list: update });
     }
 
-    //unselects all exercise of the same muscle group 
+    //unselects exercises of the same muscle group 
     if (countSelected === limit) {
       const addToPlan = userData.list
         .map((item) => {
@@ -172,6 +172,7 @@ const Plan = ({ userData, setUserData }) => {
             </Button>
           </View>
         </View>
+
         {/* WEIGHT LIFTING PLAN*/}
         {userData.showPlan ?
           <View>
@@ -183,7 +184,7 @@ const Plan = ({ userData, setUserData }) => {
                 {userData.plan.map((exer) => {
                   return (
                     <View key={`warmup-key${exer.name}`}>
-                      <Paragraph>{exer.name}  2 - 3 sets   8-12 rep {calcWeight(exer, 0.5)}lbs</Paragraph>
+                      <Paragraph>{exer.name}  2 - 3 sets   8-12 reps {calcWeight(exer, 0.5)}lbs</Paragraph>
                     </View>
                   )
                 })}
@@ -193,11 +194,11 @@ const Plan = ({ userData, setUserData }) => {
               <Card.Title title="Workout" subtitle={`Week of ${exerciseDates(0)}`} />
               <Card.Content>
                 <Paragraph>{userData.category.charAt(0).toUpperCase() + userData.category.slice(1)} body workout</Paragraph>
-                <Paragraph>Rest between sets: 2 min</Paragraph>
+                <Paragraph>Rest between sets: {`${userData.goals === 'muscleSize' ? `1-2` : `2-3`}`}  min</Paragraph>
                 {userData.plan.map((exer) => {
                   return (
                     <View key={`week1-key${exer.name}`}>
-                      <Paragraph>{exer.name}  2 - 3 sets   12 reps {calcWeight(exer, 0.6)}lbs</Paragraph>
+                      <Paragraph>{exer.name}  2 - 3 sets   12 reps {`${userData.goals === 'muscleSize' ? `${calcWeight(exer, 0.7)}` : `${calcWeight(exer, 0.6)}`}`} lbs</Paragraph>
                     </View>
                   )
                 })}
@@ -207,11 +208,11 @@ const Plan = ({ userData, setUserData }) => {
               <Card.Title title="Workout" subtitle={`Week of ${exerciseDates(7)}`} />
               <Card.Content>
                 <Paragraph>{userData.category.charAt(0).toUpperCase() + userData.category.slice(1)} body workout</Paragraph>
-                <Paragraph>Rest between sets: 2 min</Paragraph>
+                <Paragraph>Rest between sets: {`${userData.goals === 'muscleSize' ? `1-2` : `2-3`}`} min</Paragraph>
                 {userData.plan.map((exer) => {
                   return (
                     <View key={`week2-key${exer.name}`}>
-                      <Paragraph>{exer.name}  2 - 3 sets   10 reps {calcWeight(exer, 0.75)}lbs</Paragraph>
+                      <Paragraph>{exer.name}  2 - 3 sets   10 reps {`${userData.goals === 'muscleSize' ? `${calcWeight(exer, 0.65)}` : `${calcWeight(exer, 0.75)}`}`} lbs</Paragraph>
                     </View>
                   )
                 })}
