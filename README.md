@@ -4,6 +4,8 @@
 A mobile exercise application to assist users to estimate muscular strength, develop a exercise regimen for cardiovascular exercise, and to improve muscular strength, size, and endurance. 
 
 Technologies used: 
+- [Javascript]
+
 - [React Native](https://reactnative.dev/docs/getting-started)
 
 - [React Native Paper](https://callstack.github.io/react-native-paper/getting-started.html)
@@ -16,7 +18,15 @@ Icons used:
 ## Setup
 Please visit: [React Native Documentation](https://reactnative.dev/docs/environment-setup)
 
+## Demo
+[Expo Snack](https://snack.expo.dev/@danielekpark/17481f)
+
 ## Requirements
+- [Javascript]
+
+- [React](https://reactjs.org/)
+
+- [Expo](https://docs.expo.dev/)
 
 ## Installation
 ```bash
