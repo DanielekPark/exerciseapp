@@ -103,8 +103,8 @@ export default function ReturningUsers() {
                 <Button
                   style={exer.chosen ? [{ marginBottom: 10 }, { backgroundColor: exer.color }] : [{ marginBottom: 10 }]}
                   onPress={() => chooseExercise(exer)}
-                  mode={exer.chosen ? 'contained' : 'outlined'}
-                >
+                  textColor={exer.chosen ? '' : exer.color}
+                  mode={exer.chosen ? 'contained' : 'outlined'}>
                   {exer.name}
                 </Button>
               </View>
