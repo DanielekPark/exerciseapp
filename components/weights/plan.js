@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Text, Button, TextInput, Card, Title, Paragraph } from 'react-native-paper';
+import { Text, Button, TextInput, Card, Paragraph, Badge } from 'react-native-paper';
 import exercises from './exercises';
+import badgeColors from './badgeColors';
 // import { calcWeight, exerciseDates } from '../../utils';
 
 const Plan = ({ userData, setUserData }) => {
@@ -101,6 +102,9 @@ const Plan = ({ userData, setUserData }) => {
   return (
     <View style={styles.days}>
       <View style={styles.daysTxt}>
+        <View>
+
+        </View>
         <Text>
           {!userData.Inputs ?
             'Choose 1 exercise per muscle group'
@@ -108,15 +112,33 @@ const Plan = ({ userData, setUserData }) => {
             'Enter numbers for reps & weight'
           }
         </Text>
+
+        {/* EXERCISE TYPE COLOR CODES */}
+        <View style={styles.bdWrap}>
+          {badgeColors.map((bdc) => {
+            return (
+              <View
+                style={styles.bdBox}
+                key={bdc.backgroundColor + bdc.muscleGroup}>
+                <Text style={styles.muscleTxt}>
+                  {bdc.muscleGroup[0].toUpperCase() + bdc.muscleGroup.slice(1)}
+                </Text>
+                <Badge
+                  style={[{ backgroundColor: bdc.backgroundColor }]} />
+              </View>
+            )
+          })}
+        </View>
         {!userData.showInputs ?
           <View style={styles.wrapper}>
             {userData?.list?.map((exer) => {
               return (
                 <View key={`React-${exer.name}-key`} >
                   <Button
-                    style={styles.exerBtn}
+                    style={exer.chosen ? [{ marginBottom: 10 }, { backgroundColor: exer.color }] : [{ marginBottom: 10 }]}
                     onPress={() => chooseExercise(exer)}
-                    mode={exer.chosen ? 'contained' : 'outlined'}>
+                    mode={exer.chosen ? 'contained' : 'outlined'}
+                  >
                     {exer.name}
                   </Button>
                 </View>
@@ -223,7 +245,7 @@ const Plan = ({ userData, setUserData }) => {
           ""
         }
       </View>
-    </View>
+    </View >
   )
 }
 
@@ -270,7 +292,22 @@ const styles = StyleSheet.create({
   infoCard: {
     marginBottom: 10,
   },
-
+  bdWrap: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    flexWrap: 'wrap',
+    marginBottom: 10,
+  },
+  bdBox: {
+    width: '30%',
+    flexDirection: 'row',
+    marginTop: 10,
+    marginBottom: 10,
+    justifyContent: 'center'
+  },
+  muscleTxt: {
+    paddingRight: 5
+  },
 });
 
 export default Plan;

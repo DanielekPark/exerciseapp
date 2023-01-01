@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet, View, Dimensions, TextInput } from 'react-native';
 import { Text, Button } from 'react-native-paper';
 import Plan from './plan';
+import BadgeColors from './badgeColors';
 
 const Schedule = ({ userData, setUserData }) => {
 

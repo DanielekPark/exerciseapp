@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Dimensions } from 'react-native';
-import { Button, Text, TextInput, Card, Paragraph } from 'react-native-paper';
+import { Button, Text, TextInput, Card, Paragraph, Badge } from 'react-native-paper';
 import exercises from './exercises';
+import badgeColors from './badgeColors';
 
 export default function ReturningUsers() {
   const [userData, setUserData] = useState({ exercises: exercises, selected: [], goal: '', updateData: false, updatePlan: false, showPlan: false });
@@ -73,6 +74,23 @@ export default function ReturningUsers() {
       <>
         <View style={styles.days}>
           <View style={styles.daysTxt}>
+
+            {/* EXERCISE TYPE COLOR CODES */}
+            <View style={styles.bdWrap}>
+              {badgeColors.map((bdc) => {
+                return (
+                  <View
+                    style={styles.bdBox}
+                    key={bdc.backgroundColor + bdc.muscleGroup}>
+                    <Text style={styles.muscleTxt}>
+                      {bdc.muscleGroup[0].toUpperCase() + bdc.muscleGroup.slice(1)}
+                    </Text>
+                    <Badge
+                      style={[{ backgroundColor: bdc.backgroundColor }]} />
+                  </View>
+                )
+              })}
+            </View>
             <Text style={styles.txtCenter}>
               Select previous exercises
             </Text>
@@ -82,9 +100,11 @@ export default function ReturningUsers() {
           {userData.exercises.map((exer) => {
             return (
               <View key={`option${exer.name}key`} >
-                <Button style={styles.exerBtn}
+                <Button
+                  style={exer.chosen ? [{ marginBottom: 10 }, { backgroundColor: exer.color }] : [{ marginBottom: 10 }]}
                   onPress={() => chooseExercise(exer)}
-                  mode={exer.chosen === true ? 'contained' : 'outlined'}>
+                  mode={exer.chosen ? 'contained' : 'outlined'}
+                >
                   {exer.name}
                 </Button>
               </View>
@@ -205,7 +225,7 @@ const styles = StyleSheet.create({
   days: {
     marginTop: 30,
     marginBottom: 30,
-    flexDirection: 'row',
+    flexDirection: 'column',
   },
   daysTxt: {
     marginTop: 'auto',
@@ -259,5 +279,22 @@ const styles = StyleSheet.create({
   },
   selected: {
     backgroundColor: '#98FB98'
+  },
+  bdWrap: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    flexWrap: 'wrap',
+    marginBottom: 10,
+  },
+  bdBox: {
+    width: '30%',
+    flexDirection: 'row',
+    marginTop: 10,
+    marginBottom: 10,
+    justifyContent: 'center'
+  },
+  muscleTxt: {
+    paddingRight: 5
   }
+
 });
