@@ -12,12 +12,8 @@ Technologies used:
 
 - [Expo](https://docs.expo.dev/)
 
-
-## Installation
-Create a Expo account and [install Expo](https://docs.expo.dev/get-started/installation/). 
-
 ## Demo
-Ensure you have a Expo account and is installed [Expo Snack](https://snack.expo.dev/@danielekpark/17481f). 
+Be sure you have an Expo account and have installed Expo Snack.[Expo Snack](https://snack.expo.dev/@danielekpark/17481f). 
 
 ## Run the app
 

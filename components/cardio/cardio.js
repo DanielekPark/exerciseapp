@@ -141,21 +141,39 @@ const styles = StyleSheet.create({
     padding: 10,
   },
 });
+// Levels of cardio intensity
+//   150 min moderate effort(40 - 60 %) 5 days per week
+//   90 min vigorous effort(60 - 90 %) 3 days per week
 
-  // cardio 5 - 15 min warmup,
-  // Light warm up 57 - 64 % of HR max
-  // Moderate intensity warm up 64 - 76 % of HR max
-  // formula for intensity(220 - age * 0.4)
+// cardio 5 - 15 min warmup,
 
-  // MODERATE INTENSITY
-  // formula for intensity(220 - age * 0.4)
-  // formula for intensity(220 - age * 0.6)
-  // VIGOROUS INTENSITY
-  // formula for intensity(220 - age * 0.6)
-  // formula for intensity(220 - age * 0.9)
-  // Levels of cardio intensity
-  //   150 min moderate effort(40 - 60 %) 5 days per week
-  //   90 min vigorous effort(60 - 90 %) 3 days per week
+//Gwin's advice
+// Take resting HR
+// Take HR data for walking, jogging, and sprints
+// The faster the HR returns to resting HR, the more fit the individual is 
+//WORKOUT CREATION (1 mile timed w/o overexertion)
+//Walking, jogging, sprinting
+//e.g. if a mile is completed in 10 min aim for 9:30
+
+// HR RANGE CALCULATIONS PG 418
+
+/* 
+USING HR for intensity 
+ACSM RESOURCES PERSONAL TRAINER PG 418-19
+64-70% up to 94% of max HR
+FORMULA BASED ON HR MAX
+//lower range   
+targetHR = (max HR) * 64;
+//upper range
+targetHR = (max HR) * 94;
+-Unconditioned ppl: might have to use 55-70%
+-Conditioned ppl: might have to use 70-85%
+*/
+
+/* 
+HEART RATE RESERVE
+PG 419
+*/
 
 /* 
 POSSIBLE HTML THAT MAYBE NEEDED TO PUT IN 
@@ -165,4 +183,13 @@ Age
 Days
 Minutes
 APP needs to display Heart Rate range
+*/
+/* 
+
+  // MODERATE INTENSITY
+  // formula for intensity(220 - age * 0.4)
+  // formula for intensity(220 - age * 0.6)
+  // VIGOROUS INTENSITY
+  // formula for intensity(220 - age * 0.6)
+  // formula for intensity(220 - age * 0.9)
 */

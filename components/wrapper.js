@@ -17,6 +17,6 @@ export default function Wrapper({ mode }) {
 const styles = StyleSheet.create({
   app: {
     marginHorizontal: "auto",
-    maxWidth: 500
+    maxWidth: '31.25rem'
   },
 });

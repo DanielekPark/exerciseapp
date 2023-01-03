@@ -23,7 +23,7 @@ export default function App() {
                 onPress={() => setMode('weights')}
               />
               <Drawer.Item
-                label="Calculator"
+                label="1-RM Calculator"
                 active={mode === 'calc'}
                 onPress={() => setMode('calc')}
               />
