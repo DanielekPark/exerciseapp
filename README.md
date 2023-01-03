@@ -13,7 +13,7 @@ Technologies used:
 - [Expo](https://docs.expo.dev/)
 
 ## Demo
-Be sure you have an Expo account and have installed Expo Snack.[Expo Snack](https://snack.expo.dev/@danielekpark/17481f). 
+Try the app on [Expo Snack](https://snack.expo.dev/@danielekpark/17481f). 
 
 ## Run the app
 
