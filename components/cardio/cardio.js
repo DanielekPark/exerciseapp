@@ -155,11 +155,16 @@ const styles = StyleSheet.create({
 //Walking, jogging, sprinting
 //e.g. if a mile is completed in 10 min aim for 9:30
 
-// HR RANGE CALCULATIONS PG 418
+// HR RANGE CALCULATIONS
+// Ages 4 to 34
+//maxHR = 216.6 - (0.84 * age)
+// Healthy men & women
+//maxHR = 208 - (0.7 * age) 
+// Small group men & women
+//maxHR = 220-age
 
 /* 
 USING HR for intensity 
-ACSM RESOURCES PERSONAL TRAINER PG 418-19
 64-70% up to 94% of max HR
 FORMULA BASED ON HR MAX
 //lower range   
@@ -168,12 +173,17 @@ targetHR = (max HR) * 64;
 targetHR = (max HR) * 94;
 -Unconditioned ppl: might have to use 55-70%
 -Conditioned ppl: might have to use 70-85%
+
+HEART RATE RESERVE
+//lower range
+targetHR = [(0.4) * (HRmax - HRrest)] + HRrest
+//upper range
+targetHR = [(0.85) * (HRmax - HRrest)] + HRrest
+if a client somewhat active 60-80%
+if a client is deconditioned 40-50%
+
 */
 
-/* 
-HEART RATE RESERVE
-PG 419
-*/
 
 /* 
 POSSIBLE HTML THAT MAYBE NEEDED TO PUT IN 

@@ -129,8 +129,8 @@ export default function ReturningUsers() {
             return (
               <View key={`reactkey${exer.name}`} style={{ marginBottom: 16 }}>
                 <Text>{exer.name}</Text>
-                <TextInput placeholder='Weight' onChangeText={(value) => updateData(value, exer, 'weight')} keyboardType='numeric' />
-                <TextInput placeholder='Reps completed' onChangeText={(value) => updateData(value, exer, 'reps')} keyboardType='numeric' />
+                <TextInput placeholder='Weight' onChangeText={(value) => updateData(value, exer, 'weight')} keyboardType='numeric' maxLength={3} />
+                <TextInput placeholder='Reps completed' onChangeText={(value) => updateData(value, exer, 'reps')} keyboardType='number-pad' maxLength={2} />
               </View>
             )
           })}
@@ -140,6 +140,10 @@ export default function ReturningUsers() {
             <Button onPress={() => setUserData({ ...userData, showPlan: true })} mode="contained" >
               Enter
             </Button>
+                    <Button onPress={() => setUserData({ exercises: exercises, selected: [], updateData: false, updatePlan: false, showPlan: false })} mode="contained"
+                    style={styles.rightBtn} >
+          Start Over
+        </Button>
           </View>
         </View>
 
@@ -186,7 +190,6 @@ export default function ReturningUsers() {
             </Card>
           </View>
           : ''}
-        <Button title="Start Over" onPress={() => setUserData({ exercises: exercises, selected: [], updateData: false, updatePlan: false, showPlan: false })} />
       </View>
     )
   }
@@ -295,6 +298,9 @@ const styles = StyleSheet.create({
   },
   muscleTxt: {
     paddingRight: 5
-  }
+  },  
+  rightBtn: {
+    marginLeft: 5
+  },
 
 });

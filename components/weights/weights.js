@@ -26,7 +26,7 @@ export default function Weights() {
       if(btn.id === index){
         return {...item, usedBefore: 'Yes'};
       }else {
-        return {...item, usedBefore: 'No'}
+        return {...item, usedBefore: ''}
       }
     });
     setButtons(active);
@@ -51,20 +51,17 @@ export default function Weights() {
         })}
       </View>
 
-      {buttons[0].usedBefore === 'Yes' ?
-        <View>
-          <NewUser />
-        </View>
-        :
-        ''
-      }
-
-      {buttons[1].usedBefore === 'Yes' ?
-        <View>
+      {
+        buttons[0].usedBefore === 'Yes' ? 
           <ReturningUsers />
-        </View>
         : 
-        ''
+          ''
+      }
+      {
+        buttons[1].usedBefore === 'Yes' ? 
+          <NewUser />
+        : 
+          ''
       }
     </View>
   );
