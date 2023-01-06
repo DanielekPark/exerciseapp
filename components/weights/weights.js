@@ -36,7 +36,7 @@ export default function Weights() {
     <View>
       <Text variant="headlineSmall" style={styles.txtCenter}>Weight Lifting</Text>
       <View style={styles.btnContainer}>
-        <Text style={styles.daysTxt}>Have you used this app before? </Text>
+        <Text variant="titleSmall" style={styles.daysTxt}>Have you used this app before? </Text>
         {buttons.map((btn) => {
           return (
             <Button

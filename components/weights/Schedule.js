@@ -59,7 +59,7 @@ const Schedule = ({ userData, setUserData }) => {
       <View>
         <View style={styles.days}>
           <View style={styles.daysTxt}>
-            <Text>Choose a category</Text>
+            <Text variant="titleSmall">Choose a category</Text>
           </View>
           <View style={styles.btnContainer}>
             <Button
@@ -91,7 +91,7 @@ const Schedule = ({ userData, setUserData }) => {
     return (
       <View style={styles.days}>
         <View style={styles.daysTxt}>
-          <Text>Choose a category</Text>
+          <Text variant="titleSmall">Choose a category</Text>
           <View style={styles.btnWrapper}>
             <Button
               style={styles.btn}

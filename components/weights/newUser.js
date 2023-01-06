@@ -14,7 +14,7 @@ export default function NewUser() {
       </Text>
       <View style={styles.days}>
         <View style={styles.daysTxt}>
-          <Text>Days available per week ?</Text>
+          <Text variant="titleSmall">Availablility per week ?</Text>
         </View>
 
         {/* BUTTON HIGHLIGHTS WHEN PRESSED */}
@@ -36,20 +36,20 @@ export default function NewUser() {
       <View>
         <View style={styles.days}>
           <View style={styles.daysTxt}>
-            <Text>Experience level? </Text>
+            <Text variant="titleSmall">Are you a beginner?</Text>
           </View>
 
           <View style={styles.experience}>
             <Button
               onPress={() => setUserData({ ...userData, level: 'beginner' })}
               mode={userData.level === 'beginner' ? 'contained' : 'outlined'}>
-              Beginner
+              Yes
             </Button>
             <Button
               style={styles.rightBtn}
               onPress={() => setUserData({ ...userData, level: 'intermediate' })}
               mode={userData.level === 'intermediate' ? 'contained' : 'outlined'}>
-              Intermediate
+              No
             </Button>
           </View>
         </View>
@@ -57,21 +57,21 @@ export default function NewUser() {
 
       <View>
         <View style={styles.days}>
-          <View style={styles.daysTxt}>
-            <Text>Goals ?</Text>
+          <View style={styles.textContain}>
+            <Text variant="titleSmall">Exercise goals ?</Text>
           </View>
 
-          <View style={styles.btnContainer}>
+          <View style={styles.wrapper}>
             <Button
               onPress={() => setUserData({ ...userData, goals: 'muscleSize' })}
               mode={userData.goals === 'muscleSize' ? 'contained' : 'outlined'}>
-              Get Bigger
+              Gain muscle
             </Button>
             <Button
               style={styles.rightBtn}
               onPress={() => setUserData({ ...userData, goals: 'stronger' })}
               mode={userData.goals === 'stronger' ? 'contained' : 'outlined'}>
-              Stronger
+              Get Stronger
             </Button>
           </View>
         </View>
@@ -111,9 +111,16 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginLeft: 'auto',
   },
+  textContain: {
+    flex: 2
+  },
+  wrapper: {
+    flexDirection: 'row',
+  },  
   experience: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+    marginLeft: 'auto'
   },
   rightBtn: {
     marginLeft: 5

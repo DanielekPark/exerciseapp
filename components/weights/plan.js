@@ -105,7 +105,7 @@ const Plan = ({ userData, setUserData }) => {
         <View>
 
         </View>
-        <Text>
+        <Text  variant="titleSmall">
           {!userData.Inputs ?
             'Choose 1 exercise per muscle group'
             :
@@ -245,7 +245,7 @@ const Plan = ({ userData, setUserData }) => {
           ""
         }
       </View>
-    </View >
+    </View>
   )
 }
 
