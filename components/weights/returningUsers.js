@@ -65,10 +65,6 @@ export default function ReturningUsers() {
     return `${futureTime.getMonth() + 1}/${futureTime.getDate()}`;
   }
 
-  // useEffect(() => {
-  //   console.log(userData.selected, 'line 67 returningUsers')
-  // }, [userData])
-
   if (userData.updateData === false) {
     return (
       <>
@@ -194,19 +190,6 @@ export default function ReturningUsers() {
     )
   }
 }
-
-/* 
-EXERCISE ICONS
-https://www.gograph.com/vector-clip-art/exercise-stick-figure.html
-
-
-BEGINNER
-SETS 1-2
-REPS 8-12
-2-3 PER WEEK
-INTENSITY 60-80%
-
-*/
 
 const styles = StyleSheet.create({
   headSpacing: {

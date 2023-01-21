@@ -56,44 +56,7 @@ export default function Tips() {
         <Text variant="titleMedium" style={styles.term}>
           After exercising a muscle group (e.g. chest, back), wait a minimum 48 hours train the same muscle group again.
         </Text>
-
-        {/* NEEDS WORK  
-        
-        <Text style={styles.title}>Optimal strength range</Text>
-      <Text>
-        Drag the dot to see how many repetitions, rest times between sets, and percentage is best for your goals.
-      </Text>
-
-      */}
-        {/* <View style={styles.chart}>
-        <View style={[styles.category, sliderValue <= 67 ? styles.highlight : '']}>
-          <Text style={[styles.categoryTxt,]}>Endurance</Text>
-        </View>
-        <View style={[styles.category, sliderValue >= 67 && sliderValue < 85 ? styles.highlight : '']}>
-          <Text style={[styles.categoryTxt,]}>Muscle Size</Text>
-        </View>
-        <View style={[styles.category, sliderValue > 85 ? styles.highlight : '']}>
-          <Text style={[styles.categoryTxt,]}>Strength</Text>
-        </View>
-      </View> *
-
-      <Text style={styles.percentage}>{`${sliderValue}%`}</Text>
-      <View>
-        <Goalrange sliderValue={sliderValue} />
-        <Slider
-          animateTransitions
-          minimumTrackTintColor="#13a9d6"
-          thumbTintColor="#0c6692"
-          value={sliderValue}
-          minimumValue={0}
-          maximumValue={100}
-          step={1}
-          trackClickable={true}
-          onValueChange={(value) => getInputValue(value)}
-        />
-      </View>/}
-
-      {/* Need visual aid for breathing & eccentric muscle movement 3 seconds duration*/}
+          {/* strength range needs work */}
       </View>
     </View>
   );

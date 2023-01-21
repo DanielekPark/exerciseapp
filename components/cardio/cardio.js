@@ -21,32 +21,7 @@ export default function Weights() {
       const hrRange = `${lowerLevel} - ${upperLevel}`;
       setUserData({ ...userData, heartRange: hrRange });
     }
-    // MODERATE INTENSITY EXERCISE
-    // if (userData.intensity === 'level1') {
-    //   const effortLevel = Math.round((220 - age * 0.4));
-    //   heartRange.push(effortLevel);
-    // }
-    // if (userData.intensity === 'level2') {
-    //   const effortLevel = Math.round((220 - age * 0.59));
-    //   heartRange.push(effortLevel);
-    // }
-    // VIGOROUS INTENSITY EXERCISE
-    // if (userData.intensity === 'level3') {
-    //   const effortLevel = Math.round((220 - age * 0.6));
-    //   heartRange.push(effortLevel);
-    // }
-    // if (userData.intensity === 'level4') {
-    //   const effortLevel = Math.round((220 - age * 0.9));
-    //   heartRange.push(effortLevel);
-    // }
-
-    // RESET DATA
-    //setUserData({ age: '', intensity: '', heartRange: '' });
   }
-
-  // useEffect(() => {
-  //   console.log(userData)
-  // }, [userData])
 
   return (
     <View>
@@ -141,65 +116,3 @@ const styles = StyleSheet.create({
     padding: 10,
   },
 });
-// Levels of cardio intensity
-//   150 min moderate effort(40 - 60 %) 5 days per week
-//   90 min vigorous effort(60 - 90 %) 3 days per week
-
-// cardio 5 - 15 min warmup,
-
-//Gwin's advice
-// Take resting HR
-// Take HR data for walking, jogging, and sprints
-// The faster the HR returns to resting HR, the more fit the individual is 
-//WORKOUT CREATION (1 mile timed w/o overexertion)
-//Walking, jogging, sprinting
-//e.g. if a mile is completed in 10 min aim for 9:30
-
-// HR RANGE CALCULATIONS
-// Ages 4 to 34
-//maxHR = 216.6 - (0.84 * age)
-// Healthy men & women
-//maxHR = 208 - (0.7 * age) 
-// Small group men & women
-//maxHR = 220-age
-
-/* 
-USING HR for intensity 
-64-70% up to 94% of max HR
-FORMULA BASED ON HR MAX
-//lower range   
-targetHR = (max HR) * 64;
-//upper range
-targetHR = (max HR) * 94;
--Unconditioned ppl: might have to use 55-70%
--Conditioned ppl: might have to use 70-85%
-
-HEART RATE RESERVE
-//lower range
-targetHR = [(0.4) * (HRmax - HRrest)] + HRrest
-//upper range
-targetHR = [(0.85) * (HRmax - HRrest)] + HRrest
-if a client somewhat active 60-80%
-if a client is deconditioned 40-50%
-
-*/
-
-
-/* 
-POSSIBLE HTML THAT MAYBE NEEDED TO PUT IN 
-INPUTS FOR 
-Effort
-Age
-Days
-Minutes
-APP needs to display Heart Rate range
-*/
-/* 
-
-  // MODERATE INTENSITY
-  // formula for intensity(220 - age * 0.4)
-  // formula for intensity(220 - age * 0.6)
-  // VIGOROUS INTENSITY
-  // formula for intensity(220 - age * 0.6)
-  // formula for intensity(220 - age * 0.9)
-*/
